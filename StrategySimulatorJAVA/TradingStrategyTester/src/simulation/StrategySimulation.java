@@ -4,76 +4,72 @@
  */
 package simulation;
 
-import datacollection.CurrencyCourse;
-import de.flohrit.mt4j.AbstractBasicClientMINE;
-import de.flohrit.mt4j.MT4BasicClientMINE;
+import datacollection.CurrencyCourseOHLC;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import strategies.AbstractStrategy;
 
 /**
  *
  * @author Moohdyy
  */
 public class StrategySimulation {
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private TradeManager tm;
-    private AbstractBasicClientMINE strategy;
-    private CurrencyCourse cc;
+    private AbstractStrategy strategy;
+    private CurrencyCourseOHLC cc;
     private long actualTime = 0;
 
-
-    public StrategySimulation(AbstractBasicClientMINE strategy, CurrencyCourse cc, double balance) {
+    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance) {
         this.cc = cc;
         this.strategy = strategy;
         this.tm = new TradeManager(balance);
     }
 
-    public StrategySimulation(AbstractBasicClientMINE strategy, CurrencyCourse cc, double balance, double leverage) {
-        this(strategy, cc,balance);
+    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, double leverage) {
+        this(strategy, cc, balance);
         this.tm.setLeverage(leverage);
     }
 
     //for this simulation, the strategy just has one order at maximum open and can close a BUY order by returning SELL and vice versa
-    public void simulateOneOrderStrategy() {
-        int actualTradeID = -1;
+    public void simulateStrategy(int windowInMinutes) {
+        long windowInMilliseconds = windowInMinutes * 60 * 1000;
+        List<Trade> trades = new ArrayList<>();
         for (int index = 0; index < cc.getNumberOfEntries(); index++) {
-            this.actualTime = cc.getTimeStamp(index);
-            double actualPrice = cc.getBidPrice(index);
+            double actualPrice = cc.getClose(index);
             if (tm.checkForMarginCall(actualPrice)) {
-                System.out.println("MARGIN CALL");
+                System.out.println("MARGIN CALL, simulation stopped.");
                 return;
             }
-            int orderType = strategy.processTick(actualPrice, cc.getAskPrice(index));
-            if (orderType != MT4BasicClientMINE.PROCESS_TICK_NONE) {
-                if (actualTradeID == -1) { // first trade or no Trade open
-                    actualTradeID = processNewTrade(orderType, index, actualTradeID);
-                } else {
-                    Trade actualTrade = tm.getTradeByID(actualTradeID);
-                    if (actualTrade.isOpen()) {
-                        tm.closeOrder(actualTradeID, cc.getBidPrice(index));
-                        actualTradeID = -1;
-                    } else {
-                        actualTradeID = processNewTrade(orderType, index, actualTradeID);
-                    }
-                }
+            tm.checkStopLossTakeProfit(actualPrice);
+            this.actualTime = cc.getTimeStamp(index);
+            long windowTime = cc.getTimeStamp(cc.getActualPosition());
+            if (this.actualTime >= windowTime + windowInMilliseconds) { //in our case we can access new course after window
+                cc.setActualPosition(index);
+                System.out.println("Actual price of " + cc.getCurrencyPair() + " : " + actualPrice);
+                trades = strategy.processNewCourse(trades, cc);
             }
-            printCurrentStats(actualPrice);
+            tm.processTrades(trades, cc.getBidPrice(index), cc.getClose(index), this.actualTime);
+            printCurrentStats(index);
         }
     }
 
-    private int processNewTrade(int orderType, int index, int actualTradeID) {
-        double actualPrice;
-        if (orderType == MT4BasicClientMINE.PROCESS_TICK_DO_BUY) {
-            actualPrice = cc.getAskPrice(index);
-        } else { //MT4BasicClientMINE.PROCESS_TICK_DO_SELL
-            actualPrice = cc.getBidPrice(index);
-        }
-        actualTradeID = tm.newOrder(orderType, actualPrice, strategy.getVolumeMINE(), this.actualTime);
-        return actualTradeID;
+    public void printCurrentStats(int index) {
+        double bid = cc.getBidPrice(index);
+        double ask = cc.getAskPrice(index);
+        System.out.print("________________________________\n" + sdf.format(new Date(actualTime))
+                + ":\n ActualPrice:   " + bid
+                + "\n ActiveTrades:  " + tm.getActiveTradesCount()
+                + ", ClosedTrades: " + tm.getClosedTradesCount()
+                + "\n Balance:       " + Math.round(this.tm.getBalance())
+                + "\n Equity:        " + Math.round(this.tm.getEquity(bid))
+                + "\n UseableMargin: " + Math.round(this.tm.getMargin(bid, ask))
+                + "\n Margin:        " + Math.round(this.tm.getFreeMargin())
+                + "\n________________________________________\n"
+        );
     }
 
-    public void printCurrentStats(double actualPrice) {
-        System.out.println(sdf.format(new Date(actualTime))+":\n ActiveTrades: " + tm.getActiveTradesCount() + ", ClosedTrades: " + tm.getClosedTradesCount() + ", Balance: " + this.tm.getBalance() + ", Equity: " + this.tm.getEquity(actualPrice) + ", Margin: " + this.tm.getUsedMargin());
-    }
-    
 }

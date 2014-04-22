@@ -1,6 +1,6 @@
 package indicators;
 
-import datacollection.CurrencyCourse;
+import datacollection.CurrencyCourseOHLC;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class EMA {
     }
 
     // Get exponential moving average
-    public void getEMA(CurrencyCourse cc, int EMADuration) {
+    public void getEMA (CurrencyCourseOHLC cc, int EMADuration) {
 
         if (cc.getNumberOfEntries() >= EMADuration) {
 
@@ -37,7 +37,7 @@ public class EMA {
             // the first "EMADuration - 1" instances
             for (int i = 0; i < EMADuration - 1; i++) {
                 for (int j = 0; j <= i; j++) {
-                    tempSum += cc.getBidPrice(j);
+                    tempSum += cc.getClose(j);
                     average = tempSum / (j + 1);
                 }
                 tempSum = 0;
@@ -64,7 +64,7 @@ public class EMA {
 
             // Simple moving average of the first "EMADuration" instances
             for (int i = 0; i < EMADuration; i++) {
-                    sum += cc.getBidPrice(i);
+                    sum += cc.getClose(i);
             }
             simpleMovingAverage = sum / EMADuration;
             sum = 0;
@@ -79,7 +79,7 @@ public class EMA {
                   long actTime = cc.getTimeStamp(i);
                   long lastTime = cc.getTimeStamp(i - 1);
                   
-                exponentialMovingAverage = (cc.getBidPrice(i) - EMAvalues.get(lastTime))* multiplier+ EMAvalues.get(lastTime);
+                exponentialMovingAverage = (cc.getClose(i) - EMAvalues.get(lastTime))* multiplier+ EMAvalues.get(lastTime);
                 // Record EMA
                 EMAvalues.put(actTime, exponentialMovingAverage);
             }

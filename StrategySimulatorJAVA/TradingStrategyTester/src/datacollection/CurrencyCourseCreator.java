@@ -11,7 +11,7 @@ public abstract class CurrencyCourseCreator {
     public CurrencyCourseCreator() {
     }
 
-    public abstract CurrencyCourse getCurrencyCourseFromFile(String filename) throws IOException, ParseException;
+    public abstract CurrencyCourseOHLC getCurrencyCourseFromFile(String filename, String currencyPair) throws IOException, ParseException;
 
     public static int count(String filename) throws IOException {
         InputStream is = new BufferedInputStream(new FileInputStream(filename));

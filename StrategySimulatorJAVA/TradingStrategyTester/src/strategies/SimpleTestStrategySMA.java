@@ -5,47 +5,60 @@
  */
 package strategies;
 
-import datacollection.CurrencyCourse;
-import de.flohrit.mt4j.*;
+import datacollection.CurrencyCourseOHLC;
+import datacollection.OHLC;
 import java.util.HashMap;
+import java.util.List;
+import simulation.Trade;
 
 /**
  *
  * @author Moohdyy
  */
-public class SimpleTestStrategySMA extends AbstractBasicClientMINE {
+public class SimpleTestStrategySMA extends AbstractStrategy {
 
     private HashMap<Long, String> SMAstrings;
-    private CurrencyCourse cc;
-    private int counter = 0;
+    private int actualTradeIndex;
+
+    public SimpleTestStrategySMA(CurrencyCourseOHLC currencyCourseOHLC) {
+        super(currencyCourseOHLC);
+    }
+    
+    public SimpleTestStrategySMA(CurrencyCourseOHLC currencyCourseOHLC,HashMap<Long, String> SMAstrings) {
+        super(currencyCourseOHLC);
+        this.SMAstrings = SMAstrings;
+    }
     
 
-    public SimpleTestStrategySMA(HashMap<Long, String> SMAstrings, CurrencyCourse cc) {
-        this.SMAstrings = SMAstrings;
-        this.cc = cc;
-    }
-
     @Override
-    public int processTick(double bid, double ask) {
-        long actualTime = cc.getTimeStamp(counter);
-        if(SMAstrings.get(actualTime).equals("rising")){
-            return MT4BasicClientMINE.PROCESS_TICK_DO_BUY;
+    public List<Trade> processNewCourse(List<Trade> actualTrades, CurrencyCourseOHLC currencyCourse) {
+        actualTradeIndex = actualTrades.size() - 1;
+        OHLC actualOHLC = getActualOHLC();
+        int action = AbstractStrategy.NOACTION;
+        switch (SMAstrings.get(actualOHLC.getTimestamp())) {
+            case "rising":
+                action = AbstractStrategy.BUY;
+                break;
+            case "falling":
+                action = AbstractStrategy.SELL;
+                break;
         }
-        if(SMAstrings.get(actualTime).equals("falling")){
-            return MT4BasicClientMINE.PROCESS_TICK_DO_SELL;
+        if (action != AbstractStrategy.NOACTION) {
+            buyOrSell(action, actualTrades);
         }
-        counter++;
-        return PROCESS_TICK_NONE;
+        return actualTrades;
     }
 
-    @Override
-    public void init() {
-        System.out.println("simpleTestStrategySMA init()");
-    }
-
-    @Override
-    public void deinit() {
-        System.out.println("simpleTestStrategySMA deinit()");
+    private void buyOrSell(int action, List<Trade> actualTrades) {
+        if (actualTradeIndex == -1 || !actualTrades.get(actualTradeIndex).isOpen()) {
+            double lotSize = 1;
+            actualTrades.add(new Trade(2, lotSize));
+        } else {
+            Trade activeTrade = actualTrades.get(actualTradeIndex);
+            if (action != activeTrade.getTradeType()) { //if contrary sign, close trade
+                activeTrade.close();
+            }
+        }
     }
 
 }

@@ -1,17 +1,15 @@
 package main;
 
-import indicators.SMA;
-import datacollection.CurrencyCourse;
 import datacollection.CurrencyCourseCreator;
-import datacollection.FormatGAINCapital;
-import de.flohrit.mt4j.AbstractBasicClientMINE;
+import datacollection.CurrencyCourseOHLC;
+import datacollection.FormatMT4OHLC;
+import indicators.SMA;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import simulation.StrategySimulation;
+import strategies.AbstractStrategy;
 import strategies.SimpleTestStrategySMA;
 
 public class Start {
@@ -20,19 +18,32 @@ public class Start {
      * @param args
      */
     public static void main(String[] args) {
-        CurrencyCourseCreator ccc = new FormatGAINCapital();
-        CurrencyCourse cc = new CurrencyCourse();
+        
+        // getting actual course
+        CurrencyCourseCreator ccc = new FormatMT4OHLC();
+        CurrencyCourseOHLC cc = new CurrencyCourseOHLC();
         try {
-            cc = ccc.getCurrencyCourseFromFile("EUR_USD_Week1_2012-01-02_GAINCapital.csv");
+            cc = ccc.getCurrencyCourseFromFile("EURUSD.1.csv", "EURUSD");
         } catch (IOException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //parameters for this strategy
         SMA sma = new SMA();
-        sma.calculateSMA(cc, 5);
-        AbstractBasicClientMINE strategy = new SimpleTestStrategySMA(sma.getSMAStrings(), cc);
-        StrategySimulation simulation = new StrategySimulation(strategy, cc, 50000, 500);
-        simulation.simulateOneOrderStrategy();
+        int smaDuration = 5;
+        sma.calculateSMA(cc, smaDuration);
+        
+        //initialize the strategy
+        AbstractStrategy simpleTestStrategy = new SimpleTestStrategySMA(cc,sma.getSMAStrings());
+        
+        
+        // start simulation
+        int leverage = 5;
+        double balance = 50000;
+        int timeframeInMinutes = 100;
+        StrategySimulation simulation = new StrategySimulation(simpleTestStrategy, cc, balance, leverage);
+        simulation.simulateStrategy(timeframeInMinutes);
     }
 }

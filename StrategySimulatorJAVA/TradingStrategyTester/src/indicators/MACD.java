@@ -1,6 +1,6 @@
 package indicators;
 
-import datacollection.CurrencyCourse;
+import datacollection.CurrencyCourseOHLC;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,7 +18,7 @@ public class MACD {
     public MACD() {
     }
 
-    public void getMACD(CurrencyCourse cc, EMA ema) {
+    public void getMACD(CurrencyCourseOHLC cc, EMA ema) {
 
         // Get 12-Day EMA
         EMA EMA_12Day = new EMA();

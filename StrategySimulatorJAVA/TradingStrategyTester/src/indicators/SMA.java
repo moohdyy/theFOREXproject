@@ -5,7 +5,7 @@
  */
 package indicators;
 
-import datacollection.CurrencyCourse;
+import datacollection.CurrencyCourseOHLC;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public class SMA {
     }
 
     // Get simple moving average
-    public void calculateSMA(CurrencyCourse cc, int SMADuration) {
+    public void calculateSMA(CurrencyCourseOHLC cc, int SMADuration) {
 
         // Create simple moving average "SMA" attribute
         if (cc.getNumberOfEntries() >= SMADuration) {
@@ -37,7 +37,7 @@ public class SMA {
             // the first "SMADuration - 1" instances
             for (int i = 0; i < SMADuration - 1; i++) {
                 for (int j = 0; j <= i; j++) {
-                    tempSum += cc.getBidPrice(j);
+                    tempSum += cc.getClose(j);
                     average = tempSum / (j + 1);
                 }
                 tempSum = 0;
@@ -65,7 +65,7 @@ public class SMA {
             // Calculate SMA
             for (int i = SMADuration - 1; i < cc.getNumberOfEntries(); i++) {
                 for (int j = 0; j < SMADuration; j++) {
-                    sum += cc.getBidPrice(i - j);
+                    sum += cc.getClose(i - j);
                 }
                 simpleMovingAverage = sum / SMADuration;
                 sum = 0;
