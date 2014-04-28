@@ -1,12 +1,16 @@
 package Connection;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import simulation.Trade;
+
 public class Connector {
 	File input = new File("");
+	File output =new File("");
 	Time lastTimestamp;
 	Candlesticks candles = new Candlesticks();
 
@@ -56,6 +60,23 @@ public class Connector {
 			e.printStackTrace();
 		}
 
+	}
+	public void placeOrder(Trade t)
+	{
+		
+		try {
+			FileWriter fw = new FileWriter(output);
+			BufferedWriter bw=new BufferedWriter(fw);
+			String trade=t.getJavaID()+","+t.getMT4ID()+","+t.isOpen()+","+t.getTradeType()+","+t.getOpeningPrice()+","+t.getVolume()+";";
+			bw.write(trade);
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }
