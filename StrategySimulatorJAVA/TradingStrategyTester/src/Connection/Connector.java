@@ -25,12 +25,13 @@ public class Connector {
 			while (readInNext) {
 				String next = br.readLine();
 				if (next != null) {
+					next=next.replace(" ", "");
 					String[] candle = next.split(",");
 					if (candle.length == 5) {
-						Time time = new Time(candle[0]);
-						double start = Double.parseDouble(candle[1]);
-						double end = Double.parseDouble(candle[2]);
-						double low = Double.parseDouble(candle[3]);
+						Time time = new Time(candle[0],candle[1]);
+						double start = Double.parseDouble(candle[2]);
+						double end = Double.parseDouble(candle[3]);
+						double low = Double.parseDouble(candle[4]);
 
 						double high = Double.parseDouble(candle[4]);
 						candles.add(new Candlestick(time, start, end, low, high));
