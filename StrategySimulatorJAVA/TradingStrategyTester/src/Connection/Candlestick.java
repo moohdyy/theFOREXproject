@@ -4,13 +4,13 @@ public class Candlestick {
 	private Time timestamp;
 	private double high;
 	private double low;
-	private double start;
-	private double end;
+	private double opening;
+	private double closing;
 
 	public Candlestick(Time t, double s, double e, double l, double h) {
 		this.timestamp = t;
-		this.start = s;
-		this.end = e;
+		this.opening = s;
+		this.closing = e;
 		this.low = l;
 		this.high = h;
 	}
@@ -27,11 +27,11 @@ public class Candlestick {
 		return low;
 	}
 
-	public double getStart() {
-		return start;
+	public double getOpening() {
+		return opening;
 	}
 
-	public double getEnd() {
-		return end;
+	public double getClosing() {
+		return closing;
 	}
 }
