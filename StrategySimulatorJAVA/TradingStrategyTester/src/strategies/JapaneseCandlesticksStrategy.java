@@ -1,13 +1,16 @@
 package strategies;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
+import Connection.Candlestick;
 import simulation.Trade;
 import datacollection.CurrencyCourseOHLC;
 
-public class JapaneseCandlesticks extends AbstractStrategy {
+public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 
-	public JapaneseCandlesticks(CurrencyCourseOHLC currencyCourseOHLC) {
+	public JapaneseCandlesticksStrategy(CurrencyCourseOHLC currencyCourseOHLC) {
 		super(currencyCourseOHLC);
 		// TODO Auto-generated constructor stub
 	}
@@ -18,5 +21,13 @@ public class JapaneseCandlesticks extends AbstractStrategy {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	private ArrayList<Candlestick> candles;
+	public boolean buyingSignal()
+	{
+	return false;
+	}
+	public boolean sellingSignal()
+	{
+		return false;
+	}
 }
