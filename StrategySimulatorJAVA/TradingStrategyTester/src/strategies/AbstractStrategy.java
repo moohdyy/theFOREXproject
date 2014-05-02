@@ -29,5 +29,11 @@ public abstract class AbstractStrategy {
     public OHLC getActualOHLC(){
         return this.cc.getOHLCOfActualPosition();
     }
+
+	public List<Trade> processNewCourse(List<Trade> actualTrades,
+			CurrencyCourseOHLC currencyCourse, double exchange) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 }

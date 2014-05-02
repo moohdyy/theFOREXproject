@@ -7,7 +7,11 @@ public class Time {
 	int hours;
 	int minutes;
 	int seconds;
-
+	long time;
+	public Time(long time)
+	{
+		this.time=time;
+	}
 	public Time(String date, String time) {
 		String[] d = date.split(".");
 		if (d.length == 3) {
@@ -64,5 +68,9 @@ public class Time {
 			}
 		}
 		return false;
+	}
+	public long getTime()
+	{
+		return time;
 	}
 }

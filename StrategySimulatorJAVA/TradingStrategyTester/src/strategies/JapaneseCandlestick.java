@@ -1,5 +1,7 @@
 package strategies;
 import Connection.Candlestick;
+import Connection.Time;
+
 import java.util.ArrayList;
 public class JapaneseCandlestick {
 private double startingValue;
@@ -8,6 +10,7 @@ private double lowestValue;
 private double lowerBody;
 private double upperBody;
 private double highestValue;
+private Time time;
 enum Categories{None,Bullish,Bearish};
 enum Types{None,SpinningTop,WhiteMarubozu,BlackMarubozu,LongLeggedDoji,DragonflyDoji,GravestoneDoji,FourPriceDoji,Hammer,InvertedHammer};
 enum Patterns{None,Hammer,HangingMan,InvertedHammer,ShootingStar,BullishEngulfing,BearishEngulfing,TweezerTops,TweezerBottoms,EveningStar,MorningStar,ThreeWhiteSoldiers,ThreeBlackCrows,ThreeInsideUp,ThreeInsideDown};
@@ -21,6 +24,7 @@ public JapaneseCandlestick(Candlestick c)
 	this.endingValue=c.getClosing();
 	this.highestValue=c.getHigh();
 	this.lowestValue=c.getLow();
+	this.time=c.getTimestamp();
 	if(startingValue>endingValue)
 	{
 		this.upperBody=startingValue;
@@ -95,7 +99,7 @@ public Types determineType()
 	}
 	return Types.None;
 }
-public Patterns determinePattern(ArrayList<JapaneseCandlestick>candlesticks)
+public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlesticks)
 {
 	int i=candlesticks.size()-1;
 		if(i>0)
@@ -300,6 +304,10 @@ public double getBodySize()
 {
 	return (upperBody-lowerBody);
 }
+public Time getTime()
+{
+	return this.time;
+}
 private boolean hasSmallUpperShadow(double percentage)
 {
 	double upperShadow=highestValue-upperBody;
@@ -383,7 +391,7 @@ public static boolean hasUptrend(ArrayList<JapaneseCandlestick> candles, int i)
 	}
 	return false;
 }
-public boolean buyingSignal()
+public static boolean buyingSignal(Patterns pattern)
 {
 	if(pattern==Patterns.BullishEngulfing)
 	{
@@ -403,8 +411,9 @@ public boolean buyingSignal()
 	}
 	return false;
 }
-public boolean sellingSignal()
+public static boolean sellingSignal(Patterns pattern)
 {
+	
 	if(pattern==Patterns.BearishEngulfing)
 	{
 		return true;
