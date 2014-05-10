@@ -25,7 +25,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 
 	@Override
 	public List<Trade> processNewCourse(List<Trade> actualTrades,
-			CurrencyCourseOHLC currencyCourse, double exchange) {
+			CurrencyCourseOHLC currencyCourse) {
 		int number=currencyCourse.getNumberOfEntries();
 		for(int i=0;i<number;i++)
 		{
@@ -53,23 +53,9 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		{
 			double t=(candle.getHighestValue()-candle.getLowestValue())/60*currencyCourse.getBidPrice(currencyCourse.getNumberOfEntries()-1)*100000;
 			Trade trade=new Trade(AbstractStrategy.BUY,t);
+			actualTrades.add(trade);
 		}
-		return null;
+		return actualTrades;
 	}
 	private ArrayList<Candlestick> candles;
-	public boolean buyingSignal()
-	{
-	return false;
-	}
-	public boolean sellingSignal()
-	{
-		return false;
-	}
-
-	@Override
-	public List<Trade> processNewCourse(List<Trade> actualTrades,
-			CurrencyCourseOHLC currencyCourse) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
