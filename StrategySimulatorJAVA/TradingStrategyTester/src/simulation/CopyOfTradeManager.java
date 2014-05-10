@@ -30,6 +30,7 @@ public class CopyOfTradeManager {
     CopyOfTradeManager(double balance) {
         this();
         this.balance = balance;
+        this.equity=balance;
     }
 
     CopyOfTradeManager(double balance, double leverage) {
@@ -208,7 +209,10 @@ public class CopyOfTradeManager {
         }
     
     }
-
+    public double getFreeMargin()
+    {
+    	return getUsableMargin();
+    }
     public double getUsableMargin() {
         return equity-usedMargin;
     }
