@@ -1,0 +1,3146 @@
+________________________________
+2014-03-25 06:24:
+ ActualPrice:   1.3842299999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:25:
+ ActualPrice:   1.38425
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:26:
+ ActualPrice:   1.3842599999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:27:
+ ActualPrice:   1.38425
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:28:
+ ActualPrice:   1.38425
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:29:
+ ActualPrice:   1.38422
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:30:
+ ActualPrice:   1.38422
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:31:
+ ActualPrice:   1.38424
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:32:
+ ActualPrice:   1.38424
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:33:
+ ActualPrice:   1.38421
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:34:
+ ActualPrice:   1.38421
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:35:
+ ActualPrice:   1.38422
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:36:
+ ActualPrice:   1.3843299999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:37:
+ ActualPrice:   1.38425
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:38:
+ ActualPrice:   1.38432
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:39:
+ ActualPrice:   1.38422
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:40:
+ ActualPrice:   1.3841999999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:41:
+ ActualPrice:   1.3841999999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:42:
+ ActualPrice:   1.3841299999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:43:
+ ActualPrice:   1.384
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:44:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:45:
+ ActualPrice:   1.3837199999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:46:
+ ActualPrice:   1.38383
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:47:
+ ActualPrice:   1.3838599999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:48:
+ ActualPrice:   1.38388
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:49:
+ ActualPrice:   1.3838199999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:50:
+ ActualPrice:   1.38383
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:51:
+ ActualPrice:   1.38374
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:52:
+ ActualPrice:   1.3835199999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:53:
+ ActualPrice:   1.38367
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:54:
+ ActualPrice:   1.38373
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:55:
+ ActualPrice:   1.3837499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:56:
+ ActualPrice:   1.3836199999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:57:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:58:
+ ActualPrice:   1.3836499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 06:59:
+ ActualPrice:   1.38373
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:00:
+ ActualPrice:   1.38374
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:01:
+ ActualPrice:   1.3834099999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:02:
+ ActualPrice:   1.38356
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:03:
+ ActualPrice:   1.38367
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:04:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:05:
+ ActualPrice:   1.3836899999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:06:
+ ActualPrice:   1.38373
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:07:
+ ActualPrice:   1.3836899999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:08:
+ ActualPrice:   1.3837599999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:09:
+ ActualPrice:   1.38361
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:10:
+ ActualPrice:   1.38366
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:11:
+ ActualPrice:   1.3838199999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:12:
+ ActualPrice:   1.38384
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:13:
+ ActualPrice:   1.38371
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:14:
+ ActualPrice:   1.38374
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:15:
+ ActualPrice:   1.3837199999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:16:
+ ActualPrice:   1.38374
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:17:
+ ActualPrice:   1.38383
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:18:
+ ActualPrice:   1.3838599999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:19:
+ ActualPrice:   1.3838499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:20:
+ ActualPrice:   1.38377
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:21:
+ ActualPrice:   1.3838199999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:22:
+ ActualPrice:   1.3837899999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:23:
+ ActualPrice:   1.3837599999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:24:
+ ActualPrice:   1.3838599999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:25:
+ ActualPrice:   1.3838499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:26:
+ ActualPrice:   1.3836499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:27:
+ ActualPrice:   1.3837199999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:28:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:29:
+ ActualPrice:   1.3835
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:30:
+ ActualPrice:   1.3835799999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:31:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:32:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:33:
+ ActualPrice:   1.38353
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:34:
+ ActualPrice:   1.38353
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:35:
+ ActualPrice:   1.3835099999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:36:
+ ActualPrice:   1.3834099999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:37:
+ ActualPrice:   1.3835199999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:38:
+ ActualPrice:   1.3835499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:39:
+ ActualPrice:   1.3834099999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:40:
+ ActualPrice:   1.3835499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:41:
+ ActualPrice:   1.3835099999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:42:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:43:
+ ActualPrice:   1.38346
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:44:
+ ActualPrice:   1.38344
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:45:
+ ActualPrice:   1.38346
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:46:
+ ActualPrice:   1.38346
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:47:
+ ActualPrice:   1.38344
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:48:
+ ActualPrice:   1.3834099999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:49:
+ ActualPrice:   1.3834499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:50:
+ ActualPrice:   1.3834799999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:51:
+ ActualPrice:   1.38353
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:52:
+ ActualPrice:   1.38354
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:53:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:54:
+ ActualPrice:   1.3836199999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:55:
+ ActualPrice:   1.3836199999999999
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:56:
+ ActualPrice:   1.38357
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:57:
+ ActualPrice:   1.3836
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:58:
+ ActualPrice:   1.38346
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 07:59:
+ ActualPrice:   1.38344
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 08:00:
+ ActualPrice:   1.3835
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 08:01:
+ ActualPrice:   1.38347
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 08:02:
+ ActualPrice:   1.3835499999999998
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 08:03:
+ ActualPrice:   1.38363
+ ActiveTrades:  0
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        50000
+ UseableMargin: Not Implemented
+ Margin:        50000
+________________________________________
+
+________________________________
+2014-03-25 08:04:
+ ActualPrice:   1.3837199999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:05:
+ ActualPrice:   1.38367
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:06:
+ ActualPrice:   1.38374
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:07:
+ ActualPrice:   1.38381
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:08:
+ ActualPrice:   1.3839199999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:09:
+ ActualPrice:   1.38391
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:10:
+ ActualPrice:   1.3839499999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:11:
+ ActualPrice:   1.38394
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:12:
+ ActualPrice:   1.38373
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:13:
+ ActualPrice:   1.38381
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:14:
+ ActualPrice:   1.38374
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:15:
+ ActualPrice:   1.3837499999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:16:
+ ActualPrice:   1.38374
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:17:
+ ActualPrice:   1.38374
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:18:
+ ActualPrice:   1.3837499999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:19:
+ ActualPrice:   1.38377
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:20:
+ ActualPrice:   1.3838499999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:21:
+ ActualPrice:   1.3839299999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:22:
+ ActualPrice:   1.3838199999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:23:
+ ActualPrice:   1.38398
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:24:
+ ActualPrice:   1.3838899999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:25:
+ ActualPrice:   1.38388
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:26:
+ ActualPrice:   1.38387
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:27:
+ ActualPrice:   1.3838599999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:28:
+ ActualPrice:   1.3839599999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:29:
+ ActualPrice:   1.3840299999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:30:
+ ActualPrice:   1.38408
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:31:
+ ActualPrice:   1.38405
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:32:
+ ActualPrice:   1.38405
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:33:
+ ActualPrice:   1.38405
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:34:
+ ActualPrice:   1.3841599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:35:
+ ActualPrice:   1.38417
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:36:
+ ActualPrice:   1.3841999999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:37:
+ ActualPrice:   1.38422
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:38:
+ ActualPrice:   1.38424
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:39:
+ ActualPrice:   1.38425
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:40:
+ ActualPrice:   1.38428
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:41:
+ ActualPrice:   1.3843599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:42:
+ ActualPrice:   1.3843699999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:43:
+ ActualPrice:   1.3843299999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:44:
+ ActualPrice:   1.3843599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:45:
+ ActualPrice:   1.38421
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:46:
+ ActualPrice:   1.3840299999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:47:
+ ActualPrice:   1.3838599999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:48:
+ ActualPrice:   1.3838499999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:49:
+ ActualPrice:   1.38391
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:50:
+ ActualPrice:   1.3839299999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:51:
+ ActualPrice:   1.3839199999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:52:
+ ActualPrice:   1.3839299999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:53:
+ ActualPrice:   1.38407
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:54:
+ ActualPrice:   1.38405
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:55:
+ ActualPrice:   1.3840299999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:56:
+ ActualPrice:   1.3840599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:57:
+ ActualPrice:   1.38398
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:58:
+ ActualPrice:   1.3840599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 08:59:
+ ActualPrice:   1.38397
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:00:
+ ActualPrice:   1.3843299999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:01:
+ ActualPrice:   1.38455
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:02:
+ ActualPrice:   1.3845999999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:03:
+ ActualPrice:   1.3845299999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:04:
+ ActualPrice:   1.38431
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:05:
+ ActualPrice:   1.3845599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:06:
+ ActualPrice:   1.38475
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:07:
+ ActualPrice:   1.38469
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:08:
+ ActualPrice:   1.3845599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:09:
+ ActualPrice:   1.38451
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:10:
+ ActualPrice:   1.3845699999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:11:
+ ActualPrice:   1.3846399999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:12:
+ ActualPrice:   1.3847699999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:13:
+ ActualPrice:   1.38482
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:14:
+ ActualPrice:   1.38476
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:15:
+ ActualPrice:   1.3847699999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:16:
+ ActualPrice:   1.3847299999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:17:
+ ActualPrice:   1.38466
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:18:
+ ActualPrice:   1.38462
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:19:
+ ActualPrice:   1.38461
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:20:
+ ActualPrice:   1.38465
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:21:
+ ActualPrice:   1.38465
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:22:
+ ActualPrice:   1.38472
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:23:
+ ActualPrice:   1.38485
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:24:
+ ActualPrice:   1.3846999999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:25:
+ ActualPrice:   1.38472
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:26:
+ ActualPrice:   1.3845599999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:27:
+ ActualPrice:   1.3845699999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:28:
+ ActualPrice:   1.38455
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:29:
+ ActualPrice:   1.38432
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:30:
+ ActualPrice:   1.38421
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:31:
+ ActualPrice:   1.38445
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:32:
+ ActualPrice:   1.38435
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:33:
+ ActualPrice:   1.38435
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:34:
+ ActualPrice:   1.3842299999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:35:
+ ActualPrice:   1.3841999999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:36:
+ ActualPrice:   1.38411
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:37:
+ ActualPrice:   1.3840999999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:38:
+ ActualPrice:   1.3841299999999999
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:39:
+ ActualPrice:   1.384
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:40:
+ ActualPrice:   1.38401
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:41:
+ ActualPrice:   1.38405
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:42:
+ ActualPrice:   1.38411
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:43:
+ ActualPrice:   1.3841199999999998
+ ActiveTrades:  1
+, ClosedTrades: 0
+ Balance:       50000
+ Equity:        30000
+ UseableMargin: Not Implemented
+ Margin:        10000
+________________________________________
+
+________________________________
+2014-03-25 09:44:
+ ActualPrice:   1.38421
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:45:
+ ActualPrice:   1.38415
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:46:
+ ActualPrice:   1.3840299999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:47:
+ ActualPrice:   1.38391
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:48:
+ ActualPrice:   1.3840899999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:49:
+ ActualPrice:   1.38414
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:50:
+ ActualPrice:   1.38424
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:51:
+ ActualPrice:   1.3842299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:52:
+ ActualPrice:   1.3842299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:53:
+ ActualPrice:   1.3842299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:54:
+ ActualPrice:   1.3841999999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:55:
+ ActualPrice:   1.3842299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:56:
+ ActualPrice:   1.38435
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:57:
+ ActualPrice:   1.38415
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:58:
+ ActualPrice:   1.3842299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 09:59:
+ ActualPrice:   1.38434
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:00:
+ ActualPrice:   1.38434
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:01:
+ ActualPrice:   1.38424
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:02:
+ ActualPrice:   1.3844299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:03:
+ ActualPrice:   1.3844999999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:04:
+ ActualPrice:   1.38461
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:05:
+ ActualPrice:   1.3850699999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:06:
+ ActualPrice:   1.3853199999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:07:
+ ActualPrice:   1.38526
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:08:
+ ActualPrice:   1.3851099999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:09:
+ ActualPrice:   1.38513
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:10:
+ ActualPrice:   1.38502
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:11:
+ ActualPrice:   1.38516
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:12:
+ ActualPrice:   1.38505
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:13:
+ ActualPrice:   1.3848999999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:14:
+ ActualPrice:   1.3848099999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:15:
+ ActualPrice:   1.38475
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:16:
+ ActualPrice:   1.3848799999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:17:
+ ActualPrice:   1.3847399999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:18:
+ ActualPrice:   1.3846299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:19:
+ ActualPrice:   1.38455
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:20:
+ ActualPrice:   1.3845399999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:21:
+ ActualPrice:   1.3845399999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:22:
+ ActualPrice:   1.3844299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:23:
+ ActualPrice:   1.3844599999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:24:
+ ActualPrice:   1.38439
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:25:
+ ActualPrice:   1.3843599999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:26:
+ ActualPrice:   1.3843999999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:27:
+ ActualPrice:   1.3843299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:28:
+ ActualPrice:   1.3844699999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:29:
+ ActualPrice:   1.38455
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:30:
+ ActualPrice:   1.38459
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:31:
+ ActualPrice:   1.38452
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:32:
+ ActualPrice:   1.38439
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:33:
+ ActualPrice:   1.3844699999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:34:
+ ActualPrice:   1.38439
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:35:
+ ActualPrice:   1.3844599999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:36:
+ ActualPrice:   1.3845599999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:37:
+ ActualPrice:   1.38468
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:38:
+ ActualPrice:   1.38475
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:39:
+ ActualPrice:   1.38479
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:40:
+ ActualPrice:   1.3847399999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:41:
+ ActualPrice:   1.38441
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:42:
+ ActualPrice:   1.3844299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:43:
+ ActualPrice:   1.38442
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:44:
+ ActualPrice:   1.38432
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:45:
+ ActualPrice:   1.3843299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:46:
+ ActualPrice:   1.38417
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:47:
+ ActualPrice:   1.3843299999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:48:
+ ActualPrice:   1.3841599999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:49:
+ ActualPrice:   1.3839599999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:50:
+ ActualPrice:   1.38364
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:51:
+ ActualPrice:   1.3839
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:52:
+ ActualPrice:   1.38383
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:53:
+ ActualPrice:   1.3845399999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:54:
+ ActualPrice:   1.3842599999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:55:
+ ActualPrice:   1.38445
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:56:
+ ActualPrice:   1.38414
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:57:
+ ActualPrice:   1.38398
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:58:
+ ActualPrice:   1.3839599999999999
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 10:59:
+ ActualPrice:   1.38383
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:00:
+ ActualPrice:   1.38371
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:01:
+ ActualPrice:   1.3841199999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:02:
+ ActualPrice:   1.38411
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:03:
+ ActualPrice:   1.38418
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:04:
+ ActualPrice:   1.38444
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:05:
+ ActualPrice:   1.38425
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:06:
+ ActualPrice:   1.38425
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:07:
+ ActualPrice:   1.38432
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:08:
+ ActualPrice:   1.38434
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
+________________________________
+2014-03-25 11:09:
+ ActualPrice:   1.3846699999999998
+ ActiveTrades:  0
+, ClosedTrades: 1
+ Balance:       20550000
+ Equity:        20530000
+ UseableMargin: Not Implemented
+ Margin:        13853610000
+________________________________________
+
