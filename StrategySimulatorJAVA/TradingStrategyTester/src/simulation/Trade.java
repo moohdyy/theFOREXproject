@@ -11,6 +11,9 @@ import strategies.AbstractStrategy;
  * @author Moohdyy
  */
 public class Trade {
+    public final static int BUY = 1;
+    public final static int SELL = 2;
+    public final static int NOACTION = 0;
 
     private int javaID;
     private int MT4ID;
@@ -37,9 +40,9 @@ public class Trade {
     
     public double getProfitOrLoss(double actualPrice){
         switch (this.getTradeType()) {
-                case AbstractStrategy.BUY:
+                case Trade.BUY:
                     return (actualPrice-getOpeningPrice())*getVolume();
-                case AbstractStrategy.SELL:
+                case Trade.SELL:
                     return (getOpeningPrice()-actualPrice)*getVolume();
                 default:
                     return 0;

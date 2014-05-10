@@ -1,7 +1,6 @@
 package datacollection;
 
 import java.util.ArrayList;
-import strategies.AbstractStrategy;
 
 public class CurrencyCourseOHLC {
 
@@ -9,13 +8,18 @@ public class CurrencyCourseOHLC {
     private int numberOfEntries;
     private int actualPosition;
     private ArrayList<OHLC> listOHLC;
-    private double spread;
+    private double spread =0;
 
     public CurrencyCourseOHLC() {
         this.currencyPair = "NONE";
         this.numberOfEntries = 0;
         this.listOHLC = new ArrayList<>(numberOfEntries);
         this.actualPosition = 0;
+    }
+    
+    public CurrencyCourseOHLC(String currencyPair) {
+        this();
+        this.currencyPair = currencyPair;
     }
 
     public CurrencyCourseOHLC(String currencyPair, double spread) {
@@ -77,7 +81,7 @@ public class CurrencyCourseOHLC {
     }
     
     public double getBidPrice(int index){
-        return this.getClose(index) +this.spread;
+        return this.getClose(index) +this.getSpread();
     }
 
     /**
@@ -96,6 +100,20 @@ public class CurrencyCourseOHLC {
      */
     public void setActualPosition(int actualPosition) {
         this.actualPosition = actualPosition;
+    }
+
+    /**
+     * @return the spread
+     */
+    public double getSpread() {
+        return spread;
+    }
+
+    /**
+     * @param spread the spread to set
+     */
+    public void setSpread(double spread) {
+        this.spread = spread;
     }
     
     

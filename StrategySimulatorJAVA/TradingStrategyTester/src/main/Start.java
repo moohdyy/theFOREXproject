@@ -2,6 +2,7 @@ package main;
 
 import datacollection.CurrencyCourseCreator;
 import datacollection.CurrencyCourseOHLC;
+import datacollection.FormatHistDataOHLCWithoutSpread;
 import datacollection.FormatMT4OHLC;
 import indicators.SMA;
 
@@ -23,15 +24,20 @@ public class Start {
     public static void main(String[] args) {
         
         // getting actual course
-        CurrencyCourseCreator ccc = new FormatMT4OHLC();
+        CurrencyCourseCreator ccc = new FormatHistDataOHLCWithoutSpread();
         CurrencyCourseOHLC cc = new CurrencyCourseOHLC();
         try {
-            cc = ccc.getCurrencyCourseFromFile("C:\\Users\\Carina\\Documents\\Dots-And-Boxes\\Operations Research Project\\theFOREXproject\\StrategySimulatorJAVA\\TradingStrategyTester\\EURUSD.1.csv", "EURUSD");
+            cc = ccc.getCurrencyCourseFromFile("historicalData\\EURUSD\\2011\\oneDayTest.csv", "EURUSD");
         } catch (IOException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //determine spread depending on some pipchange
+        int pipsForSpread = 2;
+        double onePip = cc.getOHLC(0).getClose()/10000;
+        double spread = onePip * pipsForSpread;
+        cc.setSpread(spread);
         
         //parameters for this strategy
         SMA sma = new SMA();
@@ -45,7 +51,7 @@ public class Start {
         // start simulation
         int leverage = 5;
         double balance = 50000;
-        int timeframeInMinutes = 100;
+        int timeframeInMinutes = 2;
         CopyOfStrategySimulation simulation = new CopyOfStrategySimulation(simpleTestStrategy, cc, balance, leverage);
         simulation.simulateStrategy(timeframeInMinutes);
     }

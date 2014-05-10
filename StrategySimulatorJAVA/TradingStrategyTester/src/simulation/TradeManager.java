@@ -79,7 +79,7 @@ public class TradeManager {
     }
 
     public double getBuyOrSellingPrice(int orderType, double bid, double ask) {
-        if (orderType == AbstractStrategy.BUY) {
+        if (orderType == Trade.BUY) {
             return ask;
         } else {
             return bid;
@@ -175,7 +175,7 @@ public class TradeManager {
     public void checkStopLossTakeProfit(double actualPrice) {
         for (Trade trade : allTrades.values()) {
             switch(trade.getTradeType()){
-                case AbstractStrategy.BUY:
+                case Trade.BUY:
                     if(trade.hasStopLoss()){
                         if(actualPrice<=trade.getStopLoss()){
                             trade.close();
@@ -187,7 +187,7 @@ public class TradeManager {
                         }
                     }
                     break;
-                case AbstractStrategy.SELL:
+                case Trade.SELL:
                     if(trade.hasStopLoss()){
                         if(actualPrice>=trade.getStopLoss()){
                             trade.close();

@@ -14,9 +14,6 @@ import simulation.Trade;
  * @author Moohdyy
  */
 public abstract class AbstractStrategy {
-    public final static int BUY = 1;
-    public final static int SELL = 2;
-    public final static int NOACTION = 0;
     public CurrencyCourseOHLC cc;
     public double volume;
     

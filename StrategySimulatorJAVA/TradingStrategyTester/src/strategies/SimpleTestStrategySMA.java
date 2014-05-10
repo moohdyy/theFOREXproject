@@ -34,16 +34,16 @@ public class SimpleTestStrategySMA extends AbstractStrategy {
     public List<Trade> processNewCourse(List<Trade> actualTrades, CurrencyCourseOHLC currencyCourse) {
         actualTradeIndex = actualTrades.size() - 1;
         OHLC actualOHLC = getActualOHLC();
-        int action = AbstractStrategy.NOACTION;
+        int action = Trade.NOACTION;
         switch (SMAstrings.get(actualOHLC.getTimestamp())) {
             case "rising":
-                action = AbstractStrategy.BUY;
+                action = Trade.BUY;
                 break;
             case "falling":
-                action = AbstractStrategy.SELL;
+                action = Trade.SELL;
                 break;
         }
-        if (action != AbstractStrategy.NOACTION) {
+        if (action != Trade.NOACTION) {
             buyOrSell(action, actualTrades);
         }
         return actualTrades;
