@@ -51,10 +51,8 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		}
 		else if (buying)
 		{
-			double t=(candle.getHighestValue()-candle.getLowestValue())/60*exchange*100000;
-			//tradetype???
-			int tradetype=0;
-			Trade trade=new Trade(tradetype,t);
+			double t=(candle.getHighestValue()-candle.getLowestValue())/60*currencyCourse.getBidPrice(currencyCourse.getNumberOfEntries()-1)*100000;
+			Trade trade=new Trade(AbstractStrategy.BUY,t);
 		}
 		return null;
 	}

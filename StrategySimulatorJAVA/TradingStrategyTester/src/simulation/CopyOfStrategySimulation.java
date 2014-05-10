@@ -5,10 +5,18 @@
 package simulation;
 
 import datacollection.CurrencyCourseOHLC;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import strategies.AbstractStrategy;
 
 /**
@@ -60,16 +68,27 @@ public class CopyOfStrategySimulation {
     public void printCurrentStats(int index) {
         double bid = cc.getBidPrice(index);
         double ask = cc.getAskPrice(index);
-        System.out.print("________________________________\n" + sdf.format(new Date(actualTime))
-                + ":\n ActualPrice:   " + bid
-                + "\n ActiveTrades:  " + tm.getActiveTradesCount()
-                + ", ClosedTrades: " + tm.getClosedTradesCount()
-                + "\n Balance:       " + Math.round(this.tm.getBalance())
-                + "\n Equity:        " + Math.round(this.tm.getEquity())
-                + "\n UseableMargin: " + "Not Implemented"
-                + "\n Margin:        " + Math.round(this.tm.getFreeMargin())
-                + "\n________________________________________\n"
-        );
+        String output="________________________________"+System.lineSeparator() + sdf.format(new Date(actualTime))
+                + ":"+System.lineSeparator()+" ActualPrice:   " + bid
+                +System.lineSeparator()+" ActiveTrades:  " + tm.getActiveTradesCount()
+                +System.lineSeparator()+ ", ClosedTrades: " + tm.getClosedTradesCount()
+                	+System.lineSeparator()+" Balance:       " + Math.round(this.tm.getBalance())
+                +System.lineSeparator()+" Equity:        " + Math.round(this.tm.getEquity())
+               +System.lineSeparator()+" UseableMargin: " + "Not Implemented"
+               +System.lineSeparator()+" Margin:        " + Math.round(this.tm.getFreeMargin())
+                +System.lineSeparator()+"________________________________________"+System.lineSeparator()+"";
+        try {
+        
+			FileWriter fw=new FileWriter(new File("output.txt"),true);
+			BufferedWriter bw=new BufferedWriter(fw);
+			bw.write(output+System.lineSeparator());
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.print(output);
     }
 
 }
