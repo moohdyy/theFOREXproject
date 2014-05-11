@@ -15,7 +15,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy{
 	ArrayList<JapaneseCandlestick> japanese=new ArrayList<JapaneseCandlestick>();
 
 	public JapaneseCandlesticksStrategy(CurrencyCourseOHLC currencyCourseOHLC) {
-		super(currencyCourseOHLC);
+		super(currencyCourseOHLC,"JapaneseCandlesticksStrategy");
 		int number=currencyCourseOHLC.getNumberOfEntries();
 		for(int i=0;i<number;i++)
 		{
@@ -53,7 +53,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy{
 		else if (buying)
 		{
 			double t=(candle.getHighestValue()-candle.getLowestValue())/60*currencyCourse.getBidPrice(currencyCourse.getNumberOfEntries()-1)*100000;
-			Trade trade=new Trade(AbstractStrategy.BUY,t);
+			Trade trade=new Trade(Trade.BUY,t);
 			actualTrades.add(trade);
 		}
 		return actualTrades;
