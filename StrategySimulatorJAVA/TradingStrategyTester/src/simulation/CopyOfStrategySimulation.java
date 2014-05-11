@@ -49,7 +49,7 @@ public class CopyOfStrategySimulation {
         for (int index = 0; index < cc.getNumberOfEntries(); index++) {
             double actualPrice = cc.getClose(index);
             if (tm.checkForMarginCall()) {
-                System.out.println("MARGIN CALL, simulation stopped.");
+               // System.out.println("MARGIN CALL, simulation stopped.");
                 return;
             }
             tm.checkStopLossTakeProfit(actualPrice);
@@ -57,7 +57,7 @@ public class CopyOfStrategySimulation {
             long windowTime = cc.getTimeStamp(cc.getActualPosition());
             if (this.actualTime >= windowTime + windowInMilliseconds) { //in our case we can access new course after window
                 cc.setActualPosition(index);
-                System.out.println("Actual price of " + cc.getCurrencyPair() + " : " + actualPrice);
+               // System.out.println("Actual price of " + cc.getCurrencyPair() + " : " + actualPrice);
                 trades = strategy.processNewCourse(trades, cc);
             }
             tm.processTrades(trades, cc.getBidPrice(index), cc.getClose(index), this.actualTime);
@@ -66,29 +66,30 @@ public class CopyOfStrategySimulation {
     }
 
     public void printCurrentStats(int index) {
-        double bid = cc.getBidPrice(index);
-        double ask = cc.getAskPrice(index);
-        String output="________________________________"+System.lineSeparator() + sdf.format(new Date(actualTime))
-                + ":"+System.lineSeparator()+" ActualPrice:   " + bid
-                +System.lineSeparator()+" ActiveTrades:  " + tm.getActiveTradesCount()
-                +System.lineSeparator()+ ", ClosedTrades: " + tm.getClosedTradesCount()
-                	+System.lineSeparator()+" Balance:       " + Math.round(this.tm.getBalance())
-                +System.lineSeparator()+" Equity:        " + Math.round(this.tm.getEquity())
-               +System.lineSeparator()+" UseableMargin: " + "Not Implemented"
-               +System.lineSeparator()+" Margin:        " + Math.round(this.tm.getFreeMargin())
-                +System.lineSeparator()+"________________________________________"+System.lineSeparator()+"";
-        try {
-        
-			FileWriter fw=new FileWriter(new File("output.txt"),true);
-			BufferedWriter bw=new BufferedWriter(fw);
-			bw.write(output+System.lineSeparator());
-			bw.close();
-			fw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.print(output);
+//        double bid = cc.getBidPrice(index);
+//        double ask = cc.getAskPrice(index);
+//        String output="________________________________"+System.lineSeparator() + sdf.format(new Date(actualTime));
+////                + ":"+System.lineSeparator()+" ActualPrice:   " + bid
+////                +System.lineSeparator()+" ActiveTrades:  " + tm.getActiveTradesCount()
+////                +System.lineSeparator()+ ", ClosedTrades: " + tm.getClosedTradesCount()
+////                	+System.lineSeparator()+" Balance:       " + Math.round(this.tm.getBalance())
+////                +System.lineSeparator()+" Equity:        " + Math.round(this.tm.getEquity())
+////               +System.lineSeparator()+" UseableMargin: " + "Not Implemented"
+////               +System.lineSeparator()+" Margin:        " + Math.round(this.tm.getFreeMargin())
+////                +System.lineSeparator()+"________________________________________"+System.lineSeparator()+"";
+////        
+//        try {
+//        
+//			FileWriter fw=new FileWriter(new File("output.txt"),true);
+//			BufferedWriter bw=new BufferedWriter(fw);
+//			bw.write(output+System.lineSeparator());
+//			bw.close();
+//			fw.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        System.out.print(output);
     }
 
 }

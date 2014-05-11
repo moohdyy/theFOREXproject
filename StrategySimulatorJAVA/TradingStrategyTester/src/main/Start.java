@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import simulation.CopyOfStrategySimulation;
 import simulation.StrategySimulation;
 import strategies.AbstractStrategy;
+import strategies.JapaneseCandlestick;
+import strategies.JapaneseCandlesticksStrategy;
 import strategies.SimpleTestStrategySMA;
 
 public class Start {
@@ -39,7 +41,7 @@ public class Start {
         sma.calculateSMA(cc, smaDuration);
         
         //initialize the strategy
-        AbstractStrategy simpleTestStrategy = new SimpleTestStrategySMA(cc,sma.getSMAStrings());
+        JapaneseCandlesticksStrategy simpleTestStrategy = new JapaneseCandlesticksStrategy(cc);
         
         
         // start simulation

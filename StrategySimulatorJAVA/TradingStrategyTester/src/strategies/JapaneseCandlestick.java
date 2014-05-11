@@ -3,7 +3,8 @@ import Connection.Candlestick;
 import Connection.Time;
 
 import java.util.ArrayList;
-public class JapaneseCandlestick {
+import java.util.Collections;
+public class JapaneseCandlestick implements Comparable<JapaneseCandlestick> {
 private double startingValue;
 private double endingValue;
 private double lowestValue;
@@ -18,7 +19,7 @@ private Categories category=Categories.None;
 private Types type=Types.None;
 private Patterns pattern=Patterns.None;
 
-public JapaneseCandlestick(Candlestick c)
+public JapaneseCandlestick(Candlestick c) 
 {
 	this.startingValue=c.getOpening();
 	this.endingValue=c.getClosing();
@@ -102,6 +103,7 @@ public Types determineType()
 public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlesticks)
 {
 	int i=candlesticks.size()-1;
+	Collections.sort(candlesticks);
 		if(i>0)
 		{
 		if(candlesticks.get(i).type==Types.Hammer)
@@ -459,5 +461,18 @@ public Types getType() {
 }
 public Patterns getPattern() {
 	return pattern;
+}
+
+@Override
+public int compareTo(JapaneseCandlestick arg0) {
+	// TODO Auto-generated method stub
+	if(this.time.getTime()>arg0.getTime().getTime())
+	{
+		return 1;
+	}else if(this.time.getTime()<arg0.getTime().getTime())
+	{
+		return -1;
+	}
+	return time.compareTo(arg0.getTime());
 }
 }
