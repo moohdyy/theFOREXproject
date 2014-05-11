@@ -1,15 +1,13 @@
 package Connection;
 
-import java.security.Timestamp;
-
-public class Time implements Comparable<Time>{
+public class Time {
 	int day;
 	int month;
 	int year;
 	int hours;
 	int minutes;
 	int seconds;
-	long time=0;
+	long time;
 	public Time(long time)
 	{
 		this.time=time;
@@ -74,54 +72,5 @@ public class Time implements Comparable<Time>{
 	public long getTime()
 	{
 		return time;
-	}
-	@Override
-	public int compareTo(Time o) {
-		// TODO Auto-generated method stub
-		if(getTime()>o.getTime())
-		{
-			return 1;
-		}else if(getTime()<o.getTime())
-		{
-			return -1;
-		}else if(year>o.getYear())
-		{
-			return 1;
-		}else if(year<o.getYear())
-		{
-			return -1;
-		}else if(month>o.getMonth())
-		{
-			return 1;
-		}else if(month<o.getMonth())
-		{
-			return -1;
-		}else if(day>o.getDay())
-		{
-			return 1;
-		}else if(day<o.getDay())
-		{
-			return -1;
-		}
-		else if(hours>o.getHours())
-		{
-			return 1;
-		}else if(hours<o.getHours())
-		{
-			return -1;
-		}else if(minutes>o.getMinutes())
-		{
-			return 1;
-		}else if(minutes<o.getMinutes())
-		{
-			return -1;
-		}else if(seconds>o.getSeconds())
-		{
-			return 1;
-		}else if(seconds<o.getSeconds())
-		{
-			return -1;
-		}
-		return 0;
 	}
 }

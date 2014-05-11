@@ -5,10 +5,20 @@
 package simulation;
 
 import datacollection.CurrencyCourseOHLC;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import main.Start;
+
 import strategies.AbstractStrategy;
 
 /**
@@ -18,6 +28,7 @@ import strategies.AbstractStrategy;
 public class StrategySimulation {
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private static File logFile;
     private TradeManager tm;
     private AbstractStrategy strategy;
     private CurrencyCourseOHLC cc;
@@ -27,6 +38,13 @@ public class StrategySimulation {
         this.cc = cc;
         this.strategy = strategy;
         this.tm = new TradeManager(balance);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(cc.getOHLCOfActualPosition().getTimestamp());
+        String startOfCC = cal.get(Calendar.YEAR) + "_" + (cal.get(Calendar.MONTH) + 1);
+        String filename = Start.FOLDERNAME+strategy.getName()+"\\output" + cc.getCurrencyPair() + "_" + startOfCC + ".txt";
+        StrategySimulation.logFile = new File(filename);
+        logFile.delete();
+        StrategySimulation.logFile = new File(filename);
     }
 
     public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, double leverage) {
@@ -34,42 +52,64 @@ public class StrategySimulation {
         this.tm.setLeverage(leverage);
     }
 
-    //for this simulation, the strategy just has one order at maximum open and can close a BUY order by returning SELL and vice versa
-    public void simulateStrategy(int windowInMinutes) {
+    /**
+     * simulates the strategy over the whole CurrencyCource
+     *
+     * @param windowInMinutes the time intervall in which the course is
+     * accessible to the strategy (if windowInMinutes is 1, every OHLC is
+     * analyzed by the strategy)
+     * @return double teh final balance
+     */
+    public double simulateStrategy(int windowInMinutes) {
         long windowInMilliseconds = windowInMinutes * 60 * 1000;
         List<Trade> trades = new ArrayList<>();
         for (int index = 0; index < cc.getNumberOfEntries(); index++) {
             double actualPrice = cc.getClose(index);
-            if (tm.checkForMarginCall(actualPrice)) {
-                System.out.println("MARGIN CALL, simulation stopped.");
-                return;
+            if (checkNewPrice(actualPrice)) {
+                return tm.getBalance();
             }
-            tm.checkStopLossTakeProfit(actualPrice);
             this.actualTime = cc.getTimeStamp(index);
             long windowTime = cc.getTimeStamp(cc.getActualPosition());
             if (this.actualTime >= windowTime + windowInMilliseconds) { //in our case we can access new course after window
                 cc.setActualPosition(index);
-                System.out.println("Actual price of " + cc.getCurrencyPair() + " : " + actualPrice);
+                System.out.println("--- Strategy analyzing at actual price of: " + actualPrice+" ---");
                 trades = strategy.processNewCourse(trades, cc);
             }
             tm.processTrades(trades, cc.getBidPrice(index), cc.getClose(index), this.actualTime);
             printCurrentStats(index);
         }
+        return tm.getBalance();
+    }
+
+    private boolean checkNewPrice(double actualPrice) {
+        if (tm.checkForMarginCall()) {
+            tm.closeAllOrders(actualPrice);
+            System.out.println("MARGIN CALL, simulation stopped. Balance: "+tm.getBalance());
+            return true;
+        }
+        tm.checkStopLossTakeProfit(actualPrice);
+        tm.calculateNewEquity(actualPrice);
+        return false;
     }
 
     public void printCurrentStats(int index) {
-        double bid = cc.getBidPrice(index);
         double ask = cc.getAskPrice(index);
-        System.out.print("________________________________\n" + sdf.format(new Date(actualTime))
-                + ":\n ActualPrice:   " + bid
-                + "\n ActiveTrades:  " + tm.getActiveTradesCount()
-                + ", ClosedTrades: " + tm.getClosedTradesCount()
-                + "\n Balance:       " + Math.round(this.tm.getBalance())
-                + "\n Equity:        " + Math.round(this.tm.getEquity(bid))
-                + "\n UseableMargin: " + Math.round(this.tm.getMargin(bid, ask))
-                + "\n Margin:        " + Math.round(this.tm.getFreeMargin())
-                + "\n________________________________________\n"
-        );
+        String output = String.format("%s: Course:%6f | Active/Closed Trades:%3d/%3d | Balance:%6d | Equity:%6d | Used Margin:%6d | Usable Margin:%6d", sdf.format(new Date(actualTime)),ask,tm.getActiveTradesCount(),tm.getClosedTradesCount(),Math.round(this.tm.getBalance()),Math.round(this.tm.getEquity()),Math.round(this.tm.getUsedMargin()),Math.round(this.tm.getUsableMargin()));
+        writeToLogFileAndOutput(output);
+    }
+
+    public static void writeToLogFileAndOutput(String text) {
+        FileWriter fw;
+        System.out.println(text);
+        try {
+            fw = new FileWriter(logFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(text + System.lineSeparator());
+            bw.close();
+            fw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

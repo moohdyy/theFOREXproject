@@ -3,51 +3,50 @@
  */
 package simulation;
 
-import strategies.AbstractStrategy;
-
-
 /**
  *
  * @author Moohdyy
  */
 public class Trade {
 
+    public final static int BUY = 1;
+    public final static int SELL = 2;
+    public final static int NOACTION = 0;
+
     private int javaID;
     private int MT4ID;
     private final int tradeType;
     private long timeStampOpen;
     private double openingPrice;
-    private final double lotSize;
     private final double volume;
     private long timeStampClose;
     private double stopLoss = -1;
     private double takeProfit = -1;
     private boolean open = true;
 
-    public Trade(int tradeType, double lotSize) {
+    public Trade(int tradeType, double volume) {
         this.javaID = -1;
+        this.MT4ID = -1;
         this.tradeType = tradeType;
-        this.lotSize = lotSize;
-        this.volume = lotSize*100000;
+        this.volume = volume;
     }
 
-    public Trade(Trade tradeToCopy) {
-        this(tradeToCopy.getTradeType(), tradeToCopy.getLotSize());
+    public double getProfitOrLoss(double actualPrice) {
+        return volume * (1 - openingPrice / actualPrice);
     }
-    
-    public double getProfitOrLoss(double actualPrice){
+
+    public double getProfitOrLossOld(double actualPrice) {
         switch (this.getTradeType()) {
-                case AbstractStrategy.BUY:
-                    return (actualPrice-getOpeningPrice())*getVolume();
-                case AbstractStrategy.SELL:
-                    return (getOpeningPrice()-actualPrice)*getVolume();
-                default:
-                    return 0;
-            }
+            case Trade.BUY:
+                return (actualPrice - openingPrice) * volume;
+            case Trade.SELL:
+                return (openingPrice - actualPrice) * volume;
+            default:
+                return 0;
+        }
     }
-    
-   
-    public double getVolume(){
+
+    public double getVolume() {
         return this.volume;
     }
 
@@ -64,14 +63,13 @@ public class Trade {
     public int getJavaID() {
         return javaID;
     }
-    
-   /**
+
+    /**
      * @param javaID the javaID to set
      */
     public void setJavaID(int javaID) {
         this.javaID = javaID;
     }
-
 
     /**
      * @return the MT4ID
@@ -99,10 +97,6 @@ public class Trade {
      */
     public double getOpeningPrice() {
         return this.openingPrice;
-    }
-    
-    public double getLotSize(){
-        return this.lotSize;
     }
 
     /**
@@ -132,9 +126,9 @@ public class Trade {
     public void setStopLoss(double stopLoss) {
         this.stopLoss = stopLoss;
     }
-    
-    public boolean hasStopLoss(){
-        return this.stopLoss>0;
+
+    public boolean hasStopLoss() {
+        return this.stopLoss > 0;
     }
 
     /**
@@ -151,17 +145,16 @@ public class Trade {
         this.takeProfit = takeProfit;
     }
 
-    public boolean hasTakeProfit(){
-        return this.takeProfit>0;
+    public boolean hasTakeProfit() {
+        return this.takeProfit > 0;
     }
-    
-    public boolean isOpen(){
+
+    public boolean isOpen() {
         return this.open;
     }
-    
-    
-    public void close(){
-         this.open = false;
+
+    public void close() {
+        this.open = false;
     }
 
     /**
@@ -178,4 +171,9 @@ public class Trade {
         this.openingPrice = openingPrice;
     }
     
+    
+    public String getTradeTypeName(){
+       return ((tradeType == BUY) ? "buy " :(tradeType == SELL)? "sell":"none");
+    }
+
 }

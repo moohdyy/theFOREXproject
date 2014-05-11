@@ -14,14 +14,13 @@ import simulation.Trade;
  * @author Moohdyy
  */
 public abstract class AbstractStrategy {
-    public final static int BUY = 1;
-    public final static int SELL = 2;
-    public final static int NOACTION = 0;
     public CurrencyCourseOHLC cc;
     public double volume;
+    private final String name;
     
-    public AbstractStrategy(CurrencyCourseOHLC currencyCourseOHLC){
+    public AbstractStrategy(CurrencyCourseOHLC currencyCourseOHLC, String name){
         this.cc = currencyCourseOHLC;
+        this.name = name;
     }
     
     public abstract List<Trade> processNewCourse(List<Trade> actualTrades, CurrencyCourseOHLC currencyCourse);
@@ -30,10 +29,11 @@ public abstract class AbstractStrategy {
         return this.cc.getOHLCOfActualPosition();
     }
 
-	public List<Trade> processNewCourse(List<Trade> actualTrades,
-			CurrencyCourseOHLC currencyCourse, double exchange) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
     
 }
