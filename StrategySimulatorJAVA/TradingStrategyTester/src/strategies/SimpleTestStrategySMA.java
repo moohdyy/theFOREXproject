@@ -21,11 +21,11 @@ public class SimpleTestStrategySMA extends AbstractStrategy {
     private int actualTradeIndex;
 
     public SimpleTestStrategySMA(CurrencyCourseOHLC currencyCourseOHLC) {
-        super(currencyCourseOHLC);
+        super(currencyCourseOHLC, "SimpleTestStrategySMA");
     }
     
     public SimpleTestStrategySMA(CurrencyCourseOHLC currencyCourseOHLC,HashMap<Long, String> SMAstrings) {
-        super(currencyCourseOHLC);
+        super(currencyCourseOHLC,"SimpleTestStrategySMA");
         this.SMAstrings = SMAstrings;
     }
     
@@ -51,8 +51,7 @@ public class SimpleTestStrategySMA extends AbstractStrategy {
 
     private void buyOrSell(int action, List<Trade> actualTrades) {
         if (actualTradeIndex == -1 || !actualTrades.get(actualTradeIndex).isOpen()) {
-            double lotSize = 1;
-            actualTrades.add(new Trade(2, lotSize));
+            actualTrades.add(new Trade(action, 100000));
         } else {
             Trade activeTrade = actualTrades.get(actualTradeIndex);
             if (action != activeTrade.getTradeType()) { //if contrary sign, close trade

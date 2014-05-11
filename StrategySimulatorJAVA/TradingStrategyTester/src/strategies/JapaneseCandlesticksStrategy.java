@@ -14,7 +14,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 	ArrayList<JapaneseCandlestick> japanese=new ArrayList<JapaneseCandlestick>();
 
 	public JapaneseCandlesticksStrategy(CurrencyCourseOHLC currencyCourseOHLC) {
-		super(currencyCourseOHLC);
+		super(currencyCourseOHLC,"JapaneseCandlesticksStrategy");
 		int number=currencyCourseOHLC.getNumberOfEntries();
 		for(int i=0;i<number;i++)
 		{
