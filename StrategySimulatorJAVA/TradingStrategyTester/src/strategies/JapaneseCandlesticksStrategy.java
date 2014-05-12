@@ -37,6 +37,11 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy{
 		
 		Patterns pattern=JapaneseCandlestick.determinePattern(japanese);
 		JapaneseCandlestick candle=japanese.get(japanese.size()-1);
+		if(japanese.size()>=2)
+		{
+			System.out.println(japanese.get(0).getTime().getTime());
+			System.out.println(japanese.get(japanese.size()-1).getTime().getTime());
+		}
 		if(pattern!=Patterns.None)
 		{
 		System.out.println(pattern);

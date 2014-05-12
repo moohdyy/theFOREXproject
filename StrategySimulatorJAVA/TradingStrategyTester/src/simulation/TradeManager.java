@@ -18,6 +18,7 @@ public class TradeManager {
     private final HashMap<Integer, Trade> allTrades;
     private int counter;
     private double balance = 0;
+    private double equity = 0;
     private double usedMargin = 0;
     private double leverage = 1;
 
@@ -29,6 +30,7 @@ public class TradeManager {
     TradeManager(double balance) {
         this();
         this.balance = balance;
+        this.equity = balance;
     }
 
     TradeManager(double balance, double leverage) {
@@ -42,44 +44,47 @@ public class TradeManager {
             int javaIDtradeInList = tradeInList.getJavaID();
             if (javaIDtradeInList == -1) { //new Trade, was not in List before
                 javaIDtradeInList = newOrder(tradeInList.getTradeType(), tradeInList.getVolume(), timeStamp, bid, ask);
+                copyValuesFromNewTrade(tradeInList, getTradeByID(javaIDtradeInList));
             }
             actualTrade = getTradeByID(javaIDtradeInList);
             if (actualTrade.isOpen()) {
-                if (!tradeInList.isOpen()) {
+                if (!tradeInList.isOpen()) { // order has to be closed
                     closeOrder(javaIDtradeInList, ask);
                     tradeInList.close();
                 }
             }
-            tradeInList.setJavaID(javaIDtradeInList);
         }
 
     }
 
     public int newOrder(int orderType, double volume, long timeStamp, double bid, double ask) {
         double bidOrAsk = getBuyOrSellingPrice(orderType, bid, ask);
-        Trade trade = new Trade(orderType, volume * this.leverage);
+        Trade trade = new Trade(orderType, volume);
         trade.setTimeStampOpen(timeStamp);
         trade.setOpeningPrice(bidOrAsk);
         trade.setJavaID(counter);
-        System.out.println("Trade " + trade.getJavaID() + "(" + ((trade.getTradeType() == 1) ? "buy" : "sell") + ") opened at " + bidOrAsk + " with volume: " + volume * this.leverage);
+        StrategySimulation.writeToLogFileAndOutput(String.format("--- Order %3d (" +trade.getTradeTypeName()+ ") opened at %6f with volume: " + volume +" ---",trade.getJavaID(),bidOrAsk));
         allTrades.put(counter, trade);
-        this.usedMargin += volume * bidOrAsk / this.leverage;
+        double margin = getMarginAmountForOneTrade(volume);
+        this.usedMargin += margin;
         return counter++;
     }
 
-    public double closeTrade(Trade trade, double closingPrice) {
+    public void closeTrade(Trade trade, double closingPrice) {
         if (trade.isOpen()) {
+//            double profitOrLoss = trade.getProfitOrLoss(closingPrice);
+            double profitOrLoss = trade.getProfitOrLossOld(closingPrice);
+            StrategySimulation.writeToLogFileAndOutput(String.format("--- Trade %3d ("+trade.getTradeTypeName()+") closed at %6f, profit/loss: " + profitOrLoss,trade.getJavaID(),closingPrice ));
+            balance += profitOrLoss;
+            usedMargin -= trade.getVolume()/getLeverage();
             trade.close();
-            double profitOrLoss = trade.getProfitOrLoss(closingPrice);
-            System.out.println("Trade " + trade.getJavaID() + " closed at " + closingPrice + ", profit/loss: " + profitOrLoss);
-            return profitOrLoss;
         } else {
             throw new TradeException("Order was already closed");
         }
     }
 
     public double getBuyOrSellingPrice(int orderType, double bid, double ask) {
-        if (orderType == AbstractStrategy.BUY) {
+        if (orderType == Trade.BUY) {
             return ask;
         } else {
             return bid;
@@ -88,11 +93,10 @@ public class TradeManager {
 
     public void closeOrder(Integer tradeID, double actualPrice) {
         Trade tradeToClose = allTrades.get(tradeID);
-        this.usedMargin -= tradeToClose.getVolume() * actualPrice / getLeverage();
-        balance += closeTrade(tradeToClose, actualPrice);
+        closeTrade(tradeToClose, actualPrice);
     }
 
-    private void closeAllOrders(double actualPrice) {
+    public void closeAllOrders(double actualPrice) {
         for (Trade trade : this.allTrades.values()) {
             if (trade.isOpen()) {
                 closeTrade(trade, actualPrice);
@@ -100,13 +104,8 @@ public class TradeManager {
         }
     }
 
-    public boolean checkForMarginCall(double actualPrice) {
-        if (getEquity(actualPrice) <= this.usedMargin) {
-            closeAllOrders(actualPrice);
-            return true;
-        } else {
-            return false;
-        }
+    public boolean checkForMarginCall() {
+        return equity <= getUsedMargin();
     }
 
     public double getActualTotalProfitOrLoss(double actualPrice) {
@@ -144,18 +143,16 @@ public class TradeManager {
         return ret;
     }
 
-    double getMargin(double bidPrice, double askPrice) {
-        //TODO
-        //throw new UnsupportedOperationException("Not supported yet.");
-       return 0;
+    double getMarginAmountForOneTrade(double volume) {
+        return volume / leverage;
     }
 
     public double getBalance() {
         return this.balance;
     }
 
-    public double getEquity(double actualPrice) {
-        return this.balance + getActualTotalProfitOrLoss(actualPrice);
+    public double getEquity() {
+        return equity;
     }
 
     /**
@@ -174,39 +171,53 @@ public class TradeManager {
 
     public void checkStopLossTakeProfit(double actualPrice) {
         for (Trade trade : allTrades.values()) {
-            switch(trade.getTradeType()){
-                case AbstractStrategy.BUY:
-                    if(trade.hasStopLoss()){
-                        if(actualPrice<=trade.getStopLoss()){
+            switch (trade.getTradeType()) {
+                case Trade.BUY:
+                    if (trade.hasStopLoss()) {
+                        if (actualPrice <= trade.getStopLoss()) {
                             trade.close();
                         }
                     }
-                    if(trade.hasTakeProfit()){
-                        if(actualPrice>=trade.getTakeProfit()){
+                    if (trade.hasTakeProfit()) {
+                        if (actualPrice >= trade.getTakeProfit()) {
                             trade.close();
                         }
                     }
                     break;
-                case AbstractStrategy.SELL:
-                    if(trade.hasStopLoss()){
-                        if(actualPrice>=trade.getStopLoss()){
+                case Trade.SELL:
+                    if (trade.hasStopLoss()) {
+                        if (actualPrice >= trade.getStopLoss()) {
                             trade.close();
                         }
                     }
-                    if(trade.hasTakeProfit()){
-                        if(actualPrice<=trade.getTakeProfit()){
+                    if (trade.hasTakeProfit()) {
+                        if (actualPrice <= trade.getTakeProfit()) {
                             trade.close();
                         }
                     }
                     break;
             }
         }
-    
     }
 
-    public double getFreeMargin() {
-       //TODO
-        //throw new UnsupportedOperationException("Not supported yet."); 
-        return 0;
+    public double getUsableMargin() {
+        return equity - getUsedMargin();
+    }
+
+    private void copyValuesFromNewTrade(Trade tradeWhichValuesAreToBeActualized, Trade newTrade) {
+        tradeWhichValuesAreToBeActualized.setJavaID(newTrade.getJavaID());
+        tradeWhichValuesAreToBeActualized.setOpeningPrice(newTrade.getOpeningPrice());
+        tradeWhichValuesAreToBeActualized.setTimeStampOpen(newTrade.getTimeStampOpen());
+    }
+
+    /**
+     * @return the usedMargin
+     */
+    public double getUsedMargin() {
+        return usedMargin;
+    }
+
+    void calculateNewEquity(double actualPrice) {
+        this.equity = this.balance + getActualTotalProfitOrLoss(actualPrice);
     }
 }
