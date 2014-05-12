@@ -2,3 +2,4 @@
 StrategySimulatorJAVA/TradingStrategyTester/src/datacollection/CurrencyCourseOHLC.java
 StrategySimulatorJAVA/TradingStrategyTester/src/datacollection/CurrencyCourseOHLC.java
 StrategySimulatorJAVA/TradingStrategyTester/src/simulation/CopyOfStrategySimulation.java
+StrategySimulatorJAVA/TradingStrategyTester/src/strategies/JapaneseCandlesticksStrategy.java
