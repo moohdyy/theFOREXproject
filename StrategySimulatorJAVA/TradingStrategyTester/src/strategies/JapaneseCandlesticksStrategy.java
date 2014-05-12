@@ -36,17 +36,9 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			japanese.add(new JapaneseCandlestick(new Candlestick(new Time(ohlc.getTimestamp()), ohlc.getOpen(), ohlc.getClose(), ohlc.getLow(), ohlc.getHigh())));
 		}
 		
-		Patterns pattern=JapaneseCandlestick.determinePattern(japanese);
+		Patterns pattern=JapaneseCandlestick.determinePattern(japanese,currencyCourse.getActualPosition());
 		JapaneseCandlestick candle=japanese.get(japanese.size()-1);
-		if(japanese.size()>=2)
-		{
-			System.out.println(japanese.get(0).getTime().getTime());
-			System.out.println(japanese.get(japanese.size()-1).getTime().getTime());
-		}
-		if(pattern!=Patterns.None)
-		{
-			
-		}
+
 		
 		if(japanese.get(0).getTime().getTime()>japanese.get(japanese.size()-1).getTime().getTime())
 
@@ -56,8 +48,13 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		{
 			candle=japanese.get(japanese.size()-1);
 		}
-		boolean buying=JapaneseCandlestick.buyingSignal(candle.getPattern());
-		boolean selling=JapaneseCandlestick.sellingSignal(candle.getPattern());
+		boolean buying=JapaneseCandlestick.buyingSignal(pattern);
+		boolean selling=JapaneseCandlestick.sellingSignal(pattern);
+		if(pattern!=Patterns.None)
+		{
+			System.out.println(buying);
+			System.out.println(selling);
+		}
 		if(selling)
 		{
 			for(int i=0;i<actualTrades.size();i++)
