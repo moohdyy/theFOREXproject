@@ -1,8 +1,11 @@
 package strategies;
 import Connection.Candlestick;
 import Connection.Time;
+import indicators.SMA;
 
 import java.util.ArrayList;
+
+import strategies.JapaneseCandlesticksStrategy.Trend;
 public class JapaneseCandlestick {
 private double startingValue;
 private double endingValue;
@@ -17,6 +20,7 @@ enum Patterns{None,Hammer,HangingMan,InvertedHammer,ShootingStar,BullishEngulfin
 private Categories category=Categories.None;
 private Types type=Types.None;
 private Patterns pattern=Patterns.None;
+private final static int trend=5;
 
 public JapaneseCandlestick(Candlestick c)
 {
@@ -99,7 +103,7 @@ public Types determineType()
 	}
 	return Types.None;
 }
-public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlesticks, int index)
+public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlesticks, int index,Trend trend)
 {
 		if(index>0)
 		{
@@ -109,14 +113,14 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 				if(candlesticks.get(index-1).lowestValue>=candlesticks.get(index).upperBody)
 				{
 				
-					if(hasDowntrend(candlesticks, index))
+					if(hasDowntrend(trend))
 					{
 						return Patterns.Hammer;
 					}
 					
 				}else if(candlesticks.get(index-1).highestValue<=candlesticks.get(index).lowerBody)
 				{
-					if(hasUptrend(candlesticks, index))
+					if(hasUptrend(trend))
 					{
 					return Patterns.HangingMan;
 					}
@@ -127,14 +131,14 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 			if(candlesticks.get(index-1).lowestValue>=candlesticks.get(index).upperBody)
 			{
 			
-				if(hasDowntrend(candlesticks, index))
+				if(hasDowntrend(trend))
 				{
 				return Patterns.InvertedHammer;
 				}
 				
 			}else if(candlesticks.get(index-1).highestValue<=candlesticks.get(index).lowerBody)
 			{
-				if(hasUptrend(candlesticks, index))
+				if(hasUptrend(trend))
 				{
 				return Patterns.ShootingStar;
 				}
@@ -143,7 +147,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 		}
 		double dif=candlesticks.get(index).highestValue-candlesticks.get(index).lowestValue;
 		dif*=0.05;
-		if(hasDowntrend(candlesticks, index-1))
+		if(hasDowntrend(trend))
 		{
 		if(candlesticks.get(index).category==Categories.Bullish)
 		{
@@ -164,7 +168,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 			}
 		}
 		}
-		else if(hasUptrend(candlesticks, index-1))
+		else if(hasUptrend(trend))
 		{
 		if(candlesticks.get(index-1).category==Categories.Bullish)
 		{
@@ -192,7 +196,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 		 
 		 if(candlesticks.get(index-1).type==Types.SpinningTop)
 		 {
-			 if(hasDowntrend(candlesticks, index-2))
+			 if(hasDowntrend(trend))
 			 {
 			 if(candlesticks.get(index-2).category==Categories.Bearish)
 			 {
@@ -204,7 +208,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 					return Patterns.MorningStar; 
 				 }
 			 }
-			 }else if(hasUptrend(candlesticks, index-2))
+			 }else if(hasUptrend(trend))
 			 {
 			 if(candlesticks.get(index-2).category==Categories.Bullish)
 			 {
@@ -224,7 +228,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 		 double value=c.upperBody-c.lowerBody;
 		 if(value>(c.highestValue-c.lowestValue))
 		 {
-			 if(hasDowntrend(candlesticks, index-2))
+			 if(hasDowntrend(trend))
 			 {
 			 if(c.category==Categories.Bearish)
 			 {
@@ -240,7 +244,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 				}
 			 }
 			 }
-			 else if(hasUptrend(candlesticks, index-2))
+			 else if(hasUptrend(trend))
 			 {
 			 
 			 if(c.category==Categories.Bullish)
@@ -262,7 +266,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 		 JapaneseCandlestick front=candlesticks.get(index);
 		 JapaneseCandlestick middle=candlesticks.get(index-1);
 		 JapaneseCandlestick back=candlesticks.get(index-2);
-		if(hasDowntrend(candlesticks, index-3))
+		if(hasDowntrend(trend))
 		{
 		 if((front.category==Categories.Bullish)&&(middle.category==Categories.Bullish)&&(back.category==Categories.Bullish))
 		 {
@@ -278,7 +282,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 			}
 		 }
 		}
-		else if(hasUptrend(candlesticks, index-3))
+		else if(hasUptrend(trend))
 		{
 		 if((front.category==Categories.Bearish)&&(middle.category==Categories.Bearish)&&(back.category==Categories.Bearish))
 		 {
@@ -356,44 +360,22 @@ public double getSizeLowerShadow()
 {
 	return (lowerBody-lowestValue);
 }
-public static boolean hasDowntrend(ArrayList<JapaneseCandlestick> candles,int i)
+public static boolean hasDowntrend(Trend trend)
 {
-//	ArrayList<Double> middlepoints=new ArrayList<Double>();
-//	for(int j=i-1;j>=0;j--)
-//	{
-//		middlepoints.add((candles.get(j).highestValue-candles.get(j).lowestValue)/2);
-//	}
-//	int j=0;
-//	while((j<middlepoints.size()-1)&&(middlepoints.get(j)<middlepoints.get(j+1)))
-//	{
-//		j++;
-//	}
-//	if(j>=5)
-//	{
-//		return true;
-//	}
-	//return false;
-	return true;
+	if(trend==Trend.falling)
+	{
+		return true;
+	}
+	return false;
 }
 
-public static boolean hasUptrend(ArrayList<JapaneseCandlestick> candles, int i)
+public static boolean hasUptrend(Trend trend)
 {
-//	ArrayList<Double> middlepoints=new ArrayList<Double>();
-//	for(int j=i-1;j>=0;j--)
-//	{
-//		middlepoints.add((candles.get(j).highestValue-candles.get(j).lowestValue)/2);
-//	}
-//	int j=0;
-//	while((j<middlepoints.size()-1)&&(middlepoints.get(j)>middlepoints.get(j+1)))
-//	{
-//		j++;
-//	}
-//	if(j>=5)
-//	{
-//		return true;
-//	}
-//	return false;
-	return true;
+	if(trend==Trend.rising)
+	{
+		return true;
+	}
+	return false;
 }
 public static boolean buyingSignal(Patterns pattern)
 {
