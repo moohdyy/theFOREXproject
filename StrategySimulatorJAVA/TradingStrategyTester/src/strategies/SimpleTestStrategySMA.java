@@ -20,17 +20,16 @@ public class SimpleTestStrategySMA extends AbstractStrategy {
 
     private HashMap<Long, String> SMAstrings;
     private int actualTradeIndex;
+    private static double RELATIVEDISTANCE_FOR_TP_SL = 0.001;
 
-    
     public SimpleTestStrategySMA(CurrencyCourseOHLC currencyCourseOHLC) {
-        
-        super(currencyCourseOHLC,"SimpleTestStrategySMA");//parameters for this strategy
+
+        super(currencyCourseOHLC, "SimpleTestStrategySMA");//parameters for this strategy
         SMA sma = new SMA();
         int smaDuration = 5;
         sma.calculateSMA(currencyCourseOHLC, smaDuration);
         this.SMAstrings = sma.getSMAStrings();
     }
-    
 
     @Override
     public List<Trade> processNewCourse(List<Trade> actualTrades, CurrencyCourseOHLC currencyCourse) {
@@ -46,14 +45,29 @@ public class SimpleTestStrategySMA extends AbstractStrategy {
                 break;
         }
         if (action != Trade.NOACTION) {
-            buyOrSell(action, actualTrades);
+            buyOrSell(action, actualTrades, actualOHLC.getClose());
         }
         return actualTrades;
     }
 
-    private void buyOrSell(int action, List<Trade> actualTrades) {
+    private void buyOrSell(int action, List<Trade> actualTrades, double actualPrice) {
         if (actualTradeIndex == -1 || !actualTrades.get(actualTradeIndex).isOpen()) {
-            actualTrades.add(new Trade(action, 100000));
+            Trade trade = new Trade(action, 1000000);
+            double takeprofit = -1;
+            double stoploss = -1;
+            switch (action) {
+                case Trade.BUY:
+                    takeprofit = actualPrice * (1+RELATIVEDISTANCE_FOR_TP_SL);
+                    stoploss = actualPrice * (1-RELATIVEDISTANCE_FOR_TP_SL);
+                    break;
+                case Trade.SELL:
+                    takeprofit = actualPrice * (1-RELATIVEDISTANCE_FOR_TP_SL);
+                    stoploss = actualPrice * (1+RELATIVEDISTANCE_FOR_TP_SL);
+                    break;
+            }
+            trade.setTakeProfit(takeprofit);
+            trade.setStopLoss(stoploss);
+            actualTrades.add(trade);
         } else {
             Trade activeTrade = actualTrades.get(actualTradeIndex);
             if (action != activeTrade.getTradeType()) { //if contrary sign, close trade
