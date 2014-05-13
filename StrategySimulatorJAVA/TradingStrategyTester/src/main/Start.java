@@ -12,14 +12,15 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import simulation.SimulationResults;
 import simulation.StrategySimulation;
 import strategies.AbstractStrategy;
 import strategies.SimpleTestStrategySMA;
 
 public class Start {
 
-    public static String FOLDERNAME = "SimulationResults\\";
-
+    private static String BASICFOLDERNAME = "SimulationResults\\";
+    public static String FOLDERNAME;
     /**
      * @param args
      * @throws java.io.IOException
@@ -30,32 +31,34 @@ public class Start {
         CurrencyCourseCreator ccc = new FormatHistDataOHLCWithoutSpread();
         String filename;
 
+        boolean writeToLogFile = true;
+
         //just testing with a little file
 //        filename = "historicalData\\EURUSD\\2011\\oneDayTest.csv";
-//        simulateOneFile(filename, ccc);
-
+//        simulateOneFile(filename, ccc,true);
         //whole simulation
-        File results = new File("results_" + System.currentTimeMillis() + ".txt");
-        FileWriter fw = new FileWriter(results, true);
-        BufferedWriter bw = new BufferedWriter(fw);
         String[] currencyPairs = {"EURUSD", "GBPUSD", "USDJPY"};
         String[] years = {"2011", "2012"};
 
-        double result = 0;
+        SimulationResults result;
+        FOLDERNAME = BASICFOLDERNAME + "\\results_" + System.currentTimeMillis() +  "\\" ;
+        (new File(FOLDERNAME)).mkdirs();
+        filename = FOLDERNAME+ "overviewResults.csv";
+        writeLineToFile(filename, SimulationResults.getHeader());
 
         for (String currencyPair : currencyPairs) {
             for (String year : years) {
                 for (int month = 1; month < 12; month++) {
-                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc);
-                    bw.write(currencyPair+","+year+","+ month +": final Balance: "+result+ System.lineSeparator());
+                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc, writeToLogFile);
+
+                    writeLineToFile(filename, result.toString());
+
                 }
             }
         }
-        bw.close();
-        fw.close();
     }
 
-    private static double simulateOneFile(String filename, CurrencyCourseCreator ccc) {
+    private static SimulationResults simulateOneFile(String filename, CurrencyCourseCreator ccc, boolean writeToLogFile) {
         CurrencyCourseOHLC cc = new CurrencyCourseOHLC();
         try {
             cc = ccc.getCurrencyCourseFromFile(filename, "EURUSD");
@@ -65,7 +68,7 @@ public class Start {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
         //determine spread depending on some pipchange
-        int pipsForSpread = 2;
+        int pipsForSpread = 5;
         double onePip = cc.getOHLC(0).getClose() / 10000;
         double spread = onePip * pipsForSpread;
         cc.setSpread(spread);
@@ -74,12 +77,34 @@ public class Start {
         AbstractStrategy thisStrategy = new SimpleTestStrategySMA(cc);
 
         // start simulation
-        int leverage = 5;
+        int leverage = 100;
         double balance = 50000;
         int timeframeInMinutes = 2;
         File f = new File(FOLDERNAME + thisStrategy.getName());
         f.mkdirs();
-        StrategySimulation simulation = new StrategySimulation(thisStrategy, cc, balance, leverage);
+        StrategySimulation simulation = new StrategySimulation(thisStrategy, cc, balance, leverage, writeToLogFile);
         return simulation.simulateStrategy(timeframeInMinutes);
     }
+
+    private static void writeLineToFile(String filename, String input) {
+        FileWriter fw = null;
+        try {
+            File file = new File(filename);
+            fw = new FileWriter(file, true);
+            try (BufferedWriter bw = new BufferedWriter(fw)) {
+                bw.write(input);
+                bw.newLine();
+            }
+            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 }
