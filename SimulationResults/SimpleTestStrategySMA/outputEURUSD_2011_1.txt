@@ -1,0 +1,257 @@
+2011-01-02 17:00: Course:1,334500 | Active/Closed Trades:  0/  0 | Balance: 50000 | Equity: 50000 | Used Margin:     0 | Usable Margin: 50000
+2011-01-02 17:01: Course:1,334100 | Active/Closed Trades:  0/  0 | Balance: 50000 | Equity: 50000 | Used Margin:     0 | Usable Margin: 50000
+2011-01-02 17:02: Course:1,334300 | Active/Closed Trades:  0/  0 | Balance: 50000 | Equity: 50000 | Used Margin:     0 | Usable Margin: 50000
+2011-01-02 17:03: Course:1,334400 | Active/Closed Trades:  0/  0 | Balance: 50000 | Equity: 50000 | Used Margin:     0 | Usable Margin: 50000
+--- Order   0 (buy ) opened at 1,334800 with volume: 100000.0 ---
+2011-01-02 17:06: Course:1,334800 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50000 | Used Margin: 20000 | Usable Margin: 30000
+2011-01-02 17:07: Course:1,334600 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 49985 | Used Margin: 20000 | Usable Margin: 29985
+2011-01-02 17:08: Course:1,334700 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 49993 | Used Margin: 20000 | Usable Margin: 29993
+2011-01-02 17:09: Course:1,334800 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50000 | Used Margin: 20000 | Usable Margin: 30000
+2011-01-02 17:10: Course:1,335300 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50037 | Used Margin: 20000 | Usable Margin: 30037
+2011-01-02 17:11: Course:1,335500 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50052 | Used Margin: 20000 | Usable Margin: 30052
+2011-01-02 17:15: Course:1,335800 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50075 | Used Margin: 20000 | Usable Margin: 30075
+2011-01-02 17:16: Course:1,335900 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50082 | Used Margin: 20000 | Usable Margin: 30082
+2011-01-02 17:17: Course:1,336000 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50090 | Used Margin: 20000 | Usable Margin: 30090
+2011-01-02 17:18: Course:1,335900 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50082 | Used Margin: 20000 | Usable Margin: 30082
+2011-01-02 17:19: Course:1,335800 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50075 | Used Margin: 20000 | Usable Margin: 30075
+2011-01-02 17:20: Course:1,336000 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50090 | Used Margin: 20000 | Usable Margin: 30090
+2011-01-02 17:21: Course:1,335900 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50082 | Used Margin: 20000 | Usable Margin: 30082
+2011-01-02 17:22: Course:1,335800 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50075 | Used Margin: 20000 | Usable Margin: 30075
+2011-01-02 17:28: Course:1,336200 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50105 | Used Margin: 20000 | Usable Margin: 30105
+2011-01-02 17:29: Course:1,336100 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50097 | Used Margin: 20000 | Usable Margin: 30097
+2011-01-02 17:30: Course:1,336000 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50090 | Used Margin: 20000 | Usable Margin: 30090
+2011-01-02 17:31: Course:1,335900 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50082 | Used Margin: 20000 | Usable Margin: 30082
+2011-01-02 17:32: Course:1,336100 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50097 | Used Margin: 20000 | Usable Margin: 30097
+2011-01-02 17:33: Course:1,336000 | Active/Closed Trades:  1/  0 | Balance: 50000 | Equity: 50090 | Used Margin: 20000 | Usable Margin: 30090
+--- Trade   0 (buy ) closed at 1,335500, profit/loss: 69.9999999999923
+2011-01-02 17:35: Course:1,335500 | Active/Closed Trades:  0/  1 | Balance: 50070 | Equity: 50052 | Used Margin:     0 | Usable Margin: 50052
+2011-01-02 17:36: Course:1,335100 | Active/Closed Trades:  0/  1 | Balance: 50070 | Equity: 50070 | Used Margin:     0 | Usable Margin: 50070
+--- Order   1 (sell) opened at 1,334867 with volume: 100000.0 ---
+2011-01-02 17:37: Course:1,334600 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50070 | Used Margin: 20000 | Usable Margin: 30070
+2011-01-02 17:38: Course:1,335200 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50095 | Used Margin: 20000 | Usable Margin: 30095
+2011-01-02 17:39: Course:1,334800 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50065 | Used Margin: 20000 | Usable Margin: 30065
+2011-01-02 17:40: Course:1,334700 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50057 | Used Margin: 20000 | Usable Margin: 30057
+2011-01-02 17:43: Course:1,334800 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50065 | Used Margin: 20000 | Usable Margin: 30065
+2011-01-02 17:44: Course:1,334800 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50065 | Used Margin: 20000 | Usable Margin: 30065
+2011-01-02 17:45: Course:1,335200 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50095 | Used Margin: 20000 | Usable Margin: 30095
+2011-01-02 17:46: Course:1,335200 | Active/Closed Trades:  1/  1 | Balance: 50070 | Equity: 50095 | Used Margin: 20000 | Usable Margin: 30095
+--- Trade   1 (sell) closed at 1,335100, profit/loss: -23.30999999999861
+2011-01-02 17:47: Course:1,335100 | Active/Closed Trades:  0/  2 | Balance: 50047 | Equity: 50087 | Used Margin:     0 | Usable Margin: 50087
+2011-01-02 17:48: Course:1,335100 | Active/Closed Trades:  0/  2 | Balance: 50047 | Equity: 50047 | Used Margin:     0 | Usable Margin: 50047
+--- Order   2 (buy ) opened at 1,335200 with volume: 100000.0 ---
+2011-01-02 17:49: Course:1,335200 | Active/Closed Trades:  1/  2 | Balance: 50047 | Equity: 50047 | Used Margin: 20000 | Usable Margin: 30047
+2011-01-02 17:50: Course:1,335100 | Active/Closed Trades:  1/  2 | Balance: 50047 | Equity: 50039 | Used Margin: 20000 | Usable Margin: 30039
+2011-01-02 17:51: Course:1,335200 | Active/Closed Trades:  1/  2 | Balance: 50047 | Equity: 50047 | Used Margin: 20000 | Usable Margin: 30047
+2011-01-02 17:52: Course:1,335200 | Active/Closed Trades:  1/  2 | Balance: 50047 | Equity: 50047 | Used Margin: 20000 | Usable Margin: 30047
+--- Trade   2 (buy ) closed at 1,335000, profit/loss: -19.999999999997797
+2011-01-02 17:53: Course:1,335000 | Active/Closed Trades:  0/  3 | Balance: 50027 | Equity: 50032 | Used Margin:     0 | Usable Margin: 50032
+2011-01-02 17:54: Course:1,334700 | Active/Closed Trades:  0/  3 | Balance: 50027 | Equity: 50027 | Used Margin:     0 | Usable Margin: 50027
+--- Order   3 (sell) opened at 1,334867 with volume: 100000.0 ---
+2011-01-02 17:55: Course:1,334600 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 50027 | Used Margin: 20000 | Usable Margin: 30027
+2011-01-02 17:56: Course:1,334500 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49999 | Used Margin: 20000 | Usable Margin: 29999
+2011-01-02 17:57: Course:1,334600 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 50007 | Used Margin: 20000 | Usable Margin: 30007
+2011-01-02 17:58: Course:1,334500 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49999 | Used Margin: 20000 | Usable Margin: 29999
+2011-01-02 17:59: Course:1,334200 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49977 | Used Margin: 20000 | Usable Margin: 29977
+2011-01-02 18:00: Course:1,334200 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49977 | Used Margin: 20000 | Usable Margin: 29977
+2011-01-02 18:01: Course:1,334500 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49999 | Used Margin: 20000 | Usable Margin: 29999
+2011-01-02 18:02: Course:1,334300 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49984 | Used Margin: 20000 | Usable Margin: 29984
+2011-01-02 18:03: Course:1,334000 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49962 | Used Margin: 20000 | Usable Margin: 29962
+2011-01-02 18:04: Course:1,333900 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49954 | Used Margin: 20000 | Usable Margin: 29954
+2011-01-02 18:05: Course:1,333800 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49947 | Used Margin: 20000 | Usable Margin: 29947
+2011-01-02 18:06: Course:1,333900 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49954 | Used Margin: 20000 | Usable Margin: 29954
+2011-01-02 18:07: Course:1,333900 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49954 | Used Margin: 20000 | Usable Margin: 29954
+2011-01-02 18:08: Course:1,334100 | Active/Closed Trades:  1/  3 | Balance: 50027 | Equity: 49969 | Used Margin: 20000 | Usable Margin: 29969
+--- Trade   3 (sell) closed at 1,334000, profit/loss: 86.68999999998928
+2011-01-02 18:09: Course:1,334000 | Active/Closed Trades:  0/  4 | Balance: 50113 | Equity: 49962 | Used Margin:     0 | Usable Margin: 49962
+2011-01-02 18:13: Course:1,333800 | Active/Closed Trades:  0/  4 | Balance: 50113 | Equity: 50113 | Used Margin:     0 | Usable Margin: 50113
+2011-01-02 18:14: Course:1,334000 | Active/Closed Trades:  0/  4 | Balance: 50113 | Equity: 50113 | Used Margin:     0 | Usable Margin: 50113
+--- Order   4 (buy ) opened at 1,334200 with volume: 100000.0 ---
+2011-01-02 18:15: Course:1,334200 | Active/Closed Trades:  1/  4 | Balance: 50113 | Equity: 50113 | Used Margin: 20000 | Usable Margin: 30113
+2011-01-02 18:16: Course:1,334200 | Active/Closed Trades:  1/  4 | Balance: 50113 | Equity: 50113 | Used Margin: 20000 | Usable Margin: 30113
+2011-01-02 18:17: Course:1,334200 | Active/Closed Trades:  1/  4 | Balance: 50113 | Equity: 50113 | Used Margin: 20000 | Usable Margin: 30113
+2011-01-02 18:19: Course:1,334100 | Active/Closed Trades:  1/  4 | Balance: 50113 | Equity: 50106 | Used Margin: 20000 | Usable Margin: 30106
+2011-01-02 18:20: Course:1,334000 | Active/Closed Trades:  1/  4 | Balance: 50113 | Equity: 50098 | Used Margin: 20000 | Usable Margin: 30098
+--- Trade   4 (buy ) closed at 1,333900, profit/loss: -29.999999999996696
+2011-01-02 18:21: Course:1,333900 | Active/Closed Trades:  0/  5 | Balance: 50083 | Equity: 50091 | Used Margin:     0 | Usable Margin: 50091
+2011-01-02 18:22: Course:1,333900 | Active/Closed Trades:  0/  5 | Balance: 50083 | Equity: 50083 | Used Margin:     0 | Usable Margin: 50083
+--- Order   5 (sell) opened at 1,334167 with volume: 100000.0 ---
+2011-01-02 18:23: Course:1,333900 | Active/Closed Trades:  1/  5 | Balance: 50083 | Equity: 50083 | Used Margin: 20000 | Usable Margin: 30083
+2011-01-02 18:24: Course:1,333600 | Active/Closed Trades:  1/  5 | Balance: 50083 | Equity: 50041 | Used Margin: 20000 | Usable Margin: 30041
+2011-01-02 18:25: Course:1,333600 | Active/Closed Trades:  1/  5 | Balance: 50083 | Equity: 50041 | Used Margin: 20000 | Usable Margin: 30041
+2011-01-02 18:26: Course:1,333400 | Active/Closed Trades:  1/  5 | Balance: 50083 | Equity: 50026 | Used Margin: 20000 | Usable Margin: 30026
+2011-01-02 18:27: Course:1,333700 | Active/Closed Trades:  1/  5 | Balance: 50083 | Equity: 50048 | Used Margin: 20000 | Usable Margin: 30048
+2011-01-02 18:28: Course:1,333800 | Active/Closed Trades:  1/  5 | Balance: 50083 | Equity: 50056 | Used Margin: 20000 | Usable Margin: 30056
+--- Trade   5 (sell) closed at 1,333800, profit/loss: 36.68999999999478
+2011-01-02 18:30: Course:1,333800 | Active/Closed Trades:  0/  6 | Balance: 50120 | Equity: 50056 | Used Margin:     0 | Usable Margin: 50056
+2011-01-02 18:31: Course:1,334100 | Active/Closed Trades:  0/  6 | Balance: 50120 | Equity: 50120 | Used Margin:     0 | Usable Margin: 50120
+--- Order   6 (buy ) opened at 1,334200 with volume: 100000.0 ---
+2011-01-02 18:32: Course:1,334200 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50120 | Used Margin: 20000 | Usable Margin: 30120
+2011-01-02 18:33: Course:1,334200 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50120 | Used Margin: 20000 | Usable Margin: 30120
+2011-01-02 18:34: Course:1,334200 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50120 | Used Margin: 20000 | Usable Margin: 30120
+2011-01-02 18:35: Course:1,334200 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50120 | Used Margin: 20000 | Usable Margin: 30120
+2011-01-02 18:36: Course:1,334100 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50113 | Used Margin: 20000 | Usable Margin: 30113
+2011-01-02 18:37: Course:1,334300 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50128 | Used Margin: 20000 | Usable Margin: 30128
+2011-01-02 18:38: Course:1,334800 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50165 | Used Margin: 20000 | Usable Margin: 30165
+2011-01-02 18:39: Course:1,334900 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50173 | Used Margin: 20000 | Usable Margin: 30173
+2011-01-02 18:40: Course:1,335300 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50202 | Used Margin: 20000 | Usable Margin: 30202
+2011-01-02 18:41: Course:1,335500 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50217 | Used Margin: 20000 | Usable Margin: 30217
+2011-01-02 18:42: Course:1,335800 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50240 | Used Margin: 20000 | Usable Margin: 30240
+2011-01-02 18:43: Course:1,335600 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50225 | Used Margin: 20000 | Usable Margin: 30225
+2011-01-02 18:44: Course:1,335600 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50225 | Used Margin: 20000 | Usable Margin: 30225
+2011-01-02 18:45: Course:1,335500 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50217 | Used Margin: 20000 | Usable Margin: 30217
+2011-01-02 18:46: Course:1,335500 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50217 | Used Margin: 20000 | Usable Margin: 30217
+2011-01-02 18:47: Course:1,335800 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50240 | Used Margin: 20000 | Usable Margin: 30240
+2011-01-02 18:48: Course:1,335900 | Active/Closed Trades:  1/  6 | Balance: 50120 | Equity: 50247 | Used Margin: 20000 | Usable Margin: 30247
+--- Trade   6 (buy ) closed at 1,335600, profit/loss: 139.9999999999846
+2011-01-02 18:51: Course:1,335600 | Active/Closed Trades:  0/  7 | Balance: 50260 | Equity: 50225 | Used Margin:     0 | Usable Margin: 50225
+2011-01-02 18:52: Course:1,335500 | Active/Closed Trades:  0/  7 | Balance: 50260 | Equity: 50260 | Used Margin:     0 | Usable Margin: 50260
+--- Order   7 (sell) opened at 1,335567 with volume: 100000.0 ---
+2011-01-02 18:53: Course:1,335300 | Active/Closed Trades:  1/  7 | Balance: 50260 | Equity: 50260 | Used Margin: 20000 | Usable Margin: 30260
+2011-01-02 18:55: Course:1,335300 | Active/Closed Trades:  1/  7 | Balance: 50260 | Equity: 50240 | Used Margin: 20000 | Usable Margin: 30240
+2011-01-02 18:56: Course:1,335200 | Active/Closed Trades:  1/  7 | Balance: 50260 | Equity: 50233 | Used Margin: 20000 | Usable Margin: 30233
+2011-01-02 18:57: Course:1,335400 | Active/Closed Trades:  1/  7 | Balance: 50260 | Equity: 50248 | Used Margin: 20000 | Usable Margin: 30248
+2011-01-02 18:58: Course:1,335500 | Active/Closed Trades:  1/  7 | Balance: 50260 | Equity: 50255 | Used Margin: 20000 | Usable Margin: 30255
+--- Trade   7 (sell) closed at 1,335500, profit/loss: 6.689999999998086
+2011-01-02 18:59: Course:1,335500 | Active/Closed Trades:  0/  8 | Balance: 50267 | Equity: 50255 | Used Margin:     0 | Usable Margin: 50255
+2011-01-02 19:00: Course:1,335700 | Active/Closed Trades:  0/  8 | Balance: 50267 | Equity: 50267 | Used Margin:     0 | Usable Margin: 50267
+--- Order   8 (sell) opened at 1,335367 with volume: 100000.0 ---
+2011-01-02 19:01: Course:1,335100 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50267 | Used Margin: 20000 | Usable Margin: 30267
+2011-01-02 19:02: Course:1,334900 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50232 | Used Margin: 20000 | Usable Margin: 30232
+2011-01-02 19:03: Course:1,335000 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50239 | Used Margin: 20000 | Usable Margin: 30239
+2011-01-02 19:04: Course:1,334900 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50232 | Used Margin: 20000 | Usable Margin: 30232
+2011-01-02 19:05: Course:1,334900 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50232 | Used Margin: 20000 | Usable Margin: 30232
+2011-01-02 19:06: Course:1,334500 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50202 | Used Margin: 20000 | Usable Margin: 30202
+2011-01-02 19:07: Course:1,333900 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50157 | Used Margin: 20000 | Usable Margin: 30157
+2011-01-02 19:08: Course:1,334200 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50179 | Used Margin: 20000 | Usable Margin: 30179
+2011-01-02 19:09: Course:1,334300 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50187 | Used Margin: 20000 | Usable Margin: 30187
+2011-01-02 19:10: Course:1,333800 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50149 | Used Margin: 20000 | Usable Margin: 30149
+2011-01-02 19:11: Course:1,333400 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50119 | Used Margin: 20000 | Usable Margin: 30119
+2011-01-02 19:12: Course:1,333500 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50127 | Used Margin: 20000 | Usable Margin: 30127
+2011-01-02 19:13: Course:1,333700 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50142 | Used Margin: 20000 | Usable Margin: 30142
+2011-01-02 19:14: Course:1,333500 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50127 | Used Margin: 20000 | Usable Margin: 30127
+2011-01-02 19:15: Course:1,332900 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50082 | Used Margin: 20000 | Usable Margin: 30082
+2011-01-02 19:16: Course:1,332200 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50029 | Used Margin: 20000 | Usable Margin: 30029
+2011-01-02 19:17: Course:1,332400 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50044 | Used Margin: 20000 | Usable Margin: 30044
+2011-01-02 19:18: Course:1,332300 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50037 | Used Margin: 20000 | Usable Margin: 30037
+2011-01-02 19:19: Course:1,332500 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50052 | Used Margin: 20000 | Usable Margin: 30052
+2011-01-02 19:20: Course:1,332800 | Active/Closed Trades:  1/  8 | Balance: 50267 | Equity: 50074 | Used Margin: 20000 | Usable Margin: 30074
+--- Trade   8 (sell) closed at 1,332800, profit/loss: 256.6899999999928
+2011-01-02 19:21: Course:1,332800 | Active/Closed Trades:  0/  9 | Balance: 50523 | Equity: 50074 | Used Margin:     0 | Usable Margin: 50074
+2011-01-02 19:22: Course:1,332500 | Active/Closed Trades:  0/  9 | Balance: 50523 | Equity: 50523 | Used Margin:     0 | Usable Margin: 50523
+--- Order   9 (buy ) opened at 1,332700 with volume: 100000.0 ---
+2011-01-02 19:23: Course:1,332700 | Active/Closed Trades:  1/  9 | Balance: 50523 | Equity: 50523 | Used Margin: 20000 | Usable Margin: 30523
+2011-01-02 19:24: Course:1,332800 | Active/Closed Trades:  1/  9 | Balance: 50523 | Equity: 50531 | Used Margin: 20000 | Usable Margin: 30531
+--- Trade   9 (buy ) closed at 1,332600, profit/loss: -9.999999999998899
+2011-01-02 19:25: Course:1,332600 | Active/Closed Trades:  0/ 10 | Balance: 50513 | Equity: 50516 | Used Margin:     0 | Usable Margin: 50516
+2011-01-02 19:26: Course:1,332300 | Active/Closed Trades:  0/ 10 | Balance: 50513 | Equity: 50513 | Used Margin:     0 | Usable Margin: 50513
+--- Order  10 (sell) opened at 1,332667 with volume: 100000.0 ---
+2011-01-02 19:27: Course:1,332400 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50513 | Used Margin: 20000 | Usable Margin: 30513
+2011-01-02 19:29: Course:1,332500 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50501 | Used Margin: 20000 | Usable Margin: 30501
+2011-01-02 19:30: Course:1,332600 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50508 | Used Margin: 20000 | Usable Margin: 30508
+2011-01-02 19:31: Course:1,332300 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50486 | Used Margin: 20000 | Usable Margin: 30486
+2011-01-02 19:32: Course:1,331900 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50456 | Used Margin: 20000 | Usable Margin: 30456
+2011-01-02 19:33: Course:1,331900 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50456 | Used Margin: 20000 | Usable Margin: 30456
+2011-01-02 19:34: Course:1,331800 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50448 | Used Margin: 20000 | Usable Margin: 30448
+2011-01-02 19:35: Course:1,332000 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50463 | Used Margin: 20000 | Usable Margin: 30463
+2011-01-02 19:36: Course:1,332200 | Active/Closed Trades:  1/ 10 | Balance: 50513 | Equity: 50478 | Used Margin: 20000 | Usable Margin: 30478
+--- Trade  10 (sell) closed at 1,332000, profit/loss: 66.68999999999147
+2011-01-02 19:37: Course:1,332000 | Active/Closed Trades:  0/ 11 | Balance: 50580 | Equity: 50463 | Used Margin:     0 | Usable Margin: 50463
+2011-01-02 19:38: Course:1,332100 | Active/Closed Trades:  0/ 11 | Balance: 50580 | Equity: 50580 | Used Margin:     0 | Usable Margin: 50580
+--- Order  11 (buy ) opened at 1,332100 with volume: 100000.0 ---
+2011-01-02 19:39: Course:1,332100 | Active/Closed Trades:  1/ 11 | Balance: 50580 | Equity: 50580 | Used Margin: 20000 | Usable Margin: 30580
+2011-01-02 19:40: Course:1,332200 | Active/Closed Trades:  1/ 11 | Balance: 50580 | Equity: 50588 | Used Margin: 20000 | Usable Margin: 30588
+--- Trade  11 (buy ) closed at 1,331800, profit/loss: -29.999999999996696
+2011-01-02 19:41: Course:1,331800 | Active/Closed Trades:  0/ 12 | Balance: 50550 | Equity: 50558 | Used Margin:     0 | Usable Margin: 50558
+2011-01-02 19:42: Course:1,331900 | Active/Closed Trades:  0/ 12 | Balance: 50550 | Equity: 50550 | Used Margin:     0 | Usable Margin: 50550
+--- Order  12 (sell) opened at 1,332067 with volume: 100000.0 ---
+2011-01-02 19:43: Course:1,331800 | Active/Closed Trades:  1/ 12 | Balance: 50550 | Equity: 50550 | Used Margin: 20000 | Usable Margin: 30550
+2011-01-02 19:44: Course:1,332300 | Active/Closed Trades:  1/ 12 | Balance: 50550 | Equity: 50568 | Used Margin: 20000 | Usable Margin: 30568
+2011-01-02 19:45: Course:1,332200 | Active/Closed Trades:  1/ 12 | Balance: 50550 | Equity: 50560 | Used Margin: 20000 | Usable Margin: 30560
+2011-01-02 19:46: Course:1,332100 | Active/Closed Trades:  1/ 12 | Balance: 50550 | Equity: 50553 | Used Margin: 20000 | Usable Margin: 30553
+--- Trade  12 (sell) closed at 1,332400, profit/loss: -33.30999999999751
+2011-01-02 19:47: Course:1,332400 | Active/Closed Trades:  0/ 13 | Balance: 50517 | Equity: 50575 | Used Margin:     0 | Usable Margin: 50575
+2011-01-02 19:48: Course:1,332400 | Active/Closed Trades:  0/ 13 | Balance: 50517 | Equity: 50517 | Used Margin:     0 | Usable Margin: 50517
+--- Order  13 (sell) opened at 1,332467 with volume: 100000.0 ---
+2011-01-02 19:49: Course:1,332200 | Active/Closed Trades:  1/ 13 | Balance: 50517 | Equity: 50517 | Used Margin: 20000 | Usable Margin: 30517
+2011-01-02 19:50: Course:1,332400 | Active/Closed Trades:  1/ 13 | Balance: 50517 | Equity: 50512 | Used Margin: 20000 | Usable Margin: 30512
+--- Trade  13 (sell) closed at 1,332300, profit/loss: 16.689999999996985
+2011-01-02 19:51: Course:1,332300 | Active/Closed Trades:  0/ 14 | Balance: 50534 | Equity: 50504 | Used Margin:     0 | Usable Margin: 50504
+2011-01-02 19:52: Course:1,332300 | Active/Closed Trades:  0/ 14 | Balance: 50534 | Equity: 50534 | Used Margin:     0 | Usable Margin: 50534
+--- Order  14 (sell) opened at 1,332567 with volume: 100000.0 ---
+2011-01-02 19:54: Course:1,332300 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50534 | Used Margin: 20000 | Usable Margin: 30534
+2011-01-02 19:55: Course:1,332300 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50513 | Used Margin: 20000 | Usable Margin: 30513
+2011-01-02 19:56: Course:1,332100 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50498 | Used Margin: 20000 | Usable Margin: 30498
+2011-01-02 19:58: Course:1,331900 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50483 | Used Margin: 20000 | Usable Margin: 30483
+2011-01-02 19:59: Course:1,332100 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50498 | Used Margin: 20000 | Usable Margin: 30498
+2011-01-02 20:00: Course:1,332000 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50491 | Used Margin: 20000 | Usable Margin: 30491
+2011-01-02 20:01: Course:1,331800 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50476 | Used Margin: 20000 | Usable Margin: 30476
+2011-01-02 20:02: Course:1,331700 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50468 | Used Margin: 20000 | Usable Margin: 30468
+2011-01-02 20:03: Course:1,331800 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50476 | Used Margin: 20000 | Usable Margin: 30476
+2011-01-02 20:04: Course:1,332100 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50498 | Used Margin: 20000 | Usable Margin: 30498
+2011-01-02 20:05: Course:1,332200 | Active/Closed Trades:  1/ 14 | Balance: 50534 | Equity: 50506 | Used Margin: 20000 | Usable Margin: 30506
+--- Trade  14 (sell) closed at 1,332100, profit/loss: 46.68999999999368
+2011-01-02 20:06: Course:1,332100 | Active/Closed Trades:  0/ 15 | Balance: 50580 | Equity: 50498 | Used Margin:     0 | Usable Margin: 50498
+2011-01-02 20:08: Course:1,331700 | Active/Closed Trades:  0/ 15 | Balance: 50580 | Equity: 50580 | Used Margin:     0 | Usable Margin: 50580
+2011-01-02 20:09: Course:1,331400 | Active/Closed Trades:  0/ 15 | Balance: 50580 | Equity: 50580 | Used Margin:     0 | Usable Margin: 50580
+--- Order  15 (sell) opened at 1,331567 with volume: 100000.0 ---
+2011-01-02 20:10: Course:1,331300 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50580 | Used Margin: 20000 | Usable Margin: 30580
+2011-01-02 20:11: Course:1,330600 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50508 | Used Margin: 20000 | Usable Margin: 30508
+2011-01-02 20:12: Course:1,330700 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50515 | Used Margin: 20000 | Usable Margin: 30515
+2011-01-02 20:13: Course:1,330800 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50523 | Used Margin: 20000 | Usable Margin: 30523
+2011-01-02 20:14: Course:1,330500 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50500 | Used Margin: 20000 | Usable Margin: 30500
+2011-01-02 20:15: Course:1,330500 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50500 | Used Margin: 20000 | Usable Margin: 30500
+2011-01-02 20:16: Course:1,330500 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50500 | Used Margin: 20000 | Usable Margin: 30500
+2011-01-02 20:17: Course:1,330400 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50492 | Used Margin: 20000 | Usable Margin: 30492
+2011-01-02 20:18: Course:1,330300 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50485 | Used Margin: 20000 | Usable Margin: 30485
+2011-01-02 20:19: Course:1,329800 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50447 | Used Margin: 20000 | Usable Margin: 30447
+2011-01-02 20:20: Course:1,329900 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50455 | Used Margin: 20000 | Usable Margin: 30455
+2011-01-02 20:21: Course:1,329800 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50447 | Used Margin: 20000 | Usable Margin: 30447
+2011-01-02 20:22: Course:1,330100 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50470 | Used Margin: 20000 | Usable Margin: 30470
+2011-01-02 20:23: Course:1,329900 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50455 | Used Margin: 20000 | Usable Margin: 30455
+2011-01-02 20:24: Course:1,329800 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50447 | Used Margin: 20000 | Usable Margin: 30447
+2011-01-02 20:25: Course:1,329300 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50410 | Used Margin: 20000 | Usable Margin: 30410
+2011-01-02 20:26: Course:1,329200 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50402 | Used Margin: 20000 | Usable Margin: 30402
+2011-01-02 20:27: Course:1,329200 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50402 | Used Margin: 20000 | Usable Margin: 30402
+2011-01-02 20:28: Course:1,329100 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50395 | Used Margin: 20000 | Usable Margin: 30395
+2011-01-02 20:29: Course:1,329000 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50387 | Used Margin: 20000 | Usable Margin: 30387
+2011-01-02 20:30: Course:1,329200 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50402 | Used Margin: 20000 | Usable Margin: 30402
+2011-01-02 20:31: Course:1,329400 | Active/Closed Trades:  1/ 15 | Balance: 50580 | Equity: 50417 | Used Margin: 20000 | Usable Margin: 30417
+--- Trade  15 (sell) closed at 1,329600, profit/loss: 196.68999999999937
+2011-01-02 20:32: Course:1,329600 | Active/Closed Trades:  0/ 16 | Balance: 50777 | Equity: 50432 | Used Margin:     0 | Usable Margin: 50432
+2011-01-02 20:33: Course:1,329500 | Active/Closed Trades:  0/ 16 | Balance: 50777 | Equity: 50777 | Used Margin:     0 | Usable Margin: 50777
+--- Order  16 (buy ) opened at 1,329700 with volume: 100000.0 ---
+2011-01-02 20:34: Course:1,329700 | Active/Closed Trades:  1/ 16 | Balance: 50777 | Equity: 50777 | Used Margin: 20000 | Usable Margin: 30777
+2011-01-02 20:35: Course:1,330100 | Active/Closed Trades:  1/ 16 | Balance: 50777 | Equity: 50807 | Used Margin: 20000 | Usable Margin: 30807
+2011-01-02 20:36: Course:1,330000 | Active/Closed Trades:  1/ 16 | Balance: 50777 | Equity: 50799 | Used Margin: 20000 | Usable Margin: 30799
+2011-01-02 20:37: Course:1,329900 | Active/Closed Trades:  1/ 16 | Balance: 50777 | Equity: 50792 | Used Margin: 20000 | Usable Margin: 30792
+2011-01-02 20:38: Course:1,330000 | Active/Closed Trades:  1/ 16 | Balance: 50777 | Equity: 50799 | Used Margin: 20000 | Usable Margin: 30799
+2011-01-02 20:39: Course:1,329700 | Active/Closed Trades:  1/ 16 | Balance: 50777 | Equity: 50777 | Used Margin: 20000 | Usable Margin: 30777
+--- Trade  16 (buy ) closed at 1,329400, profit/loss: -30.0000000000189
+2011-01-02 20:40: Course:1,329400 | Active/Closed Trades:  0/ 17 | Balance: 50747 | Equity: 50754 | Used Margin:     0 | Usable Margin: 50754
+2011-01-02 20:41: Course:1,329400 | Active/Closed Trades:  0/ 17 | Balance: 50747 | Equity: 50747 | Used Margin:     0 | Usable Margin: 50747
+--- Order  17 (sell) opened at 1,329867 with volume: 100000.0 ---
+2011-01-02 20:42: Course:1,329600 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50747 | Used Margin: 20000 | Usable Margin: 30747
+2011-01-02 20:43: Course:1,329600 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50727 | Used Margin: 20000 | Usable Margin: 30727
+2011-01-02 20:44: Course:1,329000 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50682 | Used Margin: 20000 | Usable Margin: 30682
+2011-01-02 20:45: Course:1,328500 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50644 | Used Margin: 20000 | Usable Margin: 30644
+2011-01-02 20:46: Course:1,327900 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50599 | Used Margin: 20000 | Usable Margin: 30599
+2011-01-02 20:47: Course:1,327800 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50591 | Used Margin: 20000 | Usable Margin: 30591
+2011-01-02 20:48: Course:1,328000 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50606 | Used Margin: 20000 | Usable Margin: 30606
+2011-01-02 20:49: Course:1,328100 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50614 | Used Margin: 20000 | Usable Margin: 30614
+2011-01-02 20:50: Course:1,328000 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50606 | Used Margin: 20000 | Usable Margin: 30606
+2011-01-02 20:51: Course:1,328000 | Active/Closed Trades:  1/ 17 | Balance: 50747 | Equity: 50606 | Used Margin: 20000 | Usable Margin: 30606
+--- Trade  17 (sell) closed at 1,328100, profit/loss: 176.68999999997936
+2011-01-02 20:52: Course:1,328100 | Active/Closed Trades:  0/ 18 | Balance: 50924 | Equity: 50614 | Used Margin:     0 | Usable Margin: 50614
+2011-01-02 20:53: Course:1,327700 | Active/Closed Trades:  0/ 18 | Balance: 50924 | Equity: 50924 | Used Margin:     0 | Usable Margin: 50924
+--- Order  18 (sell) opened at 1,328267 with volume: 100000.0 ---
+2011-01-02 20:54: Course:1,328000 | Active/Closed Trades:  1/ 18 | Balance: 50924 | Equity: 50924 | Used Margin: 20000 | Usable Margin: 30924
+2011-01-02 20:55: Course:1,328000 | Active/Closed Trades:  1/ 18 | Balance: 50924 | Equity: 50903 | Used Margin: 20000 | Usable Margin: 30903
+--- Trade  18 (sell) closed at 1,328300, profit/loss: -3.3100000000008123
+2011-01-02 20:57: Course:1,328300 | Active/Closed Trades:  0/ 19 | Balance: 50920 | Equity: 50926 | Used Margin:     0 | Usable Margin: 50926
+2011-01-02 20:58: Course:1,328100 | Active/Closed Trades:  0/ 19 | Balance: 50920 | Equity: 50920 | Used Margin:     0 | Usable Margin: 50920
+--- Order  19 (buy ) opened at 1,328300 with volume: 100000.0 ---
+2011-01-02 21:00: Course:1,328300 | Active/Closed Trades:  1/ 19 | Balance: 50920 | Equity: 50920 | Used Margin: 20000 | Usable Margin: 30920
+2011-01-02 21:01: Course:1,328500 | Active/Closed Trades:  1/ 19 | Balance: 50920 | Equity: 50935 | Used Margin: 20000 | Usable Margin: 30935
+2011-01-02 21:02: Course:1,328800 | Active/Closed Trades:  1/ 19 | Balance: 50920 | Equity: 50958 | Used Margin: 20000 | Usable Margin: 30958
+2011-01-02 21:03: Course:1,328800 | Active/Closed Trades:  1/ 19 | Balance: 50920 | Equity: 50958 | Used Margin: 20000 | Usable Margin: 30958
+2011-01-02 21:04: Course:1,328900 | Active/Closed Trades:  1/ 19 | Balance: 50920 | Equity: 50965 | Used Margin: 20000 | Usable Margin: 30965

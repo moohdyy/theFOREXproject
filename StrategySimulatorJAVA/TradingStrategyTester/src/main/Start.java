@@ -5,6 +5,7 @@ import datacollection.CurrencyCourseOHLC;
 import datacollection.FormatHistDataOHLCWithoutSpread;
 import datacollection.FormatMT4OHLC;
 import indicators.SMA;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,8 +13,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import simulation.StrategySimulation;
 import strategies.AbstractStrategy;
+import strategies.JapaneseCandlesticksStrategy;
 import strategies.SimpleTestStrategySMA;
 
 public class Start {
@@ -45,7 +48,7 @@ public class Start {
 
         for (String currencyPair : currencyPairs) {
             for (String year : years) {
-                for (int month = 1; month < 12; month++) {
+                for (int month = 9; month < 13; month++) {
                     result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc);
                     bw.write(currencyPair+","+year+","+ month +": final Balance: "+result+ System.lineSeparator());
                 }
@@ -71,7 +74,7 @@ public class Start {
         cc.setSpread(spread);
 
         //initialize the strategy
-        AbstractStrategy thisStrategy = new SimpleTestStrategySMA(cc);
+        AbstractStrategy thisStrategy = new JapaneseCandlesticksStrategy(cc);
 
         // start simulation
         int leverage = 5;
