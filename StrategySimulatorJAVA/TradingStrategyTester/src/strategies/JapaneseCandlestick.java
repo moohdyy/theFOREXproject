@@ -1,11 +1,8 @@
 package strategies;
 import Connection.Candlestick;
 import Connection.Time;
-import indicators.SMA;
 
 import java.util.ArrayList;
-
-import strategies.JapaneseCandlesticksStrategy.Trend;
 public class JapaneseCandlestick {
 private double startingValue;
 private double endingValue;
@@ -20,7 +17,6 @@ enum Patterns{None,Hammer,HangingMan,InvertedHammer,ShootingStar,BullishEngulfin
 private Categories category=Categories.None;
 private Types type=Types.None;
 private Patterns pattern=Patterns.None;
-private final static int trend=5;
 
 public JapaneseCandlestick(Candlestick c)
 {
@@ -103,60 +99,61 @@ public Types determineType()
 	}
 	return Types.None;
 }
-public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlesticks, int index,Trend trend)
+public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlesticks)
 {
-		if(index>0)
+	int i=candlesticks.size()-1;
+		if(i>0)
 		{
-		if(candlesticks.get(index).type==Types.Hammer)
+		if(candlesticks.get(i).type==Types.Hammer)
 		{
 
-				if(candlesticks.get(index-1).lowestValue>=candlesticks.get(index).upperBody)
+				if(candlesticks.get(i-1).lowestValue>=candlesticks.get(i).upperBody)
 				{
 				
-					if(hasDowntrend(trend))
+					if(hasDowntrend(candlesticks, i))
 					{
 						return Patterns.Hammer;
 					}
 					
-				}else if(candlesticks.get(index-1).highestValue<=candlesticks.get(index).lowerBody)
+				}else if(candlesticks.get(i-1).highestValue<=candlesticks.get(i).lowerBody)
 				{
-					if(hasUptrend(trend))
+					if(hasUptrend(candlesticks, i))
 					{
 					return Patterns.HangingMan;
 					}
 					
 				}
-		}else if(candlesticks.get(index).type==Types.InvertedHammer)
+		}else if(candlesticks.get(i).type==Types.InvertedHammer)
 		{
-			if(candlesticks.get(index-1).lowestValue>=candlesticks.get(index).upperBody)
+			if(candlesticks.get(i-1).lowestValue>=candlesticks.get(i).upperBody)
 			{
 			
-				if(hasDowntrend(trend))
+				if(hasDowntrend(candlesticks, i))
 				{
 				return Patterns.InvertedHammer;
 				}
 				
-			}else if(candlesticks.get(index-1).highestValue<=candlesticks.get(index).lowerBody)
+			}else if(candlesticks.get(i-1).highestValue<=candlesticks.get(i).lowerBody)
 			{
-				if(hasUptrend(trend))
+				if(hasUptrend(candlesticks, i))
 				{
 				return Patterns.ShootingStar;
 				}
 				
 			}
 		}
-		double dif=candlesticks.get(index).highestValue-candlesticks.get(index).lowestValue;
+		double dif=candlesticks.get(i).highestValue-candlesticks.get(i).lowestValue;
 		dif*=0.05;
-		if(hasDowntrend(trend))
+		if(hasDowntrend(candlesticks, i-1))
 		{
-		if(candlesticks.get(index).category==Categories.Bullish)
+		if(candlesticks.get(i).category==Categories.Bullish)
 		{
-			if(candlesticks.get(index-1).category==Categories.Bearish)
+			if(candlesticks.get(i-1).category==Categories.Bearish)
 			{
-				if(Math.abs(candlesticks.get(index-1).lowerBody-candlesticks.get(index).lowerBody)<=Math.abs(dif))
+				if(Math.abs(candlesticks.get(i-1).lowerBody-candlesticks.get(i).lowerBody)<=Math.abs(dif))
 				{
-					double downStick=candlesticks.get(index-1).lowerBody-candlesticks.get(index-1).lowestValue;
-					double downStick1=candlesticks.get(index).lowerBody-candlesticks.get(index).lowestValue;
+					double downStick=candlesticks.get(i-1).lowerBody-candlesticks.get(i-1).lowestValue;
+					double downStick1=candlesticks.get(i).lowerBody-candlesticks.get(i).lowestValue;
 					if(Math.abs(downStick-downStick1)<=dif)
 					{
 						return Patterns.TweezerBottoms;
@@ -168,16 +165,16 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 			}
 		}
 		}
-		else if(hasUptrend(trend))
+		else if(hasUptrend(candlesticks, i-1))
 		{
-		if(candlesticks.get(index-1).category==Categories.Bullish)
+		if(candlesticks.get(i-1).category==Categories.Bullish)
 		{
-			if(candlesticks.get(index).category==Categories.Bearish)
+			if(candlesticks.get(i).category==Categories.Bearish)
 			{
-				if(Math.abs(candlesticks.get(index-1).upperBody-candlesticks.get(index).upperBody)<=Math.abs(dif))
+				if(Math.abs(candlesticks.get(i-1).upperBody-candlesticks.get(i).upperBody)<=Math.abs(dif))
 				{
-					double upperStick=candlesticks.get(index-1).upperBody-candlesticks.get(index-1).lowestValue;
-					double upperStick1=candlesticks.get(index).upperBody-candlesticks.get(index).lowestValue;
+					double upperStick=candlesticks.get(i-1).upperBody-candlesticks.get(i-1).lowestValue;
+					double upperStick1=candlesticks.get(i).upperBody-candlesticks.get(i).lowestValue;
 					if(Math.abs(upperStick-upperStick1)<=dif)
 					{
 						return Patterns.TweezerTops;
@@ -191,60 +188,58 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 		
 	}
 		}
-	 if(index>0)
+	 if(i>0)
 	 {
 		 
-		 if(candlesticks.get(index-1).type==Types.SpinningTop)
+		 if(candlesticks.get(i-1).type==Types.SpinningTop)
 		 {
-			 if(hasDowntrend(trend))
+			 if(hasDowntrend(candlesticks, i-2))
 			 {
-			 if(candlesticks.get(index-2).category==Categories.Bearish)
+			 if(candlesticks.get(i-2).category==Categories.Bearish)
 			 {
-				 double middle=candlesticks.get(index-2).highestValue-candlesticks.get(index-2).lowestValue;
+				 double middle=candlesticks.get(i-2).highestValue-candlesticks.get(i-2).lowestValue;
 				 middle/=2;
-				 middle+=candlesticks.get(index-2).lowestValue;
-				 if(candlesticks.get(index).endingValue>middle)
+				 middle+=candlesticks.get(i-2).lowestValue;
+				 if(candlesticks.get(i).endingValue>middle)
 				 {
 					return Patterns.MorningStar; 
 				 }
 			 }
-			 }else if(hasUptrend(trend))
+			 }else if(hasUptrend(candlesticks, i-2))
 			 {
-			 if(candlesticks.get(index-2).category==Categories.Bullish)
+			 if(candlesticks.get(i-2).category==Categories.Bullish)
 			 {
-				 double middle=candlesticks.get(index-2).highestValue-candlesticks.get(index-2).lowestValue;
+				 double middle=candlesticks.get(i-2).highestValue-candlesticks.get(i-2).lowestValue;
 				 middle/=2;
-				 middle+=candlesticks.get(index-2).lowestValue;
-				 if(candlesticks.get(index).endingValue>middle)
+				 middle+=candlesticks.get(i-2).lowestValue;
+				 if(candlesticks.get(i).endingValue>middle)
 				 {
 					 return Patterns.EveningStar;
 				 }
 			 }
 			 }
 		 }
-		 if(index>1)
-		 {
-		 JapaneseCandlestick c=candlesticks.get(index-2);
+		 JapaneseCandlestick c=candlesticks.get(i-2);
 		 double value=c.upperBody-c.lowerBody;
 		 if(value>(c.highestValue-c.lowestValue))
 		 {
-			 if(hasDowntrend(trend))
+			 if(hasDowntrend(candlesticks, i-2))
 			 {
 			 if(c.category==Categories.Bearish)
 			 {
 				double midpointC=c.highestValue-c.lowestValue;
 				midpointC/=2;
 				midpointC+=c.lowestValue;
-				if(midpointC<candlesticks.get(index-1).endingValue)
+				if(midpointC<candlesticks.get(i-1).endingValue)
 				{
-					if(candlesticks.get(index).endingValue>candlesticks.get(index-1).highestValue)
+					if(candlesticks.get(i).endingValue>candlesticks.get(i-1).highestValue)
 					{
 						return Patterns.ThreeInsideUp; 
 					}
 				}
 			 }
 			 }
-			 else if(hasUptrend(trend))
+			 else if(hasUptrend(candlesticks, i-2))
 			 {
 			 
 			 if(c.category==Categories.Bullish)
@@ -252,9 +247,9 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 				double midpointC=c.highestValue-c.lowestValue;
 				midpointC/=2;
 				midpointC+=c.lowestValue;
-				if(midpointC>candlesticks.get(index-1).endingValue)
+				if(midpointC>candlesticks.get(i-1).endingValue)
 				{
-					if(candlesticks.get(index).endingValue<candlesticks.get(index-1).lowestValue)
+					if(candlesticks.get(i).endingValue<candlesticks.get(i-1).lowestValue)
 					{
 						return Patterns.ThreeInsideDown; 
 					}
@@ -263,10 +258,10 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 			 }
 		 }
 		 
-		 JapaneseCandlestick front=candlesticks.get(index);
-		 JapaneseCandlestick middle=candlesticks.get(index-1);
-		 JapaneseCandlestick back=candlesticks.get(index-2);
-		if(hasDowntrend(trend))
+		 JapaneseCandlestick front=candlesticks.get(i);
+		 JapaneseCandlestick middle=candlesticks.get(i-1);
+		 JapaneseCandlestick back=candlesticks.get(i-2);
+		if(hasDowntrend(candlesticks, i-3))
 		{
 		 if((front.category==Categories.Bullish)&&(middle.category==Categories.Bullish)&&(back.category==Categories.Bullish))
 		 {
@@ -282,7 +277,7 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 			}
 		 }
 		}
-		else if(hasUptrend(trend))
+		else if(hasUptrend(candlesticks, i-3))
 		{
 		 if((front.category==Categories.Bearish)&&(middle.category==Categories.Bearish)&&(back.category==Categories.Bearish))
 		 {
@@ -298,7 +293,6 @@ public static Patterns determinePattern(ArrayList<JapaneseCandlestick>candlestic
 				}
 		 }
 		}
-	 }
 	 }
 	return Patterns.None;
 }
@@ -360,18 +354,38 @@ public double getSizeLowerShadow()
 {
 	return (lowerBody-lowestValue);
 }
-public static boolean hasDowntrend(Trend trend)
+public static boolean hasDowntrend(ArrayList<JapaneseCandlestick> candles,int i)
 {
-	if(trend==Trend.falling)
+	ArrayList<Double> middlepoints=new ArrayList<Double>();
+	for(int j=i-1;j>=0;j--)
+	{
+		middlepoints.add((candles.get(j).highestValue-candles.get(j).lowestValue)/2);
+	}
+	int j=0;
+	while((j<middlepoints.size()-1)&&(middlepoints.get(j)<middlepoints.get(j+1)))
+	{
+		j++;
+	}
+	if(j>=5)
 	{
 		return true;
 	}
 	return false;
 }
 
-public static boolean hasUptrend(Trend trend)
+public static boolean hasUptrend(ArrayList<JapaneseCandlestick> candles, int i)
 {
-	if(trend==Trend.rising)
+	ArrayList<Double> middlepoints=new ArrayList<Double>();
+	for(int j=i-1;j>=0;j--)
+	{
+		middlepoints.add((candles.get(j).highestValue-candles.get(j).lowestValue)/2);
+	}
+	int j=0;
+	while((j<middlepoints.size()-1)&&(middlepoints.get(j)>middlepoints.get(j+1)))
+	{
+		j++;
+	}
+	if(j>=5)
 	{
 		return true;
 	}

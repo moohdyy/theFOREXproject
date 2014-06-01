@@ -35,29 +35,31 @@ public class StrategySimulation {
     private long actualTime = 0;
     private static BufferedWriter bw;
     private FileWriter fw;
+    private static boolean writeToLogFile;
 
-    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance) {
+    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, boolean writeToLogFile) {
         this.cc = cc;
         this.strategy = strategy;
         this.tm = new TradeManager(balance);
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(cc.getOHLCOfActualPosition().getTimestamp());
-        String startOfCC = cal.get(Calendar.YEAR) + "_" + (cal.get(Calendar.MONTH) + 1);
-        String filename = Start.FOLDERNAME + strategy.getName() + "\\output" + cc.getCurrencyPair() + "_" + startOfCC + ".txt";
-        StrategySimulation.logFile = new File(filename);
-        logFile.delete();
-        StrategySimulation.logFile = new File(filename);
+        StrategySimulation.writeToLogFile = writeToLogFile;
+        if (writeToLogFile) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(cc.getOHLCOfActualPosition().getTimestamp());
+            String startOfCC = cal.get(Calendar.YEAR) + "_" + (cal.get(Calendar.MONTH) + 1);
+            String filename = Start.FOLDERNAME + strategy.getName() + "\\output" + cc.getCurrencyPair() + "_" + startOfCC + ".txt";
+            StrategySimulation.logFile = new File(filename);
 
-        try {
-            fw = new FileWriter(logFile, true);
-            bw = new BufferedWriter(fw);
-        } catch (IOException ex) {
-            Logger.getLogger(StrategySimulation.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                fw = new FileWriter(logFile, true);
+                bw = new BufferedWriter(fw);
+            } catch (IOException ex) {
+                Logger.getLogger(StrategySimulation.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
-    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, double leverage) {
-        this(strategy, cc, balance);
+    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, double leverage, boolean writeToLogFile) {
+        this(strategy, cc, balance, writeToLogFile);
         this.tm.setLeverage(leverage);
     }
 
@@ -69,32 +71,33 @@ public class StrategySimulation {
      * analyzed by the strategy)
      * @return double teh final balance
      */
-    public double simulateStrategy(int windowInMinutes) {
+    public SimulationResults simulateStrategy(int windowInMinutes) {
         long windowInMilliseconds = windowInMinutes * 60 * 1000;
         List<Trade> trades = new ArrayList<>();
-        for (int index = 0; index < cc.getNumberOfEntries(); index++) {
-            double actualPrice = cc.getClose(index);
+        for (int index = 0; index < getCc().getNumberOfEntries(); index++) {
+            double actualPrice = getCc().getClose(index);
             if (checkNewPrice(actualPrice)) {
-                return tm.getBalance();
+                return new SimulationResults(this, tm, true);
             }
-            this.actualTime = cc.getTimeStamp(index);
-            long windowTime = cc.getTimeStamp(cc.getActualPosition());
+            this.actualTime = getCc().getTimeStamp(index);
+            long windowTime = getCc().getTimeStamp(getCc().getActualPosition());
             if (this.actualTime >= windowTime + windowInMilliseconds) { //in our case we can access new course after window
-                cc.setActualPosition(index);
-                System.out.println("--- Strategy analyzing at actual price of: " + actualPrice + " ---");
-                trades = strategy.processNewCourse(trades, cc);
+                getCc().setActualPosition(index);
+                writeToLogFileAndOutput("--- Strategy analyzing at actual price of: " + actualPrice + " ---");
+                trades = getStrategy().processNewCourse(trades, getCc());
             }
-            tm.processTrades(trades, cc.getBidPrice(index), cc.getClose(index), this.actualTime);
+            tm.processTrades(trades, getCc().getBidPrice(index), getCc().getClose(index), this.actualTime);
             printCurrentStats(index);
         }
-        try {
-            bw.close();
-            fw.close();
-        } catch (IOException ex) {
-            Logger.getLogger(StrategySimulation.class.getName()).log(Level.SEVERE, null, ex);
+        if (writeToLogFile) {
+            try {
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(StrategySimulation.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
-        return tm.getBalance();
+        return new SimulationResults(this, tm);
 
     }
 
@@ -110,18 +113,35 @@ public class StrategySimulation {
     }
 
     public void printCurrentStats(int index) {
-        double ask = cc.getAskPrice(index);
+        double ask = getCc().getAskPrice(index);
         String output = String.format("%s: Course:%6f | Active/Closed Trades:%3d/%3d | Balance:%6d | Equity:%6d | Used Margin:%6d | Usable Margin:%6d", sdf.format(new Date(actualTime)), ask, tm.getActiveTradesCount(), tm.getClosedTradesCount(), Math.round(this.tm.getBalance()), Math.round(this.tm.getEquity()), Math.round(this.tm.getUsedMargin()), Math.round(this.tm.getUsableMargin()));
         writeToLogFileAndOutput(output);
     }
 
     public static void writeToLogFileAndOutput(String text) {
         System.out.println(text);
-        try {
-            bw.write(text + System.lineSeparator());
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (writeToLogFile) {
+            try {
+                bw.write(text);
+                bw.newLine();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
+    }
+
+    /**
+     * @return the strategy
+     */
+    public AbstractStrategy getStrategy() {
+        return strategy;
+    }
+
+    /**
+     * @return the cc
+     */
+    public CurrencyCourseOHLC getCc() {
+        return cc;
     }
 
 }

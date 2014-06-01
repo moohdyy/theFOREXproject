@@ -9,152 +9,330 @@
 #property strict
 
 // input parameters
-extern int BarsMin=100;  
-extern int TimeFrameSec = 5;
+extern int BarsMin=100;
+extern int TimeFrameSec=10;
+extern int UniqueID;
 
+string FileNameCourse,FirstLine,CurLine,LastError,D=";",FileNameTrades,FileNameLog;
+datetime LastData,CurrentTime;
+bool isPaused;
 
-string FileNameCourse,FirstLine, CurLine,LastError,D = ";", FileNameTrades;
-int FileHandler;
-datetime LastData, CurrentTime;
-double ArrayM1[][6];
+//bugfix for debugging
+class CFix { } ExtFix;
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
 //+------------------------------------------------------------------+
 
-int OnInit(){
-  Print("init");
-  
-  //file for course
-  int curTimeStamp = TimeLocal();
-  string tmpFilenameSuffix = Period()+"_"+Symbol()+"_"+curTimeStamp+".csv";
-  FileNameCourse = "ExportMT4\\data_"+tmpFilenameSuffix;
-  FirstLine = "Date"+D+"Time"+D+"Open"+D+"High"+D+"Low"+D+"Close"+D+"Volume";
-  FileDelete(FileNameCourse,FILE_WRITE);
-  FileHandler = FileOpen(FileNameCourse,FILE_READ|FILE_CSV|FILE_WRITE|FILE_SHARE_READ);
-  FileWrite(FileHandler,FirstLine);
-  WriteHistory(FileHandler);
-  FileClose(FileHandler);
-  
-  //file for trades
-  FileNameTrades = "ExportMT4\\trades_"+tmpFilenameSuffix;
-  FirstLine = "active"+D+"JavaID"+D+"MT4ID"+D+"tradeType"+D+"timeOpen"+D+"TimeClose"+D+"openingPrice"+D+"lotSize"+D+"volume"+D+"stopLoss"+D+"takeProfit";
-  FileDelete(FileNameTrades,FILE_WRITE);
-  FileHandler = FileOpen(FileNameTrades,FILE_READ|FILE_CSV|FILE_WRITE|FILE_SHARE_READ);
-  FileWrite(FileHandler,FirstLine);
-  WriteTrades(FileHandler);
-  FileClose(FileHandler);
-  
-  
-//--- create timer 
+int OnInit()
+  {
+//log file
+   FileNameLog=StringConcatenate("LOG_JavaInterface_",GetCurTime("Days"));
+   writeToLogFile("Init started.");
+
+//file for course
+   int curTimeStamp=TimeLocal();
+   string tmpFilenameSuffix=Period()+"_"+Symbol()+"_"+curTimeStamp+".csv";
+   FileNameCourse="ExportMT4\\data_"+tmpFilenameSuffix;
+   FirstLine="Date"+D+"Time"+D+"Open"+D+"High"+D+"Low"+D+"Close"+D+"Volume"+D+"Spread";
+   FileDelete(FileNameCourse,FILE_WRITE);
+   int FileHandler=FileOpen(FileNameCourse,FILE_READ|FILE_CSV|FILE_WRITE|FILE_SHARE_READ);
+   if(FileHandler<0)
+     {
+      writeToLogFile("Error while opening File: "+FileNameCourse+",Error: "+ErrorDescription(GetLastError()));
+        }else{
+      writeToLogFile("File "+FileNameCourse+" opened.");
+     }
+   FileWrite(FileHandler,FirstLine);
+//time of last bar
+   datetime time=iTime(Symbol(),Period(),1);
+   WriteHistory(FileHandler,time);
+   FileClose(FileHandler);
+
+//file for trades
+   FileNameTrades="ExportMT4\\trades_"+tmpFilenameSuffix;
+   FileDelete(FileNameTrades,FILE_WRITE);
+   FileHandler=FileOpen(FileNameTrades,FILE_READ|FILE_CSV|FILE_WRITE|FILE_SHARE_READ);
+   if(FileHandler<0)
+     {
+      writeToLogFile("Error while opening File: "+FileNameTrades+",Error: "+ErrorDescription(GetLastError()));
+        }else{
+      writeToLogFile("File "+FileNameTrades+" opened.");
+     }
+   WriteActiveTrades(FileHandler);
+   FileClose(FileHandler);
+//--- create timer for refresh of Trades
+
+   isPaused=false;
    EventSetTimer(TimeFrameSec);
-      
+
 //---
+   writeToLogFile("Init completed.");
    return(INIT_SUCCEEDED);
   }
 //+------------------------------------------------------------------+
 //| Write History                                           |
 //+------------------------------------------------------------------+
-  void WriteHistory(int FileHandler){
+void WriteHistory(int FileHandler,datetime time)
+  {
+   writeToLogFile("WriteHistory started.");
    double historyOpen[];
-   int getHistoryOpen = CopyOpen(Symbol(),Period(),1,BarsMin,historyOpen);
+   int getHistoryOpen=CopyOpen(Symbol(),Period(),time,BarsMin,historyOpen);
    double historyClose[];
-   int getHistoryClose = CopyClose(Symbol(),Period(),1,BarsMin,historyClose);
+   int getHistoryClose=CopyClose(Symbol(),Period(),time,BarsMin,historyClose);
    double historyHigh[];
-   int getHistoryHigh = CopyHigh(Symbol(),Period(),1,BarsMin,historyHigh);
+   int getHistoryHigh=CopyHigh(Symbol(),Period(),time,BarsMin,historyHigh);
    double historyLow[];
-   int getHistoryLow = CopyLow(Symbol(),Period(),1,BarsMin,historyLow);
+   int getHistoryLow=CopyLow(Symbol(),Period(),time,BarsMin,historyLow);
    long historyVolume[];
-   int getHistoryVolume = CopyTickVolume(Symbol(),Period(),1,BarsMin,historyVolume);
+   int getHistoryVolume=CopyTickVolume(Symbol(),Period(),time,BarsMin,historyVolume);
    datetime historyTime[];
-   int getHistoryTime = CopyTime(Symbol(),Period(),1,BarsMin,historyTime);
-   LastData = historyTime[BarsMin-1];
-   if(getHistoryOpen!=-1&& getHistoryClose!=-1&&getHistoryHigh!=-1&&getHistoryLow&&getHistoryVolume!=-1&&getHistoryTime!=-1){
-      for(int i = 0;i<BarsMin;i++){
-        WriteOneLineToFile(historyTime[i],historyOpen[i],historyHigh[i],historyLow[i],historyClose[i],historyVolume[i]);
-      }
-   }
+   int getHistoryTime=CopyTime(Symbol(),Period(),time,BarsMin,historyTime);
+
+// no spread data available for historical data, so assume actual spread
+   double spread=(Ask-Bid)/Point();
+   LastData=historyTime[BarsMin-1];
+   if(getHistoryOpen!=-1 && getHistoryClose!=-1 && getHistoryHigh!=-1 && getHistoryLow && getHistoryVolume!=-1 && getHistoryTime!=-1)
+     {
+      for(int i=0;i<BarsMin;i++)
+        {
+         WriteOneOHLCLineToFile(FileHandler,historyTime[i],historyOpen[i],historyHigh[i],historyLow[i],historyClose[i],historyVolume[i],spread);
+        }
+     }
+   writeToLogFile("WriteHistory completed.");
   }
-  
-  //+------------------------------------------------------------------+
+//+------------------------------------------------------------------+
 //| Write active Trades                                        |
 //+------------------------------------------------------------------+
-   void WriteTrades(int FileHandler){
-   double historyOpen[];
-   int getHistoryOpen = CopyOpen(Symbol(),Period(),1,BarsMin,historyOpen);
-   double historyClose[];
-   int getHistoryClose = CopyClose(Symbol(),Period(),1,BarsMin,historyClose);
-   double historyHigh[];
-   int getHistoryHigh = CopyHigh(Symbol(),Period(),1,BarsMin,historyHigh);
-   double historyLow[];
-   int getHistoryLow = CopyLow(Symbol(),Period(),1,BarsMin,historyLow);
-   long historyVolume[];
-   int getHistoryVolume = CopyTickVolume(Symbol(),Period(),1,BarsMin,historyVolume);
-   datetime historyTime[];
-   int getHistoryTime = CopyTime(Symbol(),Period(),1,BarsMin,historyTime);
-   LastData = historyTime[BarsMin-1];
-   if(getHistoryOpen!=-1&& getHistoryClose!=-1&&getHistoryHigh!=-1&&getHistoryLow&&getHistoryVolume!=-1&&getHistoryTime!=-1){
-      for(int i = 0;i<BarsMin;i++){
-        WriteOneLineToFile(historyTime[i],historyOpen[i],historyHigh[i],historyLow[i],historyClose[i],historyVolume[i]);
-      }
-   }
+void WriteActiveTrades(int FileHandler)
+  {
+   writeToLogFile("WriteActiveTrades started.");
+   for(int i=0;i<OrdersTotal();i++)
+     {
+      if(!OrderSelect(i,SELECT_BY_POS,MODE_TRADES))
+        {
+         writeToLogFile("Select order "+i+"failed: "+GetLastError());
+         continue;
+        }
+      if(OrderSymbol()==Symbol() && OrderMagicNumber()==UniqueID)
+        {
+         bool active=false;
+         datetime close=OrderCloseTime();
+         if(close==0)
+           { //if no closing time available, order is still open
+            active=true;
+           }
+         if(active)
+           {
+            int javaId=-1;
+            WriteOneTradeLineToFile(FileHandler,
+                                    javaId,
+                                    OrderTicket(),
+                                    active,
+                                    OrderType(),
+                                    OrderOpenTime(),
+                                    OrderCloseTime(),
+                                    OrderOpenPrice(),
+                                    OrderClosePrice(),
+                                    OrderLots(),
+                                    OrderTakeProfit(),
+                                    OrderStopLoss());
+           }
+        }
+     }
+
+   writeToLogFile("WriteActiveTrades ended.");
   }
-  
 //+------------------------------------------------------------------+
 //| Writes to the file and appends Data to the end                      |
 //+------------------------------------------------------------------+
-  void WriteOneLineToFile(datetime time, double open, double high, double low, double close, long volume){ 
-   int year = TimeYear(time);
-   int month = TimeMonth(time);
-   int day = TimeDay(time);
-   int hour = TimeHour(time);
-   int minute = TimeMinute(time);
-   string output = year+"."+month +"."+day+D+hour+":"+minute+D+open+D+high+D+low+D+close+D+volume;
+void WriteOneOHLCLineToFile(int FileHandler,datetime time,double open,double high,double low,double close,long volume,int spread)
+  {
+   int year=TimeYear(time);
+   int month=TimeMonth(time);
+   int day=TimeDay(time);
+   int hour=TimeHour(time);
+   int minute=TimeMinute(time);
+   string output=year+"."+month+"."+day+D+hour+":"+minute+D+open+D+high+D+low+D+close+D+volume+D+spread;
    FileSeek(FileHandler,0,SEEK_END);
    FileWrite(FileHandler,output);
   }
-  
+//+------------------------------------------------------------------+
+//| Writes to the file and appends Data to the end                      |
+//+------------------------------------------------------------------+
+void WriteOneTradeLineToFile(int FileHandler,
+                             int javaId,
+                             int mt4ID,
+                             bool active,
+                             int orderType,
+                             datetime openTime,
+                             datetime closeTime,
+                             double openPrice,
+                             double closePrice,
+                             double lotSize,
+                             double takeProfit,
+                             double stopLoss)
+  {
+   string output=active+D+javaId+D+mt4ID+D+orderType+D+openTime+D+closeTime+D+openPrice+D+closePrice+D+lotSize+D+takeProfit+D+stopLoss;
+   FileSeek(FileHandler,0,SEEK_END);
+   FileWrite(FileHandler,output);
+  }
 //+------------------------------------------------------------------+
 //| Expert deinitialization function                                 |
 //+------------------------------------------------------------------+
-void OnDeinit(const int reason){
+void OnDeinit(const int reason)
+  {
 //--- destroy timer
    EventKillTimer();
-      
+
   }
 //+------------------------------------------------------------------+
 //| Expert tick function                                             |
 //+------------------------------------------------------------------+
-void OnTick() {  
-   datetime time = iTime(Symbol(),Period(),1);
-   if(time!=LastData){
-      LastData = time;
+void OnTick()
+  {
+   datetime time=iTime(Symbol(),Period(),1);
+   if(time!=LastData)
+     {
+      LastData=time;
       double open = iOpen(Symbol(),Period(),1);
       double high = iHigh(Symbol(),Period(),1);
-      double low = iLow(Symbol(),Period(),1);
-      double close = iClose(Symbol(),Period(),1);
+      double low=iLow(Symbol(),Period(),1);
+      double close= iClose(Symbol(),Period(),1);
       long volume = iVolume(Symbol(),Period(),1);
-      FileHandler = FileOpen(FileNameCourse,FILE_CSV|FILE_READ|FILE_WRITE);
-         if(FileHandler==-1){
-            LastError = GetLastError();
-            Print("Error opening file: "+ErrorDescription(LastError));
-         }else{
-            WriteOneLineToFile(time,open,high,low,close,volume);
-            FileClose(FileHandler);
-      }
-   }
+      double spread=(Ask-Bid)/Point;
+      int FileHandler=FileOpen(FileNameCourse,FILE_CSV|FILE_READ|FILE_WRITE);
+      if(FileHandler==-1)
+        {
+         LastError=GetLastError();
+         Print("Error opening file: "+ErrorDescription(LastError));
+           }else{
+         WriteOneOHLCLineToFile(FileHandler,time,open,high,low,close,volume,spread);
+         FileClose(FileHandler);
+        }
+     }
   }
 //+------------------------------------------------------------------+
 //| Timer function                                                   |
 //+------------------------------------------------------------------+
-void OnTimer() {
-
-   
-  datetime timeCur = TimeCurrent();
-  if(isPaused(timeCur)){
+void OnTimer()
+  {
+   if(isPaused) // if interface is still writing, dont go in this method
+     {
       return;
+        }else{
+      isPaused=true;
+      ReadAndApplyTrades();
+      FileDelete(FileNameTrades,FILE_WRITE);
+      int FileHandler=FileOpen(FileNameTrades,FILE_READ|FILE_CSV|FILE_WRITE|FILE_SHARE_READ);
+      if(FileHandler<0)
+        {
+         writeToLogFile("Error while opening File: "+FileNameTrades+",Error: "+ErrorDescription(GetLastError()));
+           }else{
+         writeToLogFile("File "+FileNameTrades+" opened.");
+        }
+      WriteActiveTrades(FileHandler);
+      FileClose(FileHandler);
+      isPaused=false;
+     }
+
   }
-  
-   
+//+------------------------------------------------------------------+
+//|  Reads the tradefile, opens and closes trades from javastrategy  |
+//+------------------------------------------------------------------+
+void ReadAndApplyTrades()
+  {
+   int FileHandler=FileOpen(FileNameTrades,FILE_READ|FILE_CSV,D);
+   if(FileHandler==INVALID_HANDLE)
+     {
+      writeToLogFile("File "+FileNameTrades+" could not be opened: "+ErrorDescription(GetLastError()));
+      return;
+     }
+   int counter=0;
+   int slippage=1;
+   while(!FileIsEnding(FileHandler))
+     {
+      //"active"+D+"JavaID"+D+"MT4ID"+D+"tradeType"+D+"timeOpen"+D+"timeClose"+D+"openingPrice"+D+"closingPrice"+D+"lotSize"+D+"takeProfit"+D+"stopLoss";
+      bool active= FileReadBool(FileHandler);
+      int javaId = FileReadNumber(FileHandler);
+      int MT4ID=FileReadNumber(FileHandler);
+      int tradeType=FileReadNumber(FileHandler);
+      datetime timeOpen=FileReadDatetime(FileHandler);
+      datetime timeClose=FileReadDatetime(FileHandler);
+      double openingPrice = FileReadNumber(FileHandler);
+      double closingPrice = FileReadNumber(FileHandler);
+      double lotSize=FileReadNumber(FileHandler);
+      double takeProfit=FileReadNumber(FileHandler);
+      double stopLoss=FileReadNumber(FileHandler);
+      if(MT4ID==0)
+        {//new trade
+         double stopLevel=MarketInfo(Symbol(),MODE_STOPLEVEL);
+         if(tradeType==OP_BUY) // BUY
+           {
+            RefreshRates();
+            double actualBid=Bid;
+            if(stopLoss!=0)
+              {
+               if(actualBid-stopLoss<stopLevel)
+                 {
+                  stopLoss=actualBid-stopLevel;
+                 }
+              }
+            if(takeProfit!=0)
+              {
+               if(takeProfit-actualBid<stopLevel)
+                 {
+                  takeProfit=stopLevel+actualBid;
+                 }
+              }
+            int id=OrderSend(Symbol(),OP_BUY,lotSize,Ask,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
+            if(id==-1)
+              {
+               writeToLogFile(Symbol()+","+OP_BUY+","+lotSize+","+Bid+","+slippage+","+stopLoss+","+takeProfit+","+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
+                 }else{
+               writeToLogFile("Order "+id+" succesfully opened");
+              }
+              }else{ // SELL
+            RefreshRates();
+            double actualAsk=Ask;
+            if(stopLoss!=0)
+              {
+               if(stopLoss-actualAsk<stopLevel)
+                 {
+                  stopLoss=actualAsk+stopLevel;
+                 }
+              }
+            if(takeProfit!=0)
+              {
+               if(actualAsk-takeProfit<stopLevel)
+                 {
+                  takeProfit=actualAsk-stopLevel;
+                 }
+              }
+            int id=OrderSend(Symbol(),OP_SELL,lotSize,Bid,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
+            if(id==-1)
+              {
+               writeToLogFile(Symbol()+","+OP_SELL+","+lotSize+","+Bid+","+slippage+","+stopLoss+","+takeProfit+","+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
+                 }else{
+               writeToLogFile("Order "+id+" succesfully opened");
+              }
+           }
+           }else{
+         if(!active) // sign to close a trade
+           {
+            if(tradeType==OP_BUY)
+              {
+               RefreshRates();
+               OrderClose(MT4ID,lotSize,Bid,slippage,clrGreen);
+                 }else{
+               RefreshRates();
+               OrderClose(MT4ID,lotSize,Ask,slippage,clrGreen);
+              }
+           }
+        }
+      counter=counter+1;
+      writeToLogFile("Trade no "+counter+" in file "+FileNameTrades+" processed.");
+     }
+   FileClose(FileHandler);
   }
 //+------------------------------------------------------------------+
 //| ChartEvent function                                              |
@@ -162,25 +340,71 @@ void OnTimer() {
 void OnChartEvent(const int id,
                   const long &lparam,
                   const double &dparam,
-                  const string &sparam) {
-//---
-   
+                  const string &sparam)
+  {
   }
-  
-  
-bool isPaused(datetime timeToCheck){
-       if(timeToCheck == CurrentTime){
-            return true;
-         }else{
-            CurrentTime = timeToCheck;
-            return false;
-         }
-  }
-  
+//+------------------------------------------------------------------+
+//|    Writes one line to the current logfile as defined in init     |
+//+------------------------------------------------------------------+
+void writeToLogFile(string message)
+  {//0
+   string curTime=GetCurTime("Seconds");
+   for(int i=0; i<5; i++)
+     {//1
+      int HFile=FileOpen(FileNameLog,FILE_READ|FILE_WRITE);
+      if(HFile>0)
+        {//2    
+         FileSeek(HFile,0,SEEK_END);
+         FileWrite(HFile,StringConcatenate(curTime,": ",message));
+         FileFlush(HFile);
+         FileClose(HFile);
+         break;
+           }else{Sleep(500); continue;
+        }//2
+     }//1
+  }//0
+//+-------------------------------------------------------------------------------------------+
+//|    gets formatted actual time (just for logfile)   Detail = "Seconds", "Hours" or "Days"  |
+//+-------------------------------------------------------------------------------------------+
+string GetCurTime(string Detail)
+  {//1 
+   string StrMonth="",StrDay="",StrHour="",StrMinute="",StrSeconds="";
+   RefreshRates();
+
+   if(Detail=="Seconds")
+     {
+      if(Month()<10) { StrMonth="0"+Month(); } else { StrMonth=Month(); }
+      if(Day()<10) { StrDay="0"+Day(); } else { StrDay=Day(); }
+      if(Hour()<10) { StrHour="0"+Hour(); } else { StrHour=Hour(); }
+      if(Minute()<10) { StrMinute="0"+Minute(); } else { StrMinute=Minute(); }
+      if(Seconds()<10) { StrSeconds="0"+Seconds(); } else { StrSeconds=Seconds(); }
+      return(""+StrDay+"."+StrMonth+"."+Year()+" "+StrHour+":"+StrMinute+":"+StrSeconds+" ");
+     }
+   if(Detail=="Hours")
+     {
+      if(Month()<10) { StrMonth="0"+Month(); } else { StrMonth=Month(); }
+      if(Day()<10) { StrDay="0"+Day(); } else { StrDay=Day(); }
+      if(Hour()<10) { StrHour="0"+Hour(); } else { StrHour=Hour(); }
+      if(Minute()<10) { StrMinute="0"+Minute(); } else { StrMinute=Minute(); }
+      if(Seconds()<10) { StrSeconds="0"+Seconds(); } else { StrSeconds=Seconds(); }
+      return(""+StrDay+"."+StrMonth+"."+Year()+" "+StrHour+":00:"+"00 ");
+     }
+   if(Detail=="Days")
+     {
+      if(Month()<10) { StrMonth="0"+Month(); }else { StrMonth=Month(); }
+      if(Day()<10) { StrDay="0"+Day(); } else { StrDay=Day(); }
+      if(Hour()<10) { StrHour="0"+Hour(); } else { StrHour=Hour(); }
+      if(Minute()<10) { StrMinute="0"+Minute(); } else { StrMinute=Minute(); }
+      if(Seconds()<10) { StrSeconds="0"+Seconds(); } else { StrSeconds=Seconds(); }
+      return(""+StrDay+"."+StrMonth+"."+Year()+" ");
+     }
+   return "NO TIME DETECTED";
+  }//1 
 //+------------------------------------------------------------------+
 //---- codes returned from trade server                              |
 //+------------------------------------------------------------------+
-string ErrorDescription(int error_code){
+string ErrorDescription(int error_code)
+  {
    string error_string;
 //----
    switch(error_code)
@@ -279,3 +503,4 @@ string ErrorDescription(int error_code){
 //----
    return(error_string);
   }
+//+------------------------------------------------------------------+
