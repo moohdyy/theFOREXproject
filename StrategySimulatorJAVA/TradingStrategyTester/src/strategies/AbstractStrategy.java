@@ -6,7 +6,10 @@ package strategies;
 
 import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import simulation.Trade;
 
 /**
@@ -36,6 +39,32 @@ public abstract class AbstractStrategy {
      */
     public String getName() {
         return name;
+    }
+    public static CurrencyCourseOHLC filterOutliers(CurrencyCourseOHLC filteredOHLCs)
+    {
+    	int j=0;
+    	for(int i=1;i<filteredOHLCs.getNumberOfEntries()-2;i++)
+    	{
+    		if(((filteredOHLCs.getOHLC(i).getHigh()<filteredOHLCs.getOHLC(i-1).getLow())&&(filteredOHLCs.getOHLC(i).getHigh()<filteredOHLCs.getOHLC(i+1).getLow()))||((filteredOHLCs.getOHLC(i).getLow()>filteredOHLCs.getOHLC(i-1).getHigh())&&(filteredOHLCs.getOHLC(i).getLow()>filteredOHLCs.getOHLC(i+1).getHigh())))
+    		{
+    				if(filteredOHLCs.getOHLC(i-1).getLow()<filteredOHLCs.getOHLC(i+1).getLow())
+    				{
+    					filteredOHLCs.getOHLC(i).setLow(filteredOHLCs.getOHLC(i-1).getHigh());
+    					filteredOHLCs.getOHLC(i).setHigh(filteredOHLCs.getOHLC(i+1).getLow());
+    				}else
+    				{
+    					filteredOHLCs.getOHLC(i).setHigh(filteredOHLCs.getOHLC(i-1).getLow());
+    					filteredOHLCs.getOHLC(i).setLow(filteredOHLCs.getOHLC(i-1).getHigh());
+    				}
+    				filteredOHLCs.getOHLC(i).setClose(filteredOHLCs.getOHLC(i+1).getOpen());
+    				filteredOHLCs.getOHLC(i).setOpen(filteredOHLCs.getOHLC(i-1).getClose());
+    				j++;
+    			
+        		}
+        		}
+    	System.out.println(filteredOHLCs.getNumberOfEntries());
+    	System.out.println("Found outliers: "+j);
+    	return filteredOHLCs;
     }
 
 }

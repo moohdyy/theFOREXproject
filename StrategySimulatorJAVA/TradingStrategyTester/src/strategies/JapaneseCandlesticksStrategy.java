@@ -16,6 +16,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 	public JapaneseCandlesticksStrategy(CurrencyCourseOHLC currencyCourseOHLC) {
 		super(currencyCourseOHLC,"JapaneseCandlesticksStrategy");
 		int number=currencyCourseOHLC.getNumberOfEntries();
+		AbstractStrategy.filterOutliers(currencyCourseOHLC);
 		for(int i=0;i<number;i++)
 		{
 			OHLC ohlc=currencyCourseOHLC.getOHLC(i);
