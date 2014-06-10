@@ -17,9 +17,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import main.Start;
 
+import Drawing.DrawCurrencyCourse;
+import main.Start;
 import strategies.AbstractStrategy;
+import strategies.JapaneseCandlesticksStrategy;
 
 /**
  *
@@ -71,6 +73,7 @@ public class StrategySimulation {
      * analyzed by the strategy)
      * @return double teh final balance
      */
+    int nr=0;
     public SimulationResults simulateStrategy(int windowInMinutes) {
         long windowInMilliseconds = windowInMinutes * 60 * 1000;
         List<Trade> trades = new ArrayList<>();
@@ -86,6 +89,11 @@ public class StrategySimulation {
                 writeToLogFileAndOutput("--- Strategy analyzing at actual price of: " + actualPrice + " ---");
                 trades = getStrategy().processNewCourse(trades, getCc());
             }
+//            JapaneseCandlesticksStrategy jcs=new JapaneseCandlesticksStrategy(getCc());
+//            
+//           nr++;
+//            DrawCurrencyCourse draw=new DrawCurrencyCourse(jcs.japanese, "currency_"+nr);
+//            System.out.println("War hier");
             tm.processTrades(trades, getCc().getBidPrice(index), getCc().getClose(index), this.actualTime);
             printCurrentStats(index);
         }

@@ -3,3 +3,5 @@ StrategySimulatorJAVA/TradingStrategyTester/src/datacollection/CurrencyCourseOHL
 StrategySimulatorJAVA/TradingStrategyTester/src/datacollection/CurrencyCourseOHLC.java
 StrategySimulatorJAVA/TradingStrategyTester/src/simulation/CopyOfStrategySimulation.java
 StrategySimulatorJAVA/TradingStrategyTester/src/strategies/JapaneseCandlesticksStrategy.java
+StrategySimulatorJAVA/TradingStrategyTester/src/main/Start.java
+StrategySimulatorJAVA/TradingStrategyTester/src/simulation/StrategySimulation.java

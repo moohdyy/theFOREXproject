@@ -13,11 +13,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
-
-=======
 import simulation.SimulationResults;
->>>>>>> b240aeb7dffea985440e4f95150ecda270dd78db
 import simulation.StrategySimulation;
 import strategies.AbstractStrategy;
 import strategies.JapaneseCandlesticksStrategy;
@@ -54,18 +50,17 @@ public class Start {
 
         for (String currencyPair : currencyPairs) {
             for (String year : years) {
-<<<<<<< HEAD
-                for (int month = 9; month < 13; month++) {
-                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc);
-                    bw.write(currencyPair+","+year+","+ month +": final Balance: "+result+ System.lineSeparator());
-=======
-                for (int month = 1; month < 12; month++) {
+                for (int month = 1; month < 13; month++) {
                     result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc, writeToLogFile);
-
+                	//result = simulateOneFile("C:\\Users\\Carina\\Downloads\\faultyDataSample.csv", ccc, writeToLogFile);
                     writeLineToFile(filename, result.toString());
-
->>>>>>> b240aeb7dffea985440e4f95150ecda270dd78db
                 }
+//                for (int month = 1; month < 13; month++) {
+//                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc, writeToLogFile);
+//                	//result = simulateOneFile("C:\\Users\\Carina\\Downloads\\faultyDataSample.csv", ccc, writeToLogFile);
+//                    
+//                    writeLineToFile(filename, result.toString());
+//                }
             }
         }
     }
