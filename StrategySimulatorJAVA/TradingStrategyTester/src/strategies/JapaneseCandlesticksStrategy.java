@@ -16,9 +16,9 @@ import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
 
 public class JapaneseCandlesticksStrategy extends AbstractStrategy {
-	ArrayList<JapaneseCandlestick> japanese = new ArrayList<JapaneseCandlestick>();
+	public ArrayList<JapaneseCandlestick> japanese = new ArrayList<JapaneseCandlestick>();
 	enum Trend {flat, falling, rising};
-
+	
 	public JapaneseCandlesticksStrategy(CurrencyCourseOHLC currencyCourseOHLC) {
 		super(currencyCourseOHLC, "JapaneseCandlesticksStrategy");
 		int number = currencyCourseOHLC.getNumberOfEntries();
@@ -36,19 +36,32 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		int number = currencyCourse.getNumberOfEntries();
 		japanese = new ArrayList<>();
 		CurrencyCourseOHLC actualCurrencyCourse = new CurrencyCourseOHLC();
+		Trend t2=Trend.flat;
 		for (int i = 0; i < number; i++) {
 			if (i <= currencyCourse.getActualPosition()) {
 				actualCurrencyCourse.addOHLC(currencyCourse.getOHLC(i));
+
 			}
-			OHLC ohlc = currencyCourse.getOHLC(i);
+			if(i==number-3)
+			{
+				t2=determineTrend(actualCurrencyCourse);
+			}
+		
+		}
+		actualCurrencyCourse=AbstractStrategy.filterOutliers(actualCurrencyCourse);
+		
+		for(int i=0;i<actualCurrencyCourse.getNumberOfEntries();i++)
+		{
+			OHLC ohlc = actualCurrencyCourse.getOHLC(i);
 			japanese.add(new JapaneseCandlestick(new Candlestick(new Time(ohlc
 					.getTimestamp()), ohlc.getOpen(), ohlc.getClose(), ohlc
 					.getLow(), ohlc.getHigh())));
 		}
-	
+		
+		
 		Trend t=determineTrend(actualCurrencyCourse);
 		Patterns pattern = JapaneseCandlestick.determinePattern(japanese,
-				currencyCourse.getActualPosition(),t);
+				currencyCourse.getActualPosition(),t,t2);
 		
 		JapaneseCandlestick candle = japanese.get(currencyCourse
 				.getActualPosition());
@@ -65,7 +78,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		} else if (buying) {
 			double tradeV = (candle.getHighestValue() - candle.getLowestValue())
 					/ 60
-					* currencyCourse.getBidPrice(currencyCourse
+					* currencyCourse.getBidPrice(actualCurrencyCourse
 							.getNumberOfEntries() - 1) * 100000;
 			System.out.println(tradeV);
 			tradeV = 10000;

@@ -59,11 +59,8 @@ public abstract class AbstractStrategy {
     				filteredOHLCs.getOHLC(i).setClose(filteredOHLCs.getOHLC(i+1).getOpen());
     				filteredOHLCs.getOHLC(i).setOpen(filteredOHLCs.getOHLC(i-1).getClose());
     				j++;
-    			
         		}
         		}
-    	System.out.println(filteredOHLCs.getNumberOfEntries());
-    	System.out.println("Found outliers: "+j);
     	return filteredOHLCs;
     }
 
