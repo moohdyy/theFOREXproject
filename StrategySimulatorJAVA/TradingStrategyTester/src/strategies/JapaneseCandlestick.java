@@ -238,6 +238,8 @@ public class JapaneseCandlestick {
 				}
 
 			}
+			if(index>1)
+			{
 			if (hasDowntrend(trend)) {
 				if (candlesticks.get(index - 2).getCategory() == Categories.Bearish
 						|| candlesticks.get(index - 2).getType() == Types.Hammer) {
@@ -336,6 +338,7 @@ public class JapaneseCandlestick {
 					}
 				}
 			}
+		}
 		}
 		return Patterns.None;
 	}

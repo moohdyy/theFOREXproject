@@ -20,7 +20,7 @@ public class TradeManager {
     private double balance = 0;
     private double equity = 0;
     private double usedMargin = 0;
-    private double leverage = 1;
+    private double leverage = 0.05;
 
     public TradeManager() {
         this.counter = 0;
