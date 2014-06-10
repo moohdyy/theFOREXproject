@@ -13,21 +13,42 @@ import java.io.File;
  * @author Moohdyy
  */
 public class InputOrganizer {
-    File ohlcFile;
-    File tradesFile;
+    private File ohlcFile;
+    private File tradesFile;
     
     public InputOrganizer(){
         
     }
+    
+    public boolean isValid(){
+        return getOhlcFile()!=null && getTradesFile()!=null;
+    }
 
-    public void setOHLCFile(File ohlcFile){
+    /**
+     * @return the ohlcFile
+     */
+    public File getOhlcFile() {
+        return ohlcFile;
+    }
+
+    /**
+     * @param ohlcFile the ohlcFile to set
+     */
+    public void setOhlcFile(File ohlcFile) {
         this.ohlcFile = ohlcFile;
     }
-    
-    public void setTradesFile(File tradesFile){
-        this.tradesFile = tradesFile;
+
+    /**
+     * @return the tradesFile
+     */
+    public File getTradesFile() {
+        return tradesFile;
     }
-    public boolean isValid(){
-        return ohlcFile!=null && tradesFile!=null;
+
+    /**
+     * @param tradesFile the tradesFile to set
+     */
+    public void setTradesFile(File tradesFile) {
+        this.tradesFile = tradesFile;
     }
 }
