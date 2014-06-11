@@ -188,26 +188,7 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 void OnTick()
   {
-   datetime time=iTime(Symbol(),Period(),1);
-   if(time!=LastData)
-     {
-      double open = iOpen(Symbol(),Period(),1);
-      double high = iHigh(Symbol(),Period(),1);
-      double low=iLow(Symbol(),Period(),1);
-      double close= iClose(Symbol(),Period(),1);
-      long volume = iVolume(Symbol(),Period(),1);
-      double spread=(Ask-Bid)/Point;
-      int FileHandler=FileOpen(FileNameCourse,FILE_CSV|FILE_READ|FILE_WRITE);
-      if(FileHandler==-1)
-        {
-         LastError=GetLastError();
-         Print("Error opening file: "+ErrorDescription(LastError));
-           }else{
-         WriteOneOHLCLineToFile(FileHandler,time,open,high,low,close,volume,spread);
-         FileClose(FileHandler);
-        }
-      LastData=time;
-     }
+
   }
 //+------------------------------------------------------------------+
 //| Timer function                                                   |
@@ -219,6 +200,26 @@ void OnTimer()
       return;
         }else{
       isPaused=true;
+      datetime time=iTime(Symbol(),Period(),1);
+      if(time!=LastData)
+        {
+         double open = iOpen(Symbol(),Period(),1);
+         double high = iHigh(Symbol(),Period(),1);
+         double low=iLow(Symbol(),Period(),1);
+         double close= iClose(Symbol(),Period(),1);
+         long volume = iVolume(Symbol(),Period(),1);
+         double spread=(Ask-Bid)/Point;
+         int FileHandler=FileOpen(FileNameCourse,FILE_CSV|FILE_READ|FILE_WRITE);
+         if(FileHandler==-1)
+           {
+            LastError=GetLastError();
+            Print("Error opening file: "+ErrorDescription(LastError));
+              }else{
+            WriteOneOHLCLineToFile(FileHandler,time,open,high,low,close,volume,spread);
+            FileClose(FileHandler);
+           }
+         LastData=time;
+        }
       ReadAndApplyTrades();
       FileDelete(FileNameTrades,FILE_WRITE);
       int FileHandler=FileOpen(FileNameTrades,FILE_READ|FILE_CSV|FILE_WRITE|FILE_SHARE_READ);
@@ -250,7 +251,7 @@ void ReadAndApplyTrades()
    while(!FileIsEnding(FileHandler))
      {
       //"active"+D+"MT4ID"+D+"tradeType"+D+"timeOpen"+D+"timeClose"+D+"openingPrice"+D+"closingPrice"+D+"lotSize"+D+"takeProfit"+D+"stopLoss";
-      bool active= FileReadBool(FileHandler);
+      bool active=FileReadBool(FileHandler);
       int MT4ID=FileReadNumber(FileHandler);
       int tradeType=FileReadNumber(FileHandler);
       datetime timeOpen=FileReadDatetime(FileHandler);
