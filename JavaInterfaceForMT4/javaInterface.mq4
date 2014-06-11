@@ -125,7 +125,6 @@ void WriteActiveTrades(int FileHandler)
            {
             int javaId=-1;
             WriteOneTradeLineToFile(FileHandler,
-                                    javaId,
                                     OrderTicket(),
                                     active,
                                     OrderType(),
@@ -160,7 +159,6 @@ void WriteOneOHLCLineToFile(int FileHandler,datetime time,double open,double hig
 //| Writes to the file and appends Data to the end                      |
 //+------------------------------------------------------------------+
 void WriteOneTradeLineToFile(int FileHandler,
-                             int javaId,
                              int mt4ID,
                              bool active,
                              int orderType,
@@ -172,7 +170,7 @@ void WriteOneTradeLineToFile(int FileHandler,
                              double takeProfit,
                              double stopLoss)
   {
-   string output=active+D+javaId+D+mt4ID+D+orderType+D+openTime+D+closeTime+D+openPrice+D+closePrice+D+lotSize+D+takeProfit+D+stopLoss;
+   string output=active+D+mt4ID+D+orderType+D+openTime+D+closeTime+D+openPrice+D+closePrice+D+lotSize+D+takeProfit+D+stopLoss;
    FileSeek(FileHandler,0,SEEK_END);
    FileWrite(FileHandler,output);
   }
@@ -251,16 +249,15 @@ void ReadAndApplyTrades()
    int slippage=1;
    while(!FileIsEnding(FileHandler))
      {
-      //"active"+D+"JavaID"+D+"MT4ID"+D+"tradeType"+D+"timeOpen"+D+"timeClose"+D+"openingPrice"+D+"closingPrice"+D+"lotSize"+D+"takeProfit"+D+"stopLoss";
+      //"active"+D+"MT4ID"+D+"tradeType"+D+"timeOpen"+D+"timeClose"+D+"openingPrice"+D+"closingPrice"+D+"lotSize"+D+"takeProfit"+D+"stopLoss";
       bool active= FileReadBool(FileHandler);
-      int javaId = FileReadNumber(FileHandler);
       int MT4ID=FileReadNumber(FileHandler);
       int tradeType=FileReadNumber(FileHandler);
       datetime timeOpen=FileReadDatetime(FileHandler);
       datetime timeClose=FileReadDatetime(FileHandler);
       double openingPrice = FileReadNumber(FileHandler);
       double closingPrice = FileReadNumber(FileHandler);
-      double lotSize=FileReadNumber(FileHandler);
+      double lotSize=FileReadNumber(FileHandler)/100000;
       double takeProfit=FileReadNumber(FileHandler);
       double stopLoss=FileReadNumber(FileHandler);
       if(MT4ID==0)
