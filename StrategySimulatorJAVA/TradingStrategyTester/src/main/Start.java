@@ -39,7 +39,7 @@ public class Start {
 //        filename = "historicalData\\EURUSD\\2011\\oneDayTest.csv";
 //        simulateOneFile(filename, ccc,true);
         //whole simulation
-        String[] currencyPairs = {"EURUSD", "GBPUSD", "USDJPY"};
+        String[] currencyPairs = {"EURUSD","GBPUSD", "USDJPY"};
         String[] years = {"2011", "2012"};
 
         SimulationResults result;
@@ -51,7 +51,7 @@ public class Start {
         for (String currencyPair : currencyPairs) {
             for (String year : years) {
                 for (int month = 1; month < 13; month++) {
-                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc, writeToLogFile);
+                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv",currencyPair, ccc, writeToLogFile);
                 	//result = simulateOneFile("C:\\Users\\Carina\\Downloads\\faultyDataSample.csv", ccc, writeToLogFile);
                     writeLineToFile(filename, result.toString());
                 }
@@ -65,10 +65,10 @@ public class Start {
         }
     }
 
-    private static SimulationResults simulateOneFile(String filename, CurrencyCourseCreator ccc, boolean writeToLogFile) {
+    private static SimulationResults simulateOneFile(String filename,String currencyPair, CurrencyCourseCreator ccc, boolean writeToLogFile) {
         CurrencyCourseOHLC cc = new CurrencyCourseOHLC();
         try {
-            cc = ccc.getCurrencyCourseFromFile(filename, "EURUSD");
+            cc = ccc.getCurrencyCourseFromFile(filename,currencyPair);
         } catch (IOException ex) {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

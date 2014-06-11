@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class FormatHistDataOHLCWithoutSpread extends CurrencyCourseCreator {
-
     @Override
     public CurrencyCourseOHLC getCurrencyCourseFromFile(String filename, String currencyPair) throws IOException, ParseException {
         int numberOfLines = count(filename);

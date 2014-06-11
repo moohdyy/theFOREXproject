@@ -10,7 +10,6 @@ public abstract class CurrencyCourseCreator {
 
     public CurrencyCourseCreator() {
     }
-
     public abstract CurrencyCourseOHLC getCurrencyCourseFromFile(String filename, String currencyPair) throws IOException, ParseException;
 
     public static int count(String filename) throws IOException {

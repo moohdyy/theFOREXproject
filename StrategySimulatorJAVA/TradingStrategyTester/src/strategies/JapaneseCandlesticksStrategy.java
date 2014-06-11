@@ -47,9 +47,9 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		}
 	}
 
-	private double pipsRiskPerTrade = 200;
+	private double pipsRiskPerTrade = 1000;
 	private double balance = 50000;
-	private double laverage = 0.05;
+	private double laverage = 5;
 
 	public void setLaverage(double l) {
 		laverage = l;
@@ -120,7 +120,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			// tradeV = 10000;
 			// Trade trade = new Trade(Trade.BUY, tradeV);
 			// actualTrades.add(trade);
-			double tradeV = balance * laverage;
+			double tradeV = balance / laverage;
 			tradeV = tradeV / pipsRiskPerTrade;
 			double stopLoss = tradeV;
 			tradeV *= 100;
