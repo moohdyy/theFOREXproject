@@ -6,49 +6,48 @@
 
 package javamt4interface;
 
-import java.io.File;
-
 /**
  *
  * @author Moohdyy
  */
 public class InputOrganizer {
-    private File ohlcFile;
-    private File tradesFile;
+    private String ohlcFileName;
+    private String tradesFileName;
     
     public InputOrganizer(){
-        
+        ohlcFileName = "";
+        tradesFileName = "";
     }
     
     public boolean isValid(){
-        return getOhlcFile()!=null && getTradesFile()!=null;
+        return !ohlcFileName.equals("") && !tradesFileName.equals("");
     }
 
     /**
      * @return the ohlcFile
      */
-    public File getOhlcFile() {
-        return ohlcFile;
+    public String getOhlcFileName() {
+        return ohlcFileName;
     }
 
     /**
      * @param ohlcFile the ohlcFile to set
      */
-    public void setOhlcFile(File ohlcFile) {
-        this.ohlcFile = ohlcFile;
+    public void setOhlcFileName(String ohlcFile) {
+        this.ohlcFileName = ohlcFile;
     }
 
     /**
      * @return the tradesFile
      */
-    public File getTradesFile() {
-        return tradesFile;
+    public String getTradesFileName() {
+        return tradesFileName;
     }
 
     /**
      * @param tradesFile the tradesFile to set
      */
-    public void setTradesFile(File tradesFile) {
-        this.tradesFile = tradesFile;
+    public void setTradesFileName(String tradesFile) {
+        this.tradesFileName = tradesFile;
     }
 }

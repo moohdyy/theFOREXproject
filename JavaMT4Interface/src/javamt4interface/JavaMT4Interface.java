@@ -5,11 +5,8 @@
  */
 package javamt4interface;
 
-import forexstrategies.JapaneseCandlesticksStrategy;
+import forexstrategies.Testing;
 import java.io.File;
-import java.net.URL;
-import java.security.CodeSource;
-import java.security.ProtectionDomain;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -79,7 +76,7 @@ public class JavaMT4Interface extends Application {
                 fc.setTitle("ohlcFile");
                 lastFile = fc.showOpenDialog(new Popup());
                 if (lastFile != null) {
-                    io.setOhlcFile(lastFile);
+                    io.setOhlcFileName(lastFile.getAbsolutePath());
                     labelOHLC.setText(lastFile.getAbsolutePath());
                 } else {
                     showDialog("No file selected.");
@@ -104,7 +101,7 @@ public class JavaMT4Interface extends Application {
                 fc.setTitle("Trade File");
                 lastFile = fc.showOpenDialog(new Popup());
                 if (lastFile != null) {
-                    io.setTradesFile(lastFile);
+                    io.setTradesFileName(lastFile.getAbsolutePath());
                     labelTRADES.setText(lastFile.getAbsolutePath());
                 } else {
                     showDialog("No file selected.");
@@ -134,7 +131,7 @@ public class JavaMT4Interface extends Application {
                 if (io.isValid()) {
                     startSim.setDisable(true);
                     stopSim.setDisable(false);
-                    sp = new StrategyProcesser(io, new JapaneseCandlesticksStrategy());
+                    sp = new StrategyProcesser(io, new Testing());
                     sp.start();
                 } else {
                     showDialog("Please select two files for processing");

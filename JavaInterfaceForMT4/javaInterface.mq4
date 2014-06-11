@@ -10,7 +10,7 @@
 
 // input parameters
 extern int BarsMin=100;
-extern int TimeFrameSec=2;
+extern int TimeFrameSec=20;
 extern int UniqueID;
 
 string FileNameCourse,FirstLine,CurLine,LastError,D=";",FileNameTrades,FileNameLog;
@@ -188,7 +188,40 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 void OnTick()
   {
-
+   writeToLogFile("OnTick started.");
+   datetime time=iTime(Symbol(),Period(),1);
+   while(time!=LastData)
+     {
+      double open = iOpen(Symbol(),Period(),1);
+      double high = iHigh(Symbol(),Period(),1);
+      double low=iLow(Symbol(),Period(),1);
+      double close= iClose(Symbol(),Period(),1);
+      long volume = iVolume(Symbol(),Period(),1);
+      double spread=(Ask-Bid)/Point;
+      int FileHandler=FileOpen(FileNameCourse,FILE_CSV|FILE_READ|FILE_WRITE);
+      if(FileHandler==-1)
+        {
+         int error=GetLastError();
+         writeToLogFile("File "+FileNameCourse+" could not be opened: "+ErrorDescription(error)+"("+error+"). Sleeping 1 second.");
+         sleepThisThread(3);
+           }else{
+         writeToLogFile("File "+FileNameCourse+" opened.");
+         WriteOneOHLCLineToFile(FileHandler,time,open,high,low,close,volume,spread);
+         FileClose(FileHandler);
+         LastData=time;
+        }
+     }
+   writeToLogFile("OnTick ended.");
+  }
+//+------------------------------------------------------------------+
+//|                                                                  |
+//+------------------------------------------------------------------+
+void sleepThisThread(int seconds)
+  {
+   int time_waiting=TimeLocal()+seconds;
+   while(TimeLocal()<time_waiting)
+     {
+     }
   }
 //+------------------------------------------------------------------+
 //| Timer function                                                   |
@@ -200,26 +233,6 @@ void OnTimer()
       return;
         }else{
       isPaused=true;
-      datetime time=iTime(Symbol(),Period(),1);
-      if(time!=LastData)
-        {
-         double open = iOpen(Symbol(),Period(),1);
-         double high = iHigh(Symbol(),Period(),1);
-         double low=iLow(Symbol(),Period(),1);
-         double close= iClose(Symbol(),Period(),1);
-         long volume = iVolume(Symbol(),Period(),1);
-         double spread=(Ask-Bid)/Point;
-         int FileHandler=FileOpen(FileNameCourse,FILE_CSV|FILE_READ|FILE_WRITE);
-         if(FileHandler==-1)
-           {
-            LastError=GetLastError();
-            writeToLogFile("Error opening file: "+ErrorDescription(LastError));
-              }else{
-            WriteOneOHLCLineToFile(FileHandler,time,open,high,low,close,volume,spread);
-            FileClose(FileHandler);
-            LastData=time;
-           }
-        }
       ReadAndApplyTrades();
       FileDelete(FileNameTrades,FILE_WRITE);
       int FileHandler=FileOpen(FileNameTrades,FILE_READ|FILE_CSV|FILE_WRITE|FILE_SHARE_READ);
@@ -243,7 +256,8 @@ void ReadAndApplyTrades()
    int FileHandler=FileOpen(FileNameTrades,FILE_READ|FILE_CSV,D);
    if(FileHandler==INVALID_HANDLE)
      {
-      writeToLogFile("File "+FileNameTrades+" could not be opened: "+ErrorDescription(GetLastError()));
+      int error=GetLastError();
+      writeToLogFile("File "+FileNameTrades+" could not be opened: "+ErrorDescription(error)+"("+error+")");
       return;
      }
    int counter=0;
@@ -321,14 +335,24 @@ void ReadAndApplyTrades()
            }else{
          if(!active) // sign to close a trade
            {
+            bool success;
             if(tradeType==OP_BUY)
               {
                RefreshRates();
-               OrderClose(MT4ID,lotSize,Bid,slippage,clrGreen);
+               success = OrderClose(MT4ID,lotSize,Bid,slippage,clrGreen);
                  }else{
                RefreshRates();
-               OrderClose(MT4ID,lotSize,Ask,slippage,clrGreen);
+               success = OrderClose(MT4ID,lotSize,Ask,slippage,clrGreen);
               }
+
+            if(success)
+              {
+               writeToLogFile("Order "+MT4ID+" succesfully closed.");
+              }else{
+                writeToLogFile("Order "+MT4ID+" closing failed: "+ErrorDescription(GetLastError()));
+             
+              }
+              
            }
         }
       counter=counter+1;
@@ -500,6 +524,45 @@ string ErrorDescription(int error_code)
       case 4204: error_string="no object name";                                           break;
       case 4205: error_string="object coordinates error";                                 break;
       case 4206: error_string="no specified subwindow";                                   break;
+      case 4207: error_string="Graphical object error";                                   break;
+      case 4210: error_string="Unknown chart property";                                   break;
+      case 4211: error_string="Chart not found";                                          break;
+      case 4212: error_string="Chart subwindow not found";                                break;
+      case 4213: error_string="Chart indicator not found";                                break;
+      case 4220: error_string="Symbol select error";                                      break;
+      case 4250: error_string="otification error";                                        break;
+      case 4251: error_string="Notification parameter error";                             break;
+      case 4252: error_string="Notifications disabled";                                   break;
+      case 4253: error_string="Notification send too frequent";                           break;
+      case 5001: error_string="Too many opened files";                                    break;
+      case 5002: error_string="Wrong file name";                                          break;
+      case 5003: error_string="Too long file name";                                       break;
+      case 5004: error_string="Cannot open file";                                         break;
+      case 5005: error_string="Text file buffer allocation error";                        break;
+      case 5006: error_string="Cannot delete file";                                       break;
+      case 5007: error_string="Invalid file handle(file closed or was not opened)";       break;
+      case 5008: error_string="Wrong file handle(handle index is out of handle table)";   break;
+      case 5009: error_string="File must be opened with FILE_WRITE flag";                 break;
+      case 5010: error_string="File must be opened with FILE_READ flag";                  break;
+      case 5011: error_string="File must be opened with FILE_BIN flag";                   break;
+      case 5012: error_string="File must be opened with FILE_TXT flag";                   break;
+      case 5013: error_string="File must be opened with FILE_TXT or FILE_CSV flag";       break;
+      case 5014: error_string="File must be opened with FILE_CSV flag";                   break;
+      case 5015: error_string="File read error";                                          break;
+      case 5016: error_string="File write error";                                         break;
+      case 5017: error_string="String size must be specified for binary file";            break;
+      case 5018: error_string="Incompatible file(for string arrays-TXT,for others-BIN)";  break;
+      case 5019: error_string="File is directory not file";                               break;
+      case 5020: error_string="File does not exist";                                      break;
+      case 5021: error_string="File cannot be rewritten";                                 break;
+      case 5022: error_string="Wrong directory name";                                     break;
+      case 5023: error_string="Directory does not exist";                                 break;
+      case 5024: error_string="Specified file is not directory";                          break;
+      case 5025: error_string="Cannot delete directory";                                  break;
+      case 5026: error_string="Cannot clean directory";                                   break;
+      case 5027: error_string="Array resize error";                                       break;
+      case 5028: error_string="String resize error";                                      break;
+      case 5029: error_string="Structure contains strings or dynamic arrays";             break;
       default:   error_string="unknown error";
      }
 //----

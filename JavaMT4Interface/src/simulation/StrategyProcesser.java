@@ -19,6 +19,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import static java.lang.Thread.sleep;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,56 +57,51 @@ public class StrategyProcesser extends Thread {
             while (active) {
                 int fileSize = 0;
                 try {
-                    fileSize = CurrencyCourseCreator.count(io.getOhlcFile().getCanonicalPath());
-                    JavaMT4Interface.printToOutput("OHLC data detected: " + fileSize);
+                    fileSize = CurrencyCourseCreator.count(io.getOhlcFileName());
+                    writeToUI("OHLC data detected: " + fileSize);
                 } catch (IOException e) {
-                    JavaMT4Interface.printToOutput("Error while parsing file: " + io.getOhlcFile().getName() + " : " + e.getMessage());
+                    writeToUI("Error while parsing file: " + io.getOhlcFileName() + " : " + e.getMessage());
                 }
                 if (actualFileSize != fileSize) {
                     try {
-                        cc = ccc.getCurrencyCourseFromFile(io.getOhlcFile().getCanonicalPath(), "");
-                        actualTrades = getTradesFromFile(io.getTradesFile());
+                        cc = ccc.getCurrencyCourseFromFile(io.getOhlcFileName(), "");
+                        actualTrades = getTradesFromFile(io.getTradesFileName());
                     } catch (IOException | ParseException ex) {
-                        JavaMT4Interface.printToOutput("Error while parsing files: " + ex.getMessage());
+                        writeToUI("Error while parsing files: " + ex.getMessage());
                     }
                     cc.setActualPosition(cc.getNumberOfEntries() - 1);
                     strategy.setCurrencyCourseOHLC(cc);
                     List<Trade> newTrades = strategy.processNewCourse(actualTrades, cc);
-                    try {
-                        writeTradesToFile(io.getTradesFile(), newTrades);
-                    } catch (IOException ex) {
-                        JavaMT4Interface.printToOutput("Error while writing trades: " + io.getTradesFile().getName() + ex.getMessage());
-                    } catch (ParseException ex) {
-                        JavaMT4Interface.printToOutput("Error while writing trades: " + io.getTradesFile().getName() + ex.getMessage());
+                    boolean success = false;
+                    while (!success) {
+                        try {
+                            success = writeTradesToFile(io.getTradesFileName(), newTrades);
+                        } catch (IOException ex) {
+                            writeToUI("Error while writing trades: " + io.getTradesFileName() + ex.getMessage());
+                            sleepThread(1);
+                        } catch (ParseException ex) {
+                            writeToUI("Error while writing trades: " + io.getTradesFileName() + ex.getMessage());
+                            sleepThread(1);
+                        }
+
                     }
                     actualFileSize = fileSize;
                 } else {
 
 
-                    // UI updaten
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            // entsprechende UI Komponente updaten
-                        }
-                    });
+//                    // UI updaten
+
 
                     // Thread schlafen
-                    try {
-                        // fuer 3 Sekunden
-                        sleep(TimeUnit.SECONDS.toMillis(3));
-                        JavaMT4Interface.printToOutput("Waiting for changes.");
-                    } catch (InterruptedException ex) {
-                        JavaMT4Interface.printToOutput("Error while trying to sleep thread.");
-                        System.out.println("ERROR while sleeping: " + ex.getMessage());
-                    }
+                    sleepThread(5);
                 }
             }
         }
     }
 
-    private List<Trade> getTradesFromFile(File tradesFile) throws IOException, ParseException {
-        JavaMT4Interface.printToOutput("Reading trades.");
+    private List<Trade> getTradesFromFile(String tradeFileName) throws IOException, ParseException {
+        writeToUI("Reading trades.");
+        File tradesFile = new File(tradeFileName);
         FileReader fr = new FileReader(tradesFile);
         BufferedReader br = new BufferedReader(fr);
         String line;
@@ -147,20 +143,22 @@ public class StrategyProcesser extends Thread {
         }
         br.close();
         fr.close();
-        JavaMT4Interface.printToOutput(count + " existing Trades found.");
+        writeToUI(count + " existing Trades found.");
         activeTradesCount = count;
         return tradeList;
     }
 
-    private void writeTradesToFile(File tradesFile, List<Trade> newTrades) throws FileNotFoundException, IOException, ParseException {
-        if (activeTradesCount == newTrades.size()) {
-            JavaMT4Interface.printToOutput("No new Trades from strategy.");
-            return;
+    private boolean writeTradesToFile(String tradesFileName, List<Trade> newTrades) throws FileNotFoundException, IOException, ParseException {
+        if (newTrades.isEmpty()) {
+            writeToUI("Tradelist is empty.");
+            return true;
         }
+        File tradesFile = new File(tradesFileName);
         if (!tradesFile.delete()) {
-            JavaMT4Interface.printToOutput("Error deleting old tradeFile.");
+            writeToUI("Error deleting old tradeFile.");
+            return false;
         }
-        JavaMT4Interface.printToOutput("Writing " + (newTrades.size() - activeTradesCount) + " new Trades.");
+        writeToUI("Writing " + (newTrades.size() - activeTradesCount) + " new Trades.");
         FileWriter fw = new FileWriter(tradesFile);
         BufferedWriter bw = new BufferedWriter(fw);
         // date format: 2012-01-02 02:00:02.183000000
@@ -168,18 +166,38 @@ public class StrategyProcesser extends Thread {
         //from mt4: output=active+D+mt4ID+D+orderType+D+openTime+D+closeTime+D+openPrice+D+closePrice+D+lotSize+D+takeProfit+D+stopLoss;
         // true;1954704;1;2014.06.10 11:05:42;1970.01.01 00:00:00;1.35868;1.35883;1;0;0
         String D = ";";
-        int mt4ID = 0;
         double closingPrice = 0.0;
         for (Trade trade : newTrades) {
-            String tradeString = trade.isOpen() + D + mt4ID + D + trade.getTradeType() + D + sdf.format(new Date(trade.getTimeStampOpen())) + D + "" + D + trade.getOpeningPrice() + D + closingPrice + D + trade.getVolume() + D + trade.getTakeProfit() + D + trade.getStopLoss() + "\n";
-            JavaMT4Interface.printToOutput("new Trade: " + tradeString);
+            String tradeString = trade.isOpen() + D + trade.getMT4ID() + D + trade.getTradeType() + D + sdf.format(new Date(trade.getTimeStampOpen())) + D + sdf.format(new Date(trade.getTimeStampClose())) + D + trade.getOpeningPrice() + D + closingPrice + D + trade.getVolume() + D + trade.getTakeProfit() + D + trade.getStopLoss() + "\n";
+            writeToUI("new Trade: " + tradeString);
             bw.write(tradeString);
         }
         bw.close();
         fw.close();
+        return true;
     }
 
     public void stopThread() {
         active = false;
+    }
+
+    private void sleepThread(int seconds) {
+        try {
+            // fuer 3 Sekunden
+            writeToUI("Sleeping for " + seconds + " seconds...");
+            sleep(TimeUnit.SECONDS.toMillis(seconds));
+        } catch (InterruptedException ex) {
+            writeToUI("Error while trying to sleep thread.");
+            System.out.println("ERROR while sleeping: " + ex.getMessage());
+        }
+    }
+
+    private void writeToUI(final String text) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                JavaMT4Interface.printToOutput(text);
+            }
+        });
     }
 }

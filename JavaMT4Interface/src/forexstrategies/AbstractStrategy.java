@@ -7,7 +7,6 @@ package forexstrategies;
 import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import simulation.Trade;

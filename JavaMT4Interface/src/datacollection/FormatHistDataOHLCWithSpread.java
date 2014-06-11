@@ -39,6 +39,9 @@ public class FormatHistDataOHLCWithSpread extends CurrencyCourseCreator {
                 cc.setSpread(Double.parseDouble(oneLine[7]));
             }
         }
+        br.close();
+        in.close();
+        fis.close();
         return cc;
     }
 }

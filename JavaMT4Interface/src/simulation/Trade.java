@@ -13,7 +13,6 @@ public class Trade {
     public final static int SELL = 2;
     public final static int NOACTION = 0;
 
-    private int javaID;
     private int MT4ID;
     private final int tradeType;
     private long timeStampOpen;
@@ -25,8 +24,7 @@ public class Trade {
     private boolean open = true;
 
     public Trade(int tradeType, double volume) {
-        this.javaID = -1;
-        this.MT4ID = -1;
+        this.MT4ID = 0;
         this.tradeType = tradeType;
         this.volume = volume;
     }
@@ -57,19 +55,6 @@ public class Trade {
         return tradeType;
     }
 
-    /**
-     * @return the javaID
-     */
-    public int getJavaID() {
-        return javaID;
-    }
-
-    /**
-     * @param javaID the javaID to set
-     */
-    public void setJavaID(int javaID) {
-        this.javaID = javaID;
-    }
 
     /**
      * @return the MT4ID
