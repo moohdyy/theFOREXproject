@@ -7,6 +7,9 @@ package javamt4interface;
 
 import forexstrategies.JapaneseCandlesticksStrategy;
 import java.io.File;
+import java.net.URL;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -43,7 +46,7 @@ public class JavaMT4Interface extends Application {
 
         Group root = new Group();
         primaryStage.setTitle("The Forex Project");
-        scene = new Scene(root, 500, 250);
+        scene = new Scene(root, 800, 500);
         primaryStage.setScene(scene);
 
         BorderPane borderPane = new BorderPane();
@@ -54,32 +57,30 @@ public class JavaMT4Interface extends Application {
 
         primaryStage.show();
     }
+    private Label labelOHLC;
+    private Label labelTRADES;
+    File lastFile = new File(System.getProperty("user.dir"));
 
     public Node getTopContent() {
-
         Button ohlcBtn = new Button();
         ohlcBtn.setId("ohlcFileChooser");
         ohlcBtn.setText("Choose OHLC File");
-        Label labelOHLC = new Label("", ohlcBtn);
+        labelOHLC = new Label("");
         labelOHLC.setId("ohlcFileChosen");
         labelOHLC.setContentDisplay(ContentDisplay.LEFT);
         ohlcBtn.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fc = new FileChooser();
-                //Set to user directory or go to default if cannot access
-                String userDirectoryString = System.getProperty("user.home");
-                File userDirectory = new File(userDirectoryString);
-                if (!userDirectory.canRead()) {
-                    userDirectory = new File("c:/");
+                if (lastFile != null) {
+                    File existDirectory = lastFile.getParentFile();
+                    fc.setInitialDirectory(existDirectory);
                 }
-                fc.setInitialDirectory(userDirectory);
                 fc.setTitle("ohlcFile");
-                File ohlcFile = fc.showOpenDialog(new Popup());
-                if (ohlcFile != null) {
-                    io.setOhlcFile(ohlcFile);
-                    labelOHLC.setText(ohlcFile.getAbsolutePath());
+                lastFile = fc.showOpenDialog(new Popup());
+                if (lastFile != null) {
+                    io.setOhlcFile(lastFile);
+                    labelOHLC.setText(lastFile.getAbsolutePath());
                 } else {
                     showDialog("No file selected.");
                 }
@@ -89,65 +90,72 @@ public class JavaMT4Interface extends Application {
         Button tradesBtn = new Button();
         tradesBtn.setId("tradesFileChooser");
         tradesBtn.setText("Choose Trade File");
-        Label labelTRADES = new Label("", tradesBtn);
+        labelTRADES = new Label("");
         labelTRADES.setId("ohlcFileChosen");
         labelTRADES.setContentDisplay(ContentDisplay.LEFT);
         tradesBtn.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
                 FileChooser fc = new FileChooser();
-                //Set to user directory or go to default if cannot access
-                String userDirectoryString = System.getProperty("user.home");
-                File userDirectory = new File(userDirectoryString);
-                if (!userDirectory.canRead()) {
-                    userDirectory = new File("c:/");
+                if (lastFile != null) {
+                    File existDirectory = lastFile.getParentFile();
+                    fc.setInitialDirectory(existDirectory);
                 }
-                fc.setInitialDirectory(userDirectory);
                 fc.setTitle("Trade File");
-                File tradeFile = fc.showOpenDialog(new Popup());
-                if (tradeFile != null) {
-                    io.setTradesFile(tradeFile);
-                    labelTRADES.setText(tradeFile.getAbsolutePath());
+                lastFile = fc.showOpenDialog(new Popup());
+                if (lastFile != null) {
+                    io.setTradesFile(lastFile);
+                    labelTRADES.setText(lastFile.getAbsolutePath());
                 } else {
                     showDialog("No file selected.");
                 }
             }
         });
 
-        VBox hbox = new VBox();
-        hbox.getChildren().addAll(ohlcBtn, labelOHLC, tradesBtn, labelTRADES);
-        return hbox;
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(ohlcBtn, labelOHLC, tradesBtn, labelTRADES);
+        return vbox;
     }
-
     Button startSim;
+    Button stopSim;
     static TextArea simOutput;
+    StrategyProcesser sp;
 
     private Node getLeftContent() {
         simOutput = new TextArea();
-        simOutput.setPrefRowCount(10);
-        simOutput.setPrefColumnCount(100);
-        simOutput.setWrapText(true);
-        simOutput.setPrefWidth(500);
+        simOutput.setPrefWidth(800);
+        simOutput.setPrefHeight(300);
         startSim = new Button();
         startSim.setId("startTrading");
         startSim.setText("Start");
         startSim.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
                 if (io.isValid()) {
                     startSim.setDisable(true);
-                    StrategyProcesser sp = new StrategyProcesser(io, new JapaneseCandlesticksStrategy());
-                    sp.startProcessing();
+                    stopSim.setDisable(false);
+                    sp = new StrategyProcesser(io, new JapaneseCandlesticksStrategy());
+                    sp.start();
                 } else {
                     showDialog("Please select two files for processing");
                 }
             }
         });
+        stopSim = new Button();
+        stopSim.setId("stopTrading");
+        stopSim.setText("Stop");
+        stopSim.setDisable(true);
+        stopSim.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                sp.stopThread();
+                stopSim.setDisable(true);
+                startSim.setDisable(false);
+            }
+        });
 
         VBox hbox = new VBox();
-        hbox.getChildren().addAll(startSim, simOutput);
+        hbox.getChildren().addAll(startSim,stopSim, simOutput);
         return hbox;
     }
 
@@ -159,7 +167,7 @@ public class JavaMT4Interface extends Application {
     }
 
     public static void printToOutput(String text) {
-        simOutput.appendText(text);
+        simOutput.appendText("\n" + text);
     }
 
     public void showDialog(String message) {

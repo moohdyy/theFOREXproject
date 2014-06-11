@@ -10,7 +10,7 @@
 
 // input parameters
 extern int BarsMin=100;
-extern int TimeFrameSec=10;
+extern int TimeFrameSec=2;
 extern int UniqueID;
 
 string FileNameCourse,FirstLine,CurLine,LastError,D=";",FileNameTrades,FileNameLog;
@@ -193,7 +193,6 @@ void OnTick()
    datetime time=iTime(Symbol(),Period(),1);
    if(time!=LastData)
      {
-      LastData=time;
       double open = iOpen(Symbol(),Period(),1);
       double high = iHigh(Symbol(),Period(),1);
       double low=iLow(Symbol(),Period(),1);
@@ -209,6 +208,7 @@ void OnTick()
          WriteOneOHLCLineToFile(FileHandler,time,open,high,low,close,volume,spread);
          FileClose(FileHandler);
         }
+      LastData=time;
      }
   }
 //+------------------------------------------------------------------+

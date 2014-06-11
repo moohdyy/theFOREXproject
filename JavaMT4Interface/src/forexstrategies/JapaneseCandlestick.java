@@ -1,381 +1,487 @@
 package forexstrategies;
 
+
 import Connection.Candlestick;
 import Connection.Time;
 import forexstrategies.JapaneseCandlesticksStrategy.Trend;
+
 import java.util.ArrayList;
 
 public class JapaneseCandlestick {
+	private double openingValue;
+	private double closingValue;
+	private double lowestValue;
+	private double lowerBody;
+	private double upperBody;
+	private double highestValue;
+	private Time time;
 
-    private double startingValue;
-    private double endingValue;
-    private double lowestValue;
-    private double lowerBody;
-    private double upperBody;
-    private double highestValue;
-    private Time time;
+	public enum Categories {
+		None, Bullish, Bearish
+	}
 
-    enum Categories {
+	public enum Colors {
+		None, White, Black
+	};
 
-        None, Bullish, Bearish
-    };
+	public enum Types {
+		None, SpinningTop, WhiteMarubozu, BlackMarubozu, LongLeggedDoji, DragonflyDoji, GravestoneDoji, FourPriceDoji, Hammer, InvertedHammer
+	};
 
-    enum Types {
+	public enum Patterns {
+		None, Hammer, HangingMan, InvertedHammer, ShootingStar, BullishEngulfing, BearishEngulfing, TweezerTops, TweezerBottoms, EveningStar, MorningStar, ThreeWhiteSoldiers, ThreeBlackCrows, ThreeInsideUp, ThreeInsideDown
+	};
 
-        None, SpinningTop, WhiteMarubozu, BlackMarubozu, LongLeggedDoji, DragonflyDoji, GravestoneDoji, FourPriceDoji, Hammer, InvertedHammer
-    };
+	private Categories category = Categories.None;
+	private Colors color = Colors.None;
+	private Types type = Types.None;
+	private Patterns pattern = Patterns.None;
+	private final static int trend = 5;
 
-    enum Patterns {
+	public JapaneseCandlestick(Candlestick c) {
+		this.openingValue = c.getOpening();
+		this.closingValue = c.getClosing();
+		this.highestValue = c.getHigh();
+		this.lowestValue = c.getLow();
+		this.time = c.getTimestamp();
+		if (openingValue > closingValue) {
+			this.upperBody = openingValue;
+			this.lowerBody = closingValue;
+		} else {
+			this.upperBody = closingValue;
+			this.lowerBody = openingValue;
+		}
+		color = determineColor();
+		type = determineType();
+		category = determineCategory();
+	}
 
-        None, Hammer, HangingMan, InvertedHammer, ShootingStar, BullishEngulfing, BearishEngulfing, TweezerTops, TweezerBottoms, EveningStar, MorningStar, ThreeWhiteSoldiers, ThreeBlackCrows, ThreeInsideUp, ThreeInsideDown
-    };
-    private Categories category = Categories.None;
-    private Types type = Types.None;
-    private Patterns pattern = Patterns.None;
-    private final static int trend = 5;
+	public Categories determineCategory() {
+		if (type == Types.WhiteMarubozu) {
+			return Categories.Bullish;
+		} else if (type == Types.BlackMarubozu) {
+			return Categories.Bearish;
+		} else if (type == Types.SpinningTop) {
+			return Categories.None;
+		} else if (type == Types.DragonflyDoji) {
+			return Categories.None;
+		} else if (type == Types.FourPriceDoji) {
+			return Categories.None;
+		} else if (type == Types.LongLeggedDoji) {
+			return Categories.None;
+		} else if (type == Types.GravestoneDoji) {
+			return Categories.None;
+		} else if (color == Colors.Black) {
+			return Categories.Bearish;
+		} else if (color == Colors.White) {
+			return Categories.Bullish;
+		}
+		return Categories.None;
 
-    public JapaneseCandlestick(Candlestick c) {
-        this.startingValue = c.getOpening();
-        this.endingValue = c.getClosing();
-        this.highestValue = c.getHigh();
-        this.lowestValue = c.getLow();
-        this.time = c.getTimestamp();
-        if (startingValue > endingValue) {
-            this.upperBody = startingValue;
-            this.lowerBody = endingValue;
-        } else {
-            this.upperBody = endingValue;
-            this.lowerBody = startingValue;
-        }
-        category = determineCategory();
-        type = determineType();
-    }
+	}
 
-    public Categories determineCategory() {
-        if (endingValue > startingValue) {
-            return Categories.Bullish;
-        } else if (endingValue < startingValue) {
-            return Categories.Bearish;
-        }
-        return Categories.None;
-    }
+	public Categories getCategory() {
+		return category;
+	}
 
-    public Types determineType() {
-        if (category == Categories.None) {
-            if (highestValue == lowestValue) {
-                return Types.FourPriceDoji;
-            } else if (lowestValue == startingValue) {
-                return Types.GravestoneDoji;
-            } else if (highestValue == startingValue) {
-                return Types.DragonflyDoji;
-            } else {
-                return Types.LongLeggedDoji;
-            }
-        } else if ((highestValue == startingValue) && (lowestValue == endingValue)) {
-            return Types.BlackMarubozu;
-        } else if ((highestValue == endingValue) && (lowestValue == startingValue)) {
-            return Types.WhiteMarubozu;
-        }
-        double topStick;
-        double bottomStick;
-        if (endingValue > startingValue) {
-            topStick = highestValue - endingValue;
-            bottomStick = startingValue - lowestValue;
-        } else {
-            topStick = highestValue - startingValue;
-            bottomStick = endingValue - lowestValue;
-        }
-        double body = Math.abs(startingValue - endingValue);
-        if (((body * 2) <= topStick) && (body > bottomStick)) {
-            return Types.Hammer;
-        } else if (((body * 2) <= bottomStick) && (body > topStick)) {
-            return Types.InvertedHammer;
-        }
-        if ((body > topStick) && (body > bottomStick)) {
-            return Types.SpinningTop;
-        }
-        return Types.None;
-    }
+	public Colors determineColor() {
+		if (closingValue > openingValue) {
+			return Colors.White;
+		} else if (closingValue < openingValue) {
+			return Colors.Black;
+		}
+		return Colors.None;
+	}
 
-    public static Patterns determinePattern(ArrayList<JapaneseCandlestick> candlesticks, int index, Trend trend) {
-        if (index > 0) {
-            if (candlesticks.get(index).type == Types.Hammer) {
+	public Types determineType() {
+		if (color == Colors.None) {
+			if (highestValue == lowestValue) {
+				return Types.FourPriceDoji;
+			} else if (lowestValue == openingValue) {
+				return Types.GravestoneDoji;
+			} else if (highestValue == openingValue) {
+				return Types.DragonflyDoji;
+			} else {
+				return Types.LongLeggedDoji;
+			}
+		} else if ((highestValue == openingValue)
+				&& (lowestValue == closingValue)) {
+			return Types.BlackMarubozu;
+		} else if ((highestValue == closingValue)
+				&& (lowestValue == openingValue)) {
+			return Types.WhiteMarubozu;
+		}
+		double topStick;
+		double bottomStick;
+		if (closingValue > openingValue) {
+			topStick = highestValue - closingValue;
+			bottomStick = openingValue - lowestValue;
+		} else {
+			topStick = highestValue - openingValue;
+			bottomStick = closingValue - lowestValue;
+		}
+		double body = Math.abs(openingValue - closingValue);
+		if (((body * 2) <= bottomStick) && ((body / 3.0) > topStick)) {
+			return Types.Hammer;
+		} else if (((body * 2) <= topStick) && ((body / 3.0) > bottomStick)) {
+			return Types.InvertedHammer;
+		}
+		if ((body > topStick) && (body > bottomStick)
+				&& body <= getSize() / 4.0) {
+			return Types.SpinningTop;
+		}
+		return Types.None;
+	}
 
-                if (candlesticks.get(index - 1).lowestValue >= candlesticks.get(index).upperBody) {
+	static double multiply = 0.05;
 
-                    if (hasDowntrend(trend)) {
-                        return Patterns.Hammer;
-                    }
+	public static Patterns determinePattern(
+			ArrayList<JapaneseCandlestick> candlesticks, int index,
+			Trend trend, Trend trend2) {
+		if (index > 0) {
+			if (candlesticks.get(index - 1).type == Types.Hammer) {
 
-                } else if (candlesticks.get(index - 1).highestValue <= candlesticks.get(index).lowerBody) {
-                    if (hasUptrend(trend)) {
-                        return Patterns.HangingMan;
-                    }
+				if (candlesticks.get(index).getClosingValue() >= candlesticks
+						.get(index - 1).getOpeningValue()) {
 
-                }
-            } else if (candlesticks.get(index).type == Types.InvertedHammer) {
-                if (candlesticks.get(index - 1).lowestValue >= candlesticks.get(index).upperBody) {
+					if (candlesticks.get(index).getColor() == Colors.White) {
+						return Patterns.Hammer;
+					}
 
-                    if (hasDowntrend(trend)) {
-                        return Patterns.InvertedHammer;
-                    }
+				} else if (candlesticks.get(index).getOpeningValue() <= candlesticks
+						.get(index - 1).getClosingValue()) {
+					if (candlesticks.get(index).getColor() == Colors.Black) {
+						return Patterns.HangingMan;
+					}
 
-                } else if (candlesticks.get(index - 1).highestValue <= candlesticks.get(index).lowerBody) {
-                    if (hasUptrend(trend)) {
-                        return Patterns.ShootingStar;
-                    }
+				}
+			} else if (candlesticks.get(index).type == Types.InvertedHammer) {
+				if (candlesticks.get(index).getClosingValue() >= candlesticks
+						.get(index - 1).getOpeningValue()) {
 
-                }
-            }
-            double dif = candlesticks.get(index).highestValue - candlesticks.get(index).lowestValue;
-            dif *= 0.05;
-            if (hasDowntrend(trend)) {
-                if (candlesticks.get(index).category == Categories.Bullish) {
-                    if (candlesticks.get(index - 1).category == Categories.Bearish) {
-                        if (Math.abs(candlesticks.get(index - 1).lowerBody - candlesticks.get(index).lowerBody) <= Math.abs(dif)) {
-                            double downStick = candlesticks.get(index - 1).lowerBody - candlesticks.get(index - 1).lowestValue;
-                            double downStick1 = candlesticks.get(index).lowerBody - candlesticks.get(index).lowestValue;
-                            if (Math.abs(downStick - downStick1) <= dif) {
-                                return Patterns.TweezerBottoms;
-                            } else {
-                                return Patterns.BullishEngulfing;
-                            }
-                        }
-                    }
-                }
-            } else if (hasUptrend(trend)) {
-                if (candlesticks.get(index - 1).category == Categories.Bullish) {
-                    if (candlesticks.get(index).category == Categories.Bearish) {
-                        if (Math.abs(candlesticks.get(index - 1).upperBody - candlesticks.get(index).upperBody) <= Math.abs(dif)) {
-                            double upperStick = candlesticks.get(index - 1).upperBody - candlesticks.get(index - 1).lowestValue;
-                            double upperStick1 = candlesticks.get(index).upperBody - candlesticks.get(index).lowestValue;
-                            if (Math.abs(upperStick - upperStick1) <= dif) {
-                                return Patterns.TweezerTops;
-                            } else {
-                                return Patterns.BearishEngulfing;
-                            }
-                        }
-                    }
-                }
+					if (candlesticks.get(index).getColor() == Colors.White) {
+						return Patterns.InvertedHammer;
+					}
 
-            }
-        }
-        if (index > 0) {
+				} else if (candlesticks.get(index).getOpeningValue() <= candlesticks
+						.get(index - 1).getClosingValue()) {
+					if (candlesticks.get(index).getColor() == Colors.Black) {
+						return Patterns.ShootingStar;
+					}
 
-            if (candlesticks.get(index - 1).type == Types.SpinningTop) {
-                if (hasDowntrend(trend)) {
-                    if (candlesticks.get(index - 2).category == Categories.Bearish) {
-                        double middle = candlesticks.get(index - 2).highestValue - candlesticks.get(index - 2).lowestValue;
-                        middle /= 2;
-                        middle += candlesticks.get(index - 2).lowestValue;
-                        if (candlesticks.get(index).endingValue > middle) {
-                            return Patterns.MorningStar;
-                        }
-                    }
-                } else if (hasUptrend(trend)) {
-                    if (candlesticks.get(index - 2).category == Categories.Bullish) {
-                        double middle = candlesticks.get(index - 2).highestValue - candlesticks.get(index - 2).lowestValue;
-                        middle /= 2;
-                        middle += candlesticks.get(index - 2).lowestValue;
-                        if (candlesticks.get(index).endingValue > middle) {
-                            return Patterns.EveningStar;
-                        }
-                    }
-                }
-            }
-            if (index > 1) {
-                JapaneseCandlestick c = candlesticks.get(index - 2);
-                double value = c.upperBody - c.lowerBody;
-                if (value > (c.highestValue - c.lowestValue)) {
-                    if (hasDowntrend(trend)) {
-                        if (c.category == Categories.Bearish) {
-                            double midpointC = c.highestValue - c.lowestValue;
-                            midpointC /= 2;
-                            midpointC += c.lowestValue;
-                            if (midpointC < candlesticks.get(index - 1).endingValue) {
-                                if (candlesticks.get(index).endingValue > candlesticks.get(index - 1).highestValue) {
-                                    return Patterns.ThreeInsideUp;
-                                }
-                            }
-                        }
-                    } else if (hasUptrend(trend)) {
+				}
+			}
 
-                        if (c.category == Categories.Bullish) {
-                            double midpointC = c.highestValue - c.lowestValue;
-                            midpointC /= 2;
-                            midpointC += c.lowestValue;
-                            if (midpointC > candlesticks.get(index - 1).endingValue) {
-                                if (candlesticks.get(index).endingValue < candlesticks.get(index - 1).lowestValue) {
-                                    return Patterns.ThreeInsideDown;
-                                }
-                            }
-                        }
-                    }
-                }
+			double dif = candlesticks.get(index).highestValue
+					- candlesticks.get(index).lowestValue;
+			// dif*=0.05;
+			dif *= multiply;
+			dif = Math.abs(dif);
+			if (hasDowntrend(trend)) {
+				if (candlesticks.get(index).color == Colors.White) {
+					if (candlesticks.get(index - 1).color == Colors.Black) {
+						if (Math.abs(candlesticks.get(index).getLowestValue()
+								- candlesticks.get(index - 1).getLowestValue()) <= dif) {
+							double shadowIndex = candlesticks.get(index).highestValue
+									- candlesticks.get(index).upperBody;
+							double shadowBefIndex = candlesticks.get(index - 1).highestValue
+									- candlesticks.get(index - 1).upperBody;
+							if (Math.abs(shadowBefIndex - shadowIndex) <= dif) {
+								shadowIndex = candlesticks.get(index).lowerBody
+										- candlesticks.get(index).lowestValue;
+								shadowBefIndex = candlesticks.get(index - 1).lowerBody
+										- candlesticks.get(index - 1).lowestValue;
+								if (Math.abs(shadowBefIndex - shadowIndex) <= dif) {
+									return Patterns.TweezerBottoms;
+								}
+							}
+						}
+						if (candlesticks.get(index - 1).getUpperBody() <= (candlesticks
+								.get(index).getUpperBody() + dif)) {
+							if (candlesticks.get(index - 1).getLowerBody() >= (candlesticks
+									.get(index).getLowerBody() - dif)) {
+								return Patterns.BullishEngulfing;
+							}
+						}
+					}
+				}
+			} else if (hasUptrend(trend)) {
+				if (candlesticks.get(index - 1).color == Colors.White) {
+					if (candlesticks.get(index).color == Colors.Black) {
+						if (Math.abs(candlesticks.get(index).getHighestValue()
+								- candlesticks.get(index - 1).getHighestValue()) <= dif) {
+							double shadowIndex = candlesticks.get(index).highestValue
+									- candlesticks.get(index).upperBody;
+							double shadowBefIndex = candlesticks.get(index - 1).highestValue
+									- candlesticks.get(index - 1).upperBody;
+							if (Math.abs(shadowBefIndex - shadowIndex) <= dif) {
+								shadowIndex = candlesticks.get(index).lowerBody
+										- candlesticks.get(index).lowestValue;
+								shadowBefIndex = candlesticks.get(index - 1).lowerBody
+										- candlesticks.get(index - 1).lowestValue;
+								if (Math.abs(shadowBefIndex - shadowIndex) <= dif) {
+									return Patterns.TweezerTops;
+								}
+							}
+						}
+						if (candlesticks.get(index - 1).upperBody <= (candlesticks
+								.get(index).upperBody + dif)) {
+							if (candlesticks.get(index - 1).lowerBody >= (candlesticks
+									.get(index).lowerBody - dif)) {
+								return Patterns.BearishEngulfing;
+							}
+						}
+					}
+				}
 
-                JapaneseCandlestick front = candlesticks.get(index);
-                JapaneseCandlestick middle = candlesticks.get(index - 1);
-                JapaneseCandlestick back = candlesticks.get(index - 2);
-                if (hasDowntrend(trend)) {
-                    if ((front.category == Categories.Bullish) && (middle.category == Categories.Bullish) && (back.category == Categories.Bullish)) {
-                        if ((back.getBodySize() <= middle.getSize()) && (middle.hasSmallUpperShadow())) {
-                            if (middle.getBodySize() <= front.getSize()) {
-                                if (front.hasSmallUpperShadow()) {
-                                    return Patterns.ThreeWhiteSoldiers;
-                                }
-                            }
-                        }
-                    }
-                } else if (hasUptrend(trend)) {
-                    if ((front.category == Categories.Bearish) && (middle.category == Categories.Bearish) && (back.category == Categories.Bearish)) {
-                        if ((back.getBodySize() <= middle.getSize()) && (middle.smallLowerShadow())) {
-                            if (middle.getBodySize() <= front.getSize()) {
-                                if (front.smallLowerShadow()) {
-                                    return Patterns.ThreeWhiteSoldiers;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return Patterns.None;
-    }
+			}
+			if(index>1)
+			{
+			if (hasDowntrend(trend)) {
+				if (candlesticks.get(index - 2).getCategory() == Categories.Bearish
+						|| candlesticks.get(index - 2).getType() == Types.Hammer) {
+					if ((candlesticks.get(index - 1).getType() == Types.SpinningTop)
+							|| (candlesticks.get(index - 1).getType() == Types.FourPriceDoji)
+							|| (candlesticks.get(index - 1).getType() == Types.GravestoneDoji)
+							|| (candlesticks.get(index - 1).getType() == Types.LongLeggedDoji)
+							|| (candlesticks.get(index - 1).getType() == Types.DragonflyDoji)) {
+						double midpoint = candlesticks.get(index - 2)
+								.getHighestValue()
+								- candlesticks.get(index - 2).getLowestValue();
+						midpoint /= 2.0;
+						midpoint += candlesticks.get(index - 2)
+								.getLowestValue();
+						if (midpoint < candlesticks.get(index).closingValue) {
+							return Patterns.MorningStar;
+						}
+					}
+				}
+			} else if (hasUptrend(trend)) {
+				if (candlesticks.get(index - 2).getCategory() == Categories.Bullish
+						|| candlesticks.get(index - 2).getType() == Types.InvertedHammer) {
+					if ((candlesticks.get(index - 1).getType() == Types.SpinningTop)
+							|| (candlesticks.get(index - 1).getType() == Types.FourPriceDoji)
+							|| (candlesticks.get(index - 1).getType() == Types.GravestoneDoji)
+							|| (candlesticks.get(index - 1).getType() == Types.LongLeggedDoji)
+							|| (candlesticks.get(index - 1).getType() == Types.DragonflyDoji)) {
+						double midpoint = candlesticks.get(index - 2)
+								.getHighestValue()
+								- candlesticks.get(index - 2).getLowestValue();
+						midpoint /= 2.0;
+						midpoint += candlesticks.get(index - 2)
+								.getLowestValue();
+						if (midpoint > candlesticks.get(index).closingValue) {
+							return Patterns.EveningStar;
+						}
+					}
+				}
+			}
+			JapaneseCandlestick third = candlesticks.get(index);
+			JapaneseCandlestick second = candlesticks.get(index - 1);
+			JapaneseCandlestick first = candlesticks.get(index - 2);
+			if (hasDowntrend(trend2)) {
+				if (first.getCategory() == Categories.Bearish) {
+					double midpoint = first.getHighestValue()
+							- first.getLowestValue();
+					midpoint /= 2.0;
+					midpoint += first.getLowestValue();
+					midpoint += candlesticks.get(index - 2).getLowestValue();
+					if (second.getHighestValue() > midpoint) {
+						if (third.getClosingValue() > first.getHighestValue()) {
+							return Patterns.ThreeInsideUp;
+						}
+					}
 
-    public double getSize() {
-        return this.highestValue - this.lowestValue;
-    }
+				}
+			} else if (hasUptrend(trend2)) {
+				if (first.getCategory() == Categories.Bullish) {
+					double midpoint = first.getHighestValue()
+							- first.getLowestValue();
+					midpoint /= 2.0;
+					midpoint += first.getLowestValue();
+					if (midpoint > second.getLowestValue()) {
+						if (third.getClosingValue() < first.getLowestValue()) {
+							return Patterns.ThreeInsideDown;
+						}
+					}
 
-    public double getBodySize() {
-        return (upperBody - lowerBody);
-    }
+				}
+			}
 
-    public Time getTime() {
-        return this.time;
-    }
+			if (hasDowntrend(trend2)) {
+				if ((third.color == Colors.White)
+						&& (second.color == Colors.White)
+						&& (first.color == Colors.White)) {
+					if ((first.getBodySize() < second.getSize())
+							&& (second.hasSmallUpperShadow())) {
+						if (second.getBodySize() <= third.getSize()) {
+							if (third.hasSmallUpperShadow()) {
+								return Patterns.ThreeWhiteSoldiers;
+							}
+						}
+					}
+				}
+			} else if (hasUptrend(trend2)) {
+				if ((third.color == Colors.Black)
+						&& (second.color == Colors.Black)
+						&& (first.color == Colors.Black)) {
+					if ((first.getBodySize() < second.getSize())
+							&& (second.smallLowerShadow())) {
+						if (second.getBodySize() <= third.getSize()) {
+							if (third.smallLowerShadow()) {
+								return Patterns.ThreeWhiteSoldiers;
+							}
+						}
+					}
+				}
+			}
+		}
+		}
+		return Patterns.None;
+	}
 
-    private boolean hasSmallUpperShadow(double percentage) {
-        double upperShadow = highestValue - upperBody;
-        double sizeBodyP = upperBody - lowerBody;
-        sizeBodyP *= percentage;
-        if (upperShadow < sizeBodyP) {
-            return true;
-        }
-        return false;
-    }
+	public double getSize() {
+		return this.highestValue - this.lowestValue;
+	}
 
-    private boolean hasSmallLowerShadow(double percentage) {
-        double lowerShadow = lowerBody - lowestValue;
-        double sizeBodyP = upperBody - lowerBody;
-        sizeBodyP *= percentage;
-        if (lowerShadow < sizeBodyP) {
-            return true;
-        }
-        return false;
-    }
+	public double getBodySize() {
+		return (upperBody - lowerBody);
+	}
 
-    public boolean hasSmallUpperShadow() {
-        return hasSmallUpperShadow((1 / 3));
-    }
+	public Time getTime() {
+		return this.time;
+	}
 
-    public boolean smallLowerShadow() {
-        return hasSmallLowerShadow((1 / 3));
-    }
+	private boolean hasSmallUpperShadow(double percentage) {
+		double upperShadow = highestValue - upperBody;
+		double sizeBodyP = upperBody - lowerBody;
+		sizeBodyP *= percentage;
+		if (upperShadow < sizeBodyP) {
+			return true;
+		}
+		return false;
+	}
 
-    public boolean hasNoUpperShadow() {
-        return hasSmallUpperShadow(0.001);
-    }
+	private boolean hasSmallLowerShadow(double percentage) {
+		double lowerShadow = lowerBody - lowestValue;
+		double sizeBodyP = upperBody - lowerBody;
+		sizeBodyP *= percentage;
+		if (lowerShadow < sizeBodyP) {
+			return true;
+		}
+		return false;
+	}
 
-    public boolean hasNoLowerShadow() {
-        return hasSmallLowerShadow(0.001);
-    }
+	public boolean hasSmallUpperShadow() {
+		return hasSmallUpperShadow((1.0 / 3.0));
+	}
 
-    public double getSizeUpperShadow() {
-        return (highestValue - upperBody);
-    }
+	public boolean smallLowerShadow() {
+		return hasSmallLowerShadow((1.0 / 3.0));
+	}
 
-    public double getSizeLowerShadow() {
-        return (lowerBody - lowestValue);
-    }
+	public boolean hasNoUpperShadow() {
+		return hasSmallUpperShadow(0.001);
+	}
 
-    public static boolean hasDowntrend(Trend trend) {
-        if (trend == Trend.falling) {
-            return true;
-        }
-        return false;
-    }
+	public boolean hasNoLowerShadow() {
+		return hasSmallLowerShadow(0.001);
+	}
 
-    public static boolean hasUptrend(Trend trend) {
-        if (trend == Trend.rising) {
-            return true;
-        }
-        return false;
-    }
+	public double getSizeUpperShadow() {
+		return (highestValue - upperBody);
+	}
 
-    public static boolean buyingSignal(Patterns pattern) {
-        if (pattern == Patterns.BullishEngulfing) {
-            return true;
-        } else if (pattern == Patterns.TweezerBottoms) {
-            return true;
-        } else if (pattern == Patterns.MorningStar) {
-            return true;
-        } else if (pattern == Patterns.ThreeWhiteSoldiers) {
-            return true;
-        } else if (pattern == Patterns.ThreeInsideUp) {
-            return true;
-        }
-        return false;
-    }
+	public double getSizeLowerShadow() {
+		return (lowerBody - lowestValue);
+	}
 
-    public static boolean sellingSignal(Patterns pattern) {
+	public static boolean hasDowntrend(Trend trend) {
+		if (trend == Trend.falling) {
+			return true;
+		}
+		return false;
+	}
 
-        if (pattern == Patterns.BearishEngulfing) {
-            return true;
-        } else if (pattern == Patterns.TweezerTops) {
-            return true;
-        } else if (pattern == Patterns.EveningStar) {
-            return true;
-        } else if (pattern == Patterns.ThreeBlackCrows) {
-            return true;
-        } else if (pattern == Patterns.ThreeInsideDown) {
-            return true;
-        }
-        return false;
-    }
+	public static boolean hasUptrend(Trend trend) {
+		if (trend == Trend.rising) {
+			return true;
+		}
+		return false;
+	}
 
-    public double getStartingValue() {
-        return startingValue;
-    }
+	public static boolean buyingSignal(Patterns pattern) {
+		if (pattern == Patterns.BullishEngulfing) {
+			return true;
+		} else if (pattern == Patterns.TweezerBottoms) {
+			return true;
+		} else if (pattern == Patterns.MorningStar) {
+			return true;
+		} else if (pattern == Patterns.ThreeWhiteSoldiers) {
+			return true;
+		} else if (pattern == Patterns.ThreeInsideUp) {
+			return true;
+		} else if (pattern == Patterns.Hammer) {
+			return true;
+		} else if (pattern == Patterns.InvertedHammer) {
+			return true;
+		}
+		return false;
+	}
 
-    public double getEndingValue() {
-        return endingValue;
-    }
+	public static boolean sellingSignal(Patterns pattern) {
 
-    public double getLowestValue() {
-        return lowestValue;
-    }
+		if (pattern == Patterns.BearishEngulfing) {
+			return true;
+		} else if (pattern == Patterns.TweezerTops) {
+			return true;
+		} else if (pattern == Patterns.EveningStar) {
+			return true;
+		} else if (pattern == Patterns.ThreeBlackCrows) {
+			return true;
+		} else if (pattern == Patterns.ThreeInsideDown) {
+			return true;
+		} else if (pattern == Patterns.HangingMan) {
+			return true;
+		} else if (pattern == Patterns.ShootingStar) {
+			return true;
+		}
+		return false;
+	}
 
-    public double getLowerBody() {
-        return lowerBody;
-    }
+	public double getOpeningValue() {
+		return openingValue;
+	}
 
-    public double getUpperBody() {
-        return upperBody;
-    }
+	public double getClosingValue() {
+		return closingValue;
+	}
 
-    public double getHighestValue() {
-        return highestValue;
-    }
+	public double getLowestValue() {
+		return lowestValue;
+	}
 
-    public Categories getCategory() {
-        return category;
-    }
+	public double getLowerBody() {
+		return lowerBody;
+	}
 
-    public Types getType() {
-        return type;
-    }
+	public double getUpperBody() {
+		return upperBody;
+	}
 
-    public Patterns getPattern() {
-        return pattern;
-    }
+	public double getHighestValue() {
+		return highestValue;
+	}
+
+	public Colors getColor() {
+		return color;
+	}
+
+	public Types getType() {
+		return type;
+	}
+
+	public Patterns getPattern() {
+		return pattern;
+	}
 }

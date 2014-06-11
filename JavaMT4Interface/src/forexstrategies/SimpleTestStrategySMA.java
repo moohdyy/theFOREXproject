@@ -1,10 +1,10 @@
+package forexstrategies;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forexstrategies;
-
 import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
 import indicators.SMA;
@@ -22,9 +22,6 @@ public class SimpleTestStrategySMA extends AbstractStrategy {
     private int actualTradeIndex;
     private static double RELATIVEDISTANCE_FOR_TP_SL = 0.001;
 
-    public SimpleTestStrategySMA(){
-        super("SimpleTestStrategySMA");
-    }
     public SimpleTestStrategySMA(CurrencyCourseOHLC currencyCourseOHLC) {
 
         super(currencyCourseOHLC, "SimpleTestStrategySMA");//parameters for this strategy
