@@ -213,12 +213,12 @@ void OnTimer()
          if(FileHandler==-1)
            {
             LastError=GetLastError();
-            Print("Error opening file: "+ErrorDescription(LastError));
+            writeToLogFile("Error opening file: "+ErrorDescription(LastError));
               }else{
             WriteOneOHLCLineToFile(FileHandler,time,open,high,low,close,volume,spread);
             FileClose(FileHandler);
+            LastData=time;
            }
-         LastData=time;
         }
       ReadAndApplyTrades();
       FileDelete(FileNameTrades,FILE_WRITE);
@@ -285,26 +285,30 @@ void ReadAndApplyTrades()
             int id=OrderSend(Symbol(),OP_BUY,lotSize,Ask,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
             if(id==-1)
               {
-               writeToLogFile(Symbol()+","+OP_BUY+","+lotSize+","+Bid+","+slippage+","+stopLoss+","+takeProfit+","+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
+               writeToLogFile(Symbol()+", TYPE:"+OP_BUY+", LOTSIZE"+lotSize+", BID"+Bid+", SLIPPAGE"+slippage+", STOPLOSS"+stopLoss+", TAKEPROFIT"+takeProfit+", UNIQUEID"+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
                  }else{
                writeToLogFile("Order "+id+" succesfully opened");
               }
               }else{ // SELL
             RefreshRates();
             double actualAsk=Ask;
-            if(stopLoss!=0)
+            if(stopLoss>0)
               {
                if(stopLoss-actualAsk<stopLevel)
                  {
                   stopLoss=actualAsk+stopLevel;
                  }
+                 }else{
+               stopLoss=0;
               }
-            if(takeProfit!=0)
+            if(takeProfit>0)
               {
                if(actualAsk-takeProfit<stopLevel)
                  {
                   takeProfit=actualAsk-stopLevel;
                  }
+                 }else{
+               takeProfit=0;
               }
             int id=OrderSend(Symbol(),OP_SELL,lotSize,Bid,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
             if(id==-1)
