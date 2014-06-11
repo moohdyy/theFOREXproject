@@ -49,7 +49,12 @@ public class TradeManager {
             actualTrade = getTradeByID(javaIDtradeInList);
             if (actualTrade.isOpen()) {
                 if (!tradeInList.isOpen()) { // order has to be closed
-                    closeOrder(javaIDtradeInList, ask);
+                	double value=ask;
+                	if(tradeInList.getTradeType()==Trade.SELL)
+                	{
+                		value=bid;
+                	}
+                    closeOrder(javaIDtradeInList, value);
                     tradeInList.close();
                 }
             }

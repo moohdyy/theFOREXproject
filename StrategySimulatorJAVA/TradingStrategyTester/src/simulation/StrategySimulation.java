@@ -89,12 +89,7 @@ public class StrategySimulation {
                 writeToLogFileAndOutput("--- Strategy analyzing at actual price of: " + actualPrice + " ---");
                 trades = getStrategy().processNewCourse(trades, getCc());
             }
-//            JapaneseCandlesticksStrategy jcs=new JapaneseCandlesticksStrategy(getCc());
-//            
-//           nr++;
-//            DrawCurrencyCourse draw=new DrawCurrencyCourse(jcs.japanese, "currency_"+nr);
-//            System.out.println("War hier");
-            tm.processTrades(trades, getCc().getBidPrice(index), getCc().getClose(index), this.actualTime);
+            tm.processTrades(trades, getCc().getBidPrice(index), getCc().getAskPrice(index), this.actualTime);
             printCurrentStats(index);
         }
         if (writeToLogFile) {

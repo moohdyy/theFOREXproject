@@ -13,11 +13,13 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import simulation.SimulationResults;
 import simulation.StrategySimulation;
 import strategies.AbstractStrategy;
 import strategies.JapaneseCandlesticksStrategy;
 import strategies.SimpleTestStrategySMA;
+import strategies.Testing;
 
 public class Start {
 
@@ -76,13 +78,11 @@ public class Start {
         }
         //determine spread depending on some pipchange
         int pipsForSpread = 5;
-        double onePip = cc.getOHLC(0).getClose() / 10000;
-        double spread = onePip * pipsForSpread;
-        cc.setSpread(spread);
+        cc.setSpread(pipsForSpread);
 
         //initialize the strategy
         AbstractStrategy thisStrategy = new JapaneseCandlesticksStrategy(cc);
-
+        //AbstractStrategy thisStrategy=new Testing(cc,"Testing");
         // start simulation
         int leverage = 100;
         double balance = 50000;
