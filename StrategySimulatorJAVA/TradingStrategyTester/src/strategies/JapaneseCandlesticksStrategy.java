@@ -86,8 +86,8 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			}
 
 		}
-		actualCurrencyCourse = AbstractStrategy
-				.filterOutliers(actualCurrencyCourse);
+		//actualCurrencyCourse = AbstractStrategy
+		//		.filterOutliers(actualCurrencyCourse);
 		int actualPos = cc.getActualPosition();
 		Trend t = determineTrend(cc);
 		Trend t2 = Trend.flat;
@@ -102,10 +102,6 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 
 		boolean buying = JapaneseCandlestick.buyingSignal(pattern);
 		boolean selling = JapaneseCandlestick.sellingSignal(pattern);
-		if (pattern != Patterns.None) {
-			System.out.println(buying);
-			System.out.println(selling);
-		}
 		if (selling) {
 			for (int i = 0; i < actualTrades.size(); i++) {
 				actualTrades.get(i).close();
@@ -120,10 +116,11 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			// tradeV = 10000;
 			// Trade trade = new Trade(Trade.BUY, tradeV);
 			// actualTrades.add(trade);
-			double tradeV = balance / laverage;
-			tradeV = tradeV / pipsRiskPerTrade;
-			double stopLoss = tradeV;
-			tradeV *= 100;
+	        double tradeV = balance * laverage;
+	        tradeV = tradeV / pipsRiskPerTrade;
+	       // double stopLoss = tradeV;
+	        System.out.println("TradeVolume: "+tradeV);
+	        tradeV*=100;
 			Trade trade = new Trade(Trade.BUY, tradeV);
 			actualTrades.add(trade);
 		}

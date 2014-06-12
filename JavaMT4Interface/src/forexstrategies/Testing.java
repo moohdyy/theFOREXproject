@@ -24,10 +24,13 @@ public class Testing extends AbstractStrategy {
         for (Trade t : actualTrades) {
             t.close();
         }
-        Trade t = new Trade(Trade.SELL, 10000);
+        {
+        Trade t = new Trade(Trade.SELL, 0.1);
         actualTrades.add(t);
-        t = new Trade(Trade.BUY, 10000);
+        t = new Trade(Trade.BUY, 0.1);
         actualTrades.add(t);
+        }
         return actualTrades;
+        
     }
 }

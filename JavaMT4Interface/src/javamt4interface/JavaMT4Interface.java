@@ -6,7 +6,9 @@
 package javamt4interface;
 
 import forexstrategies.Testing;
+
 import java.io.File;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,6 +30,7 @@ import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import simulation.StrategyProcesser;
+import forexstrategies.JapaneseCandlesticksStrategy;
 
 /**
  *
@@ -131,7 +134,7 @@ public class JavaMT4Interface extends Application {
                 if (io.isValid()) {
                     startSim.setDisable(true);
                     stopSim.setDisable(false);
-                    sp = new StrategyProcesser(io, new Testing());
+                    sp = new StrategyProcesser(io, new JapaneseCandlesticksStrategy());
                     sp.start();
                 } else {
                     showDialog("Please select two files for processing");

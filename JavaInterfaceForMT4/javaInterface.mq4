@@ -272,7 +272,7 @@ void ReadAndApplyTrades()
       datetime timeClose=FileReadDatetime(FileHandler);
       double openingPrice = FileReadNumber(FileHandler);
       double closingPrice = FileReadNumber(FileHandler);
-      double lotSize=FileReadNumber(FileHandler)/100000;
+      double lotSize=FileReadNumber(FileHandler);
       double takeProfit=FileReadNumber(FileHandler);
       double stopLoss=FileReadNumber(FileHandler);
       if(MT4ID==0)
@@ -299,7 +299,7 @@ void ReadAndApplyTrades()
             int id=OrderSend(Symbol(),OP_BUY,lotSize,Ask,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
             if(id==-1)
               {
-               writeToLogFile(Symbol()+", TYPE:"+OP_BUY+", LOTSIZE"+lotSize+", BID"+Bid+", SLIPPAGE"+slippage+", STOPLOSS"+stopLoss+", TAKEPROFIT"+takeProfit+", UNIQUEID"+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
+               writeToLogFile(Symbol()+", TYPE:"+OP_BUY+", LOTSIZE"+lotSize+", "+Ask+", SLIPPAGE"+slippage+", STOPLOSS"+stopLoss+", TAKEPROFIT"+takeProfit+", UNIQUEID"+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
                  }else{
                writeToLogFile("Order "+id+" succesfully opened");
               }
@@ -349,7 +349,7 @@ void ReadAndApplyTrades()
               {
                writeToLogFile("Order "+MT4ID+" succesfully closed.");
               }else{
-                writeToLogFile("Order "+MT4ID+" closing failed: "+ErrorDescription(GetLastError()));
+                writeToLogFile("Order "+MT4ID+" closing failed with lot size "+lotSize+": "+ErrorDescription(GetLastError()));
              
               }
               

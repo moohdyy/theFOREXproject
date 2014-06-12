@@ -9,9 +9,9 @@ package simulation;
  */
 public class Trade {
 
-    public final static int BUY = 1;
-    public final static int SELL = 2;
-    public final static int NOACTION = 0;
+    public final static int BUY = 0;
+    public final static int SELL = 1;
+    public final static int NOACTION = -1;
 
     private int MT4ID;
     private final int tradeType;
@@ -19,8 +19,8 @@ public class Trade {
     private double openingPrice;
     private final double volume;
     private long timeStampClose;
-    private double stopLoss = -1;
-    private double takeProfit = -1;
+    private double stopLoss = 0;
+    private double takeProfit = 0;
     private boolean open = true;
 
     public Trade(int tradeType, double volume) {

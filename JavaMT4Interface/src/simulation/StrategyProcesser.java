@@ -119,6 +119,10 @@ public class StrategyProcesser extends Thread {
         while ((line = br.readLine()) != null) {
             oneLine = line.split(";");
             active = Boolean.parseBoolean(oneLine[0]);
+            if(!active)
+            {
+            	System.out.println("yeah");
+            }
             mt4ID = Integer.parseInt(oneLine[1]);
             orderType = Integer.parseInt(oneLine[2]);
             timeStampOpen = sdf.parse(oneLine[3]).getTime();
