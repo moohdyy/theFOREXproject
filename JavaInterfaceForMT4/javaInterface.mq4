@@ -10,7 +10,7 @@
 
 // input parameters
 extern int BarsMin=100;
-extern int TimeFrameSec=20;
+extern int TimeFrameSec=2;
 extern int UniqueID;
 
 string FileNameCourse,FirstLine,CurLine,LastError,D=";",FileNameTrades,FileNameLog;
@@ -280,56 +280,68 @@ void ReadAndApplyTrades()
          double stopLevel=MarketInfo(Symbol(),MODE_STOPLEVEL);
          if(tradeType==OP_BUY) // BUY
            {
+            double stopLossPriceBUY;
+            double takeProfitPriceBUY;
             RefreshRates();
             double actualBid=Bid;
-            if(stopLoss!=0)
+            if(stopLoss>0)
               {
-               if(actualBid-stopLoss<stopLevel)
+               stopLossPriceBUY=actualBid -(actualBid/10000)*stopLoss;
+               if(actualBid-stopLossPriceBUY<stopLevel)
                  {
-                  stopLoss=actualBid-stopLevel;
+                  stopLossPriceBUY=actualBid-stopLevel;
                  }
+                 }else{
+               stopLossPriceBUY=0;
               }
-            if(takeProfit!=0)
+            if(takeProfit>0)
               {
-               if(takeProfit-actualBid<stopLevel)
+               takeProfitPriceBUY=actualBid+(actualBid/10000)*takeProfit;
+               if(takeProfitPriceBUY-actualBid<stopLevel)
                  {
-                  takeProfit=stopLevel+actualBid;
+                  takeProfitPriceBUY=stopLevel+actualBid;
                  }
+                 }else{
+               takeProfitPriceBUY=0;
               }
-            int id=OrderSend(Symbol(),OP_BUY,lotSize,Ask,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
+            int id=OrderSend(Symbol(),OP_BUY,lotSize,Ask,slippage,stopLossPriceBUY,takeProfitPriceBUY,"",UniqueID,0,clrAqua);
             if(id==-1)
               {
-               writeToLogFile(Symbol()+", TYPE:"+OP_BUY+", LOTSIZE"+lotSize+", "+Ask+", SLIPPAGE"+slippage+", STOPLOSS"+stopLoss+", TAKEPROFIT"+takeProfit+", UNIQUEID"+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
+               writeToLogFile(Symbol()+", TYPE:"+OP_BUY+", LOTSIZE"+lotSize+", ASK:"+Ask+", SLIPPAGE"+slippage+", STOPLOSS"+stopLossPriceBUY+", TAKEPROFIT"+takeProfitPriceBUY+", UNIQUEID"+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
                  }else{
-               writeToLogFile("Order "+id+" succesfully opened");
+               writeToLogFile("Order "+id+" succesfully opened: "+Symbol()+", TYPE:BUY, LOTSIZE: "+lotSize+", ASK: "+Ask+", SLIPPAGE: "+slippage+", STOPLOSS: "+stopLossPriceBUY+", TAKEPROFIT: "+takeProfitPriceBUY+", UNIQUEID: "+UniqueID);
               }
               }else{ // SELL
+              double takeProfitPriceSELL;
+              double stopLossPriceSELL;
             RefreshRates();
             double actualAsk=Ask;
             if(stopLoss>0)
               {
-               if(stopLoss-actualAsk<stopLevel)
+               stopLossPriceSELL=actualAsk+(actualAsk/10000)*stopLoss;
+               if(stopLossPriceSELL-actualAsk<stopLevel)
                  {
-                  stopLoss=actualAsk+stopLevel;
+                  stopLossPriceSELL=actualAsk+stopLevel;
                  }
                  }else{
-               stopLoss=0;
+               stopLossPriceSELL=0;
               }
             if(takeProfit>0)
               {
-               if(actualAsk-takeProfit<stopLevel)
+               takeProfitPriceSELL=actualAsk-(actualAsk/10000)*takeProfit;
+               if(actualAsk-takeProfitPriceSELL<stopLevel)
                  {
-                  takeProfit=actualAsk-stopLevel;
+                  takeProfitPriceSELL=actualAsk-stopLevel;
                  }
                  }else{
-               takeProfit=0;
+               takeProfitPriceSELL=0;
               }
-            int id=OrderSend(Symbol(),OP_SELL,lotSize,Bid,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
+            int id=OrderSend(Symbol(),OP_SELL,lotSize,Bid,slippage,stopLossPriceSELL,takeProfitPriceSELL,"",UniqueID,0,clrAqua);
             if(id==-1)
               {
-               writeToLogFile(Symbol()+","+OP_SELL+","+lotSize+","+Bid+","+slippage+","+stopLoss+","+takeProfit+","+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
+               writeToLogFile(Symbol()+","+OP_SELL+","+lotSize+","+Bid+","+slippage+","+stopLossPriceSELL+","+takeProfitPriceSELL+","+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
                  }else{
-               writeToLogFile("Order "+id+" succesfully opened");
+               writeToLogFile("Order "+id+" succesfully opened: "+Symbol()+", TYPE:SELL, LOTSIZE: "+lotSize+", BID: "+Bid+", SLIPPAGE: "+slippage+", STOPLOSS: "+stopLossPriceSELL+", TAKEPROFIT: "+takeProfitPriceSELL+", UNIQUEID: "+UniqueID);
               }
            }
            }else{
@@ -339,20 +351,20 @@ void ReadAndApplyTrades()
             if(tradeType==OP_BUY)
               {
                RefreshRates();
-               success = OrderClose(MT4ID,lotSize,Bid,slippage,clrGreen);
+               success=OrderClose(MT4ID,lotSize,Bid,slippage,clrGreen);
                  }else{
                RefreshRates();
-               success = OrderClose(MT4ID,lotSize,Ask,slippage,clrGreen);
+               success=OrderClose(MT4ID,lotSize,Ask,slippage,clrGreen);
               }
 
             if(success)
               {
                writeToLogFile("Order "+MT4ID+" succesfully closed.");
-              }else{
-                writeToLogFile("Order "+MT4ID+" closing failed with lot size "+lotSize+": "+ErrorDescription(GetLastError()));
-             
+                 }else{
+               writeToLogFile("Order "+MT4ID+" closing failed with lot size "+lotSize+": "+ErrorDescription(GetLastError()));
+
               }
-              
+
            }
         }
       counter=counter+1;
