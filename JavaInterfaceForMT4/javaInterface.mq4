@@ -299,7 +299,7 @@ void ReadAndApplyTrades()
             int id=OrderSend(Symbol(),OP_BUY,lotSize,Ask,slippage,stopLoss,takeProfit,"",UniqueID,0,clrAqua);
             if(id==-1)
               {
-               writeToLogFile(Symbol()+", TYPE:"+OP_BUY+", LOTSIZE"+lotSize+", "+Ask+", SLIPPAGE"+slippage+", STOPLOSS"+stopLoss+", TAKEPROFIT"+takeProfit+", UNIQUEID"+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
+                writeToLogFile(Symbol()+","+OP_SELL+","+lotSize+","+Ask+","+slippage+","+stopLoss+","+takeProfit+","+UniqueID+","+"Order opening failed: "+ErrorDescription(GetLastError()));
                  }else{
                writeToLogFile("Order "+id+" succesfully opened");
               }
