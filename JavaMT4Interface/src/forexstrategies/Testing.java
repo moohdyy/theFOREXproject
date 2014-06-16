@@ -21,11 +21,10 @@ public class Testing extends AbstractStrategy {
     public List<Trade> processNewCourse(List<Trade> actualTrades,
             CurrencyCourseOHLC currencyCourse) {
         // TODO Auto-generated method stub
-        for (Trade t : actualTrades) {
-            t.close();
-        }
+
         {
         Trade t = new Trade(Trade.SELL, 0.1);
+        t.setStopLoss(20.0);
         actualTrades.add(t);
         t = new Trade(Trade.BUY, 0.1);
         actualTrades.add(t);

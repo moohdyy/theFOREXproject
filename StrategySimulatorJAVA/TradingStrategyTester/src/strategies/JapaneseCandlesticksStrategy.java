@@ -86,42 +86,55 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			}
 
 		}
-		//actualCurrencyCourse = AbstractStrategy
-		//		.filterOutliers(actualCurrencyCourse);
+		// actualCurrencyCourse = AbstractStrategy
+		// .filterOutliers(actualCurrencyCourse);
 		int actualPos = cc.getActualPosition();
+		cc.setActualPosition(actualPos);
 		Trend t = determineTrend(cc);
 		Trend t2 = Trend.flat;
-		if(actualPos-2>0)
-		{
-		cc.setActualPosition(actualPos - 2);
-		t2= determineTrend(cc);
+		if (actualPos - 2 > 0) {
+			cc.setActualPosition(actualPos - 2);
+			t2 = determineTrend(cc);
 		}
 		cc.setActualPosition(actualPos);
 		Patterns pattern = JapaneseCandlestick.determinePattern(japanese,
 				currencyCourse.getActualPosition(), t, t2);
-
 		boolean buying = JapaneseCandlestick.buyingSignal(pattern);
 		boolean selling = JapaneseCandlestick.sellingSignal(pattern);
+		double tradeV = balance * laverage;
+		tradeV = tradeV / pipsRiskPerTrade;
+		// double stopLoss = tradeV;
+		tradeV = 2000;
+		OHLC c=cc.getOHLC(cc.getActualPosition());
+		double k=c.getHigh()-c.getLow();
+		k/=2;
+		double pip=c.getHigh()/10000;
+		double pipCount=20.0;
+		pip*=pipCount;
 		if (selling) {
 			for (int i = 0; i < actualTrades.size(); i++) {
-				actualTrades.get(i).close();
+				if (actualTrades.get(i).getTradeType() == Trade.BUY) {
+					actualTrades.get(i).close();
+				}
 			}
-		} else if (buying) {
-			// double tradeV = (candle.getHighestValue() -
-			// candle.getLowestValue())
-			// / 60
-			// * currencyCourse.getBidPrice(actualCurrencyCourse
-			// .getNumberOfEntries() - 1) * 100000;
-			// System.out.println(tradeV);
-			// tradeV = 10000;
-			// Trade trade = new Trade(Trade.BUY, tradeV);
-			// actualTrades.add(trade);
-	        double tradeV = balance * laverage;
-	        tradeV = tradeV / pipsRiskPerTrade;
-	       // double stopLoss = tradeV;
-	        System.out.println("TradeVolume: "+tradeV);
-	        tradeV*=100;
+
+			Trade trade = new Trade(Trade.SELL, tradeV);
+			trade.setPattern(pattern);
+			System.out.println(c.getLow()+k+pip);
+			trade.setStopLoss(c.getLow()+k+pip);
+			trade.setTakeProfit(c.getLow()+k-pip);
+			actualTrades.add(trade);
+		}
+		if (buying) {
+			for (int i = 0; i < actualTrades.size(); i++) {
+				if (actualTrades.get(i).getTradeType() == Trade.SELL) {
+					actualTrades.get(i).close();
+				}
+			}
 			Trade trade = new Trade(Trade.BUY, tradeV);
+			trade.setPattern(pattern);
+			trade.setStopLoss(c.getLow()+k-pip);
+			trade.setTakeProfit(c.getLow()+k+pip);
 			actualTrades.add(trade);
 		}
 		return actualTrades;
@@ -131,16 +144,22 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		double sma65 = this.sma65.calculateSMA(cc);
 		double sma20 = this.sma20.calculateSMA(cc);
 		double sma7 = this.sma7.calculateSMA(cc);
-		if (sma65 > sma20) {
-			if (sma20 > sma7) {
-				return Trend.falling;
+		if ((sma65 != 0) && (sma20 != 0) && (sma7 != 0)) {
+			if (sma65 > sma20) {
+				if (sma20 > sma7) {
+					return Trend.falling;
+				}
 			}
-		}
-		if (sma7 > sma20) {
-			if (sma20 > sma65) {
-				return Trend.rising;
+			if (sma7 > sma20) {
+				if (sma20 > sma65) {
+					return Trend.rising;
+				}
 			}
 		}
 		return Trend.flat;
+	}
+	public static String patternToString(Patterns p)
+	{
+		return p.toString();
 	}
 }

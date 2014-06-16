@@ -17,13 +17,26 @@ public class Testing extends AbstractStrategy {
 	public List<Trade> processNewCourse(List<Trade> actualTrades,
 			CurrencyCourseOHLC currencyCourse) {
 		// TODO Auto-generated method stub
-		for (Trade t : actualTrades) {
-			t.close();
-		}
+
 		if (Math.random() < 0.01) {
-			Trade t = new Trade(Trade.SELL, 100);
+			for (Trade t : actualTrades) {
+				if(t.getTradeType()==Trade.SELL)
+				{
+				t.close();
+				}
+			}
+			Trade t = new Trade(Trade.SELL, 2000);
 			actualTrades.add(t);
-			t = new Trade(Trade.BUY, 100);
+		}
+		if(Math.random()<0.01)
+		{
+			for (Trade t : actualTrades) {
+			if(t.getTradeType()==Trade.BUY)
+			{
+				t.close();
+			}
+			}
+			Trade t = new Trade(Trade.BUY, 2000);
 			actualTrades.add(t);
 		}
 		return actualTrades;

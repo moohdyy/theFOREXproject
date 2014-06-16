@@ -304,7 +304,7 @@ public class JapaneseCandlestick {
 					midpoint += first.getLowestValue();
 					if (midpoint > second.getLowestValue()) {
 						if (third.getClosingValue() < first.getLowestValue()) {
-							return Patterns.ThreeInsideDown;
+							return Patterns.ThreeBlackCrows;
 						}
 					}
 

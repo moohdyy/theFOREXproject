@@ -135,6 +135,8 @@ public class JavaMT4Interface extends Application {
                     startSim.setDisable(true);
                     stopSim.setDisable(false);
                     sp = new StrategyProcesser(io, new JapaneseCandlesticksStrategy());
+                    sp.setDaemon(true);
+                    System.out.println("Offical site");
                     sp.start();
                 } else {
                     showDialog("Please select two files for processing");

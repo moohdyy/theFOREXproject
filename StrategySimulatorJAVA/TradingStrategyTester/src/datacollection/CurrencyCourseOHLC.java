@@ -109,7 +109,7 @@ public class CurrencyCourseOHLC {
 	public double getSpread() {
 		double ret = this.getOHLC(actualPosition).getClose() / 10000.0;
 		ret *= spread;
-		return ret;
+		return Math.abs(ret);
 	}
 
 	/**

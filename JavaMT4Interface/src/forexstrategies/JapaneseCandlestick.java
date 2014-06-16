@@ -145,13 +145,19 @@ public class JapaneseCandlestick {
 						.get(index - 1).getOpeningValue()) {
 
 					if (candlesticks.get(index).getColor() == Colors.White) {
-						return Patterns.Hammer;
+						if(hasDowntrend(trend))
+						{
+							return Patterns.Hammer;
+						}
 					}
 
 				} else if (candlesticks.get(index).getOpeningValue() <= candlesticks
 						.get(index - 1).getClosingValue()) {
 					if (candlesticks.get(index).getColor() == Colors.Black) {
-						return Patterns.HangingMan;
+						if(hasUptrend(trend))
+						{
+							return Patterns.HangingMan;
+						}
 					}
 
 				}
@@ -160,13 +166,19 @@ public class JapaneseCandlestick {
 						.get(index - 1).getOpeningValue()) {
 
 					if (candlesticks.get(index).getColor() == Colors.White) {
-						return Patterns.InvertedHammer;
+						if(hasDowntrend(trend))
+						{
+							return Patterns.InvertedHammer;
+						}
 					}
 
 				} else if (candlesticks.get(index).getOpeningValue() <= candlesticks
 						.get(index - 1).getClosingValue()) {
 					if (candlesticks.get(index).getColor() == Colors.Black) {
+						if(hasUptrend(trend))
+						{
 						return Patterns.ShootingStar;
+						}
 					}
 
 				}
@@ -329,7 +341,7 @@ public class JapaneseCandlestick {
 							&& (second.smallLowerShadow())) {
 						if (second.getBodySize() <= third.getSize()) {
 							if (third.smallLowerShadow()) {
-								return Patterns.ThreeWhiteSoldiers;
+								return Patterns.ThreeBlackCrows;
 							}
 						}
 					}

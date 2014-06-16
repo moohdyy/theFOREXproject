@@ -3,6 +3,15 @@
  */
 package simulation;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import strategies.JapaneseCandlestick;
+import strategies.JapaneseCandlestick.Patterns;
+import strategies.JapaneseCandlesticksStrategy;
+import Connection.Time;
+
 /**
  *
  * @author Moohdyy
@@ -23,6 +32,7 @@ public class Trade {
     private double stopLoss = -1;
     private double takeProfit = -1;
     private boolean open = true;
+    private Patterns pattern=null;
 
     public Trade(int tradeType, double volume) {
         this.javaID = -1;
@@ -34,7 +44,10 @@ public class Trade {
     public double getProfitOrLoss(double actualPrice) {
         return volume * (1 - openingPrice / actualPrice);
     }
-
+    public void setPattern(Patterns pattern)
+    {
+    	this.pattern=pattern;
+    }
     public double getProfitOrLossOld(double actualPrice) {
         switch (this.getTradeType()) {
             case Trade.BUY:
@@ -174,6 +187,34 @@ public class Trade {
     
     public String getTradeTypeName(){
        return ((tradeType == BUY) ? "buy " :(tradeType == SELL)? "sell":"none");
+    }
+    public Patterns getPattern()
+    {
+    	return pattern;
+    }
+    public String toString()
+    {
+    	Date date=new Date(timeStampOpen);
+    	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd;HH:mm");
+    	String sT=sdf.format(date);
+    	String type="";
+    	if(this.tradeType==SELL)
+    	{
+    		type="SELL";
+    	}else if(this.tradeType==BUY)
+    	{
+    		type="BUY";
+    	}
+    	String r=javaID+";"+sT+";"+type+ ";";
+    	date=new Date(timeStampClose);
+    	sT=sdf.format(date);
+    	r+=sT;
+    	System.out.println(pattern);
+    	if(pattern!=null)
+    	{
+    		r+=";"+JapaneseCandlesticksStrategy.patternToString(pattern);
+    	}
+    	return r;
     }
 
 }

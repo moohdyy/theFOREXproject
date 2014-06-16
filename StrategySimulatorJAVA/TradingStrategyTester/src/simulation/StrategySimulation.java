@@ -1,5 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
+a * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package simulation;
@@ -37,7 +37,9 @@ public class StrategySimulation {
     private long actualTime = 0;
     private static BufferedWriter bw;
     private FileWriter fw;
+    private FileWriter fwTW;
     private static boolean writeToLogFile;
+    private BufferedWriter bwTW;
 
     public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, boolean writeToLogFile) {
         this.cc = cc;
@@ -50,8 +52,15 @@ public class StrategySimulation {
             String startOfCC = cal.get(Calendar.YEAR) + "_" + (cal.get(Calendar.MONTH) + 1);
             String filename = Start.FOLDERNAME + strategy.getName() + "\\output" + cc.getCurrencyPair() + "_" + startOfCC + ".txt";
             StrategySimulation.logFile = new File(filename);
+            
+            filename = Start.FOLDERNAME + strategy.getName() + "\\trades" + cc.getCurrencyPair() + "_" + startOfCC + ".txt";
 
             try {
+                File fTW =new File(filename);
+         
+                fwTW=new FileWriter(fTW, true);
+                bwTW=new BufferedWriter(fwTW);
+                tm.setTradeWriter(bwTW);
                 fw = new FileWriter(logFile, true);
                 bw = new BufferedWriter(fw);
             } catch (IOException ex) {
@@ -79,7 +88,7 @@ public class StrategySimulation {
         List<Trade> trades = new ArrayList<>();
         for (int index = 0; index < getCc().getNumberOfEntries(); index++) {
             double actualPrice = getCc().getClose(index);
-            if (checkNewPrice(actualPrice)) {
+            if (checkNewPrice(getCc().getTimeStamp(index),actualPrice)) {
                 return new SimulationResults(this, tm, true);
             }
             this.actualTime = getCc().getTimeStamp(index);
@@ -96,6 +105,8 @@ public class StrategySimulation {
             try {
                 bw.close();
                 fw.close();
+                bwTW.close();
+                fwTW.close();
             } catch (IOException ex) {
                 Logger.getLogger(StrategySimulation.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -104,13 +115,13 @@ public class StrategySimulation {
 
     }
 
-    private boolean checkNewPrice(double actualPrice) {
+    private boolean checkNewPrice(long timeStamp,double actualPrice) {
         if (tm.checkForMarginCall()) {
-            tm.closeAllOrders(actualPrice);
+            tm.closeAllOrders(timeStamp,actualPrice);
             System.out.println("MARGIN CALL, simulation stopped. Balance: " + tm.getBalance());
             return true;
         }
-        tm.checkStopLossTakeProfit(actualPrice);
+        tm.checkStopLossTakeProfit(cc,timeStamp,actualPrice);
         tm.calculateNewEquity(actualPrice);
         return false;
     }

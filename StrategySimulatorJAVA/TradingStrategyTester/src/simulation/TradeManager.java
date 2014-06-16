@@ -5,9 +5,15 @@
  */
 package simulation;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
+import datacollection.CurrencyCourseOHLC;
+import datacollection.OHLC;
 import strategies.AbstractStrategy;
+import strategies.JapaneseCandlestick.Patterns;
 
 /**
  *
@@ -21,8 +27,9 @@ public class TradeManager {
     private double equity = 0;
     private double usedMargin = 0;
     private double leverage = 0.2;
-
-    public TradeManager() {
+    private BufferedWriter tradeWriter;
+    public 
+    TradeManager() {
         this.counter = 0;
         this.allTrades = new HashMap<>();
     }
@@ -49,12 +56,12 @@ public class TradeManager {
             actualTrade = getTradeByID(javaIDtradeInList);
             if (actualTrade.isOpen()) {
                 if (!tradeInList.isOpen()) { // order has to be closed
-                	double value=ask;
+                	double value=bid;
                 	if(tradeInList.getTradeType()==Trade.SELL)
                 	{
-                		value=bid;
+                		value=ask;
                 	}
-                    closeOrder(javaIDtradeInList, value);
+                    closeOrder(javaIDtradeInList,timeStamp, value);
                     tradeInList.close();
                 }
             }
@@ -69,7 +76,9 @@ public class TradeManager {
         trade.setTakeProfit(tradeToPlaceOrder.getTakeProfit());
         trade.setTimeStampOpen(timeStamp);
         trade.setOpeningPrice(bidOrAsk);
+        trade.setPattern(tradeToPlaceOrder.getPattern());
         trade.setJavaID(counter);
+        
         StrategySimulation.writeToLogFileAndOutput(String.format("--- Order %3d (" + trade.getTradeTypeName() + ") opened at %6f with volume: " + trade.getVolume() + " ---", trade.getJavaID(), bidOrAsk));
         allTrades.put(counter, trade);
         double margin = getMarginAmountForOneTrade(trade.getVolume());
@@ -77,19 +86,32 @@ public class TradeManager {
         return counter++;
     }
 
-    public void closeTrade(Trade trade, double closingPrice) {
+    public void closeTrade(Trade trade, long timestamp, double closingPrice) {
         if (trade.isOpen()) {
 //            double profitOrLoss = trade.getProfitOrLoss(closingPrice);
             double profitOrLoss = trade.getProfitOrLossOld(closingPrice);
+            trade.setTimeStampClose(timestamp);
             StrategySimulation.writeToLogFileAndOutput(String.format("--- Trade %3d (" + trade.getTradeTypeName() + ") closed at %6f, profit/loss: " + profitOrLoss, trade.getJavaID(), closingPrice));
             balance += profitOrLoss;
             usedMargin -= trade.getVolume() / getLeverage();
             trade.close();
+            if(tradeWriter!=null)
+            {
+            try {
+				tradeWriter.write(trade.toString()+System.lineSeparator());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            }
         } else {
             throw new TradeException("Order was already closed");
         }
     }
-
+    public void setTradeWriter(BufferedWriter bw)
+    {
+    	tradeWriter=bw;
+    }
     public double getBuyOrSellingPrice(int orderType, double bid, double ask) {
         if (orderType == Trade.BUY) {
             return ask;
@@ -98,15 +120,24 @@ public class TradeManager {
         }
     }
 
-    public void closeOrder(Integer tradeID, double actualPrice) {
+    public void closeOrder(Integer tradeID, long timeStamp, double actualPrice) {
+    	double b=Math.random();
+    	double plus=1.0;
+    	if(b<0.5)
+    	{
+    		plus=-1.0;
+    	}
+    	double value=actualPrice/10000*5*Math.random();
+    	
+    	actualPrice+=value*plus;
         Trade tradeToClose = allTrades.get(tradeID);
-        closeTrade(tradeToClose, actualPrice);
+        closeTrade(tradeToClose, timeStamp, actualPrice);
     }
 
-    public void closeAllOrders(double actualPrice) {
+    public void closeAllOrders(long timeStamp, double actualPrice) {
         for (Trade trade : this.allTrades.values()) {
             if (trade.isOpen()) {
-                closeTrade(trade, actualPrice);
+                closeTrade(trade, timeStamp, actualPrice);
             }
         }
     }
@@ -176,32 +207,43 @@ public class TradeManager {
         this.leverage = leverage;
     }
 
-    public void checkStopLossTakeProfit(double actualPrice) {
-        for (Trade trade : allTrades.values()) {
+    public void checkStopLossTakeProfit(CurrencyCourseOHLC cc,long timeStamp,double actualPrice) {
+       OHLC c=cc.getOHLC(cc.getActualPosition());
+    	for (Trade trade : allTrades.values()) {
             if (trade.isOpen()) {
                 switch (trade.getTradeType()) {
                     case Trade.BUY:
                         if (trade.hasStopLoss()) {
-                            if (actualPrice <= trade.getStopLoss()) {
-                                closeTrade(trade, actualPrice);
+                        	double value=c.getLow();
+                            if (value <= trade.getStopLoss()) {
+                                closeTrade(trade,timeStamp, trade.getStopLoss());
                             }
                         }
+                        if(trade.isOpen())
+                        {
                         if (trade.hasTakeProfit()) {
-                            if (actualPrice >= trade.getTakeProfit()) {
-                                closeTrade(trade, actualPrice);
+                        	double value=c.getHigh();
+                            if (value >= trade.getTakeProfit()) {
+                                closeTrade(trade,timeStamp, trade.getTakeProfit());
                             }
+                        }
                         }
                         break;
                     case Trade.SELL:
                         if (trade.hasStopLoss()) {
-                            if (actualPrice >= trade.getStopLoss()) {
-                                closeTrade(trade, actualPrice);
+                        	double value=c.getHigh();
+                            if (value >= trade.getStopLoss()) {
+                                closeTrade(trade,timeStamp, trade.getStopLoss());
                             }
                         }
+                        if(trade.isOpen())
+                        {
                         if (trade.hasTakeProfit()) {
-                            if (actualPrice <= trade.getTakeProfit()) {
-                                closeTrade(trade, actualPrice);
+                        	double value=c.getLow();
+                            if (value <= trade.getTakeProfit()) {
+                                closeTrade(trade, timeStamp,trade.getTakeProfit());
                             }
+                        }
                         }
                         break;
                 }

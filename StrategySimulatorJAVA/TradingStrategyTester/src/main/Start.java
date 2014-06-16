@@ -38,11 +38,11 @@ public class Start {
         boolean writeToLogFile = true;
 
         //just testing with a little file
-//        filename = "historicalData\\EURUSD\\2011\\oneDayTest.csv";
-//        simulateOneFile(filename, ccc,true);
+        filename = "historicalData\\EURUSD\\2011\\oneDayTest.csv";
+        simulateOneFile(filename, "EURUSD", ccc,true);
         //whole simulation
         String[] currencyPairs = {"EURUSD","GBPUSD", "USDJPY"};
-        String[] years = {"2011", "2012"};
+        String[] years = {"2014"};
 
         SimulationResults result;
         FOLDERNAME = BASICFOLDERNAME + "\\results_" + System.currentTimeMillis() +  "\\" ;
@@ -52,7 +52,7 @@ public class Start {
 
         for (String currencyPair : currencyPairs) {
             for (String year : years) {
-                for (int month = 1; month < 13; month++) {
+                for (int month = 1; month < 7; month++) {
                     result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv",currencyPair, ccc, writeToLogFile);
                 	//result = simulateOneFile("C:\\Users\\Carina\\Downloads\\faultyDataSample.csv", ccc, writeToLogFile);
                     writeLineToFile(filename, result.toString());
@@ -82,11 +82,11 @@ public class Start {
 
         //initialize the strategy
         AbstractStrategy thisStrategy = new JapaneseCandlesticksStrategy(cc);
-        //AbstractStrategy thisStrategy=new Testing(cc,"Testing");
+       // AbstractStrategy thisStrategy=new Testing(cc,"Testing");
         // start simulation
-        int leverage = 100;
+        int leverage = 5;
         double balance = 50000;
-        int timeframeInMinutes = 2;
+        int timeframeInMinutes = 1;
         File f = new File(FOLDERNAME + thisStrategy.getName());
         f.mkdirs();
         StrategySimulation simulation = new StrategySimulation(thisStrategy, cc, balance, leverage, writeToLogFile);

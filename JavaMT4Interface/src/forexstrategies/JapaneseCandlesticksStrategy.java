@@ -82,8 +82,8 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			}
 
 		}
-		actualCurrencyCourse = AbstractStrategy
-				.filterOutliers(actualCurrencyCourse);
+		//actualCurrencyCourse = AbstractStrategy
+			//	.filterOutliers(actualCurrencyCourse);
 		int actualPos = cc.getActualPosition();
 		Trend t = determineTrend(cc);
 		Trend t2 = Trend.flat;
@@ -97,18 +97,18 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 
 		boolean buying = JapaneseCandlestick.buyingSignal(pattern);
 		boolean selling = JapaneseCandlestick.sellingSignal(pattern);
-		if (pattern != Patterns.None) {
-			if (buying) {
-				System.out.println("BUY!");
-			}
-			if (selling) {
-				System.out.println("SELL!");
-			}
-		}
 		double tradeV = balance * laverage;
 		tradeV = tradeV / pipsRiskPerTrade;
 		// double stopLoss = tradeV;
 		tradeV = 0.1;
+		if(selling)
+		{
+			System.out.println("SELL");
+		}
+		if(buying)
+		{
+			System.out.println("Buy");
+		}
 		if (selling) {
 			for (int i = 0; i < actualTrades.size(); i++) {
 				if (actualTrades.get(i).getTradeType() == Trade.BUY) {
@@ -117,6 +117,8 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			}
 
 			Trade trade = new Trade(Trade.SELL, tradeV);
+			trade.setStopLoss(10.0);
+			trade.setTakeProfit(20.0);
 			actualTrades.add(trade);
 		}
 		if (buying) {
@@ -135,6 +137,8 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			// Trade trade = new Trade(Trade.BUY, tradeV);
 			// actualTrades.add(trade);
 			Trade trade = new Trade(Trade.BUY, tradeV);
+	trade.setStopLoss(10.0);
+	trade.setTakeProfit(20.0);
 			actualTrades.add(trade);
 		}
 		return actualTrades;
@@ -146,12 +150,15 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 		double sma7 = this.sma7.calculateSMA(cc);
 		if (sma65 > sma20) {
 			if (sma20 > sma7) {
+				System.out.println("Falling");
 				return Trend.falling;
 			}
 		}
 		if (sma7 > sma20) {
 			if (sma20 > sma65) {
+				System.out.println("Rising");
 				return Trend.rising;
+				
 			}
 		}
 		return Trend.flat;

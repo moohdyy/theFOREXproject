@@ -37,12 +37,19 @@ public class CopyOfSMA {
 		if ((values.size()-1) < cc.getActualPosition()) {
 			int lastIndex = cc.getActualPosition();
 			int start = lastIndex - SMADuration + 1;
+			if(start>0)
+			{
 			double r = 0.0;
 			for (int i = start; i <= lastIndex; i++) {
 				r += cc.getOHLC(i).getClose();
 			}
 			r /= SMADuration * 1.0;
+			
 			return r;
+			}else
+			{
+				return 0;
+			}
 		} else {
 			return values.get(cc.getActualPosition());
 		}
