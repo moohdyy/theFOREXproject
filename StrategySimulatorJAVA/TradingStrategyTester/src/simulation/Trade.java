@@ -209,7 +209,6 @@ public class Trade {
     	date=new Date(timeStampClose);
     	sT=sdf.format(date);
     	r+=sT;
-    	System.out.println(pattern);
     	if(pattern!=null)
     	{
     		r+=";"+JapaneseCandlesticksStrategy.patternToString(pattern);

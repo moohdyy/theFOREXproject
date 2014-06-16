@@ -38,36 +38,53 @@ public class Start {
         boolean writeToLogFile = true;
 
         //just testing with a little file
-        filename = "historicalData\\EURUSD\\2011\\oneDayTest.csv";
-        simulateOneFile(filename, "EURUSD", ccc,true);
+       // filename = "historicalData\\EURUSD\\2011\\oneDayTest.csv";
+       //simulateOneFile(filename, "EURUSD", ccc,true);
         //whole simulation
         String[] currencyPairs = {"EURUSD","GBPUSD", "USDJPY"};
         String[] years = {"2014"};
-
+        String[] timeframes = {"1","5","15","30","60"};
+        int[]laverages={1,3,5,10,25,50,100};
+        double [] pips={0.0,5.0,10.0,20.0,50.0};
         SimulationResults result;
         FOLDERNAME = BASICFOLDERNAME + "\\results_" + System.currentTimeMillis() +  "\\" ;
         (new File(FOLDERNAME)).mkdirs();
         filename = FOLDERNAME+ "overviewResults.csv";
         writeLineToFile(filename, SimulationResults.getHeader());
 
-        for (String currencyPair : currencyPairs) {
-            for (String year : years) {
-                for (int month = 1; month < 7; month++) {
-                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv",currencyPair, ccc, writeToLogFile);
+       // for (String currencyPair : currencyPairs) {
+          //  for (String year : years) {
+             //   for (int month = 1; month < 7; month++) {
+        String currencyPair="EURUSD";
+    	String year="2014";
+        for(String timeframe:timeframes)
+        {
+        	for(int i=0;i<pips.length;i++)
+        	{
+            	for(int j=0;j<pips.length;j++)
+            	{
+            		//for(int l:laverages)
+            		{
+            			int l=5;
+                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\EURUSD" + timeframe + ".csv",currencyPair, ccc,timeframe,pips[i],pips[j],l, writeToLogFile);
                 	//result = simulateOneFile("C:\\Users\\Carina\\Downloads\\faultyDataSample.csv", ccc, writeToLogFile);
                     writeLineToFile(filename, result.toString());
+                    System.out.println("Finished M"+timeframe+" "+pips[i]+" "+pips[j]);
+            		}
                 }
+        	}
+        }
 //                for (int month = 1; month < 13; month++) {
 //                    result = simulateOneFile("historicalData\\" + currencyPair + "\\" + year + "\\" + month + ".csv", ccc, writeToLogFile);
 //                	//result = simulateOneFile("C:\\Users\\Carina\\Downloads\\faultyDataSample.csv", ccc, writeToLogFile);
 //                    
 //                    writeLineToFile(filename, result.toString());
 //                }
-            }
-        }
+            //}
+       // }
     }
 
-    private static SimulationResults simulateOneFile(String filename,String currencyPair, CurrencyCourseCreator ccc, boolean writeToLogFile) {
+    private static SimulationResults simulateOneFile(String filename,String currencyPair, CurrencyCourseCreator ccc,String timeframe,double stoppLoss,double takeProfit,int leverage, boolean writeToLogFile) {
         CurrencyCourseOHLC cc = new CurrencyCourseOHLC();
         try {
             cc = ccc.getCurrencyCourseFromFile(filename,currencyPair);
@@ -81,15 +98,14 @@ public class Start {
         cc.setSpread(pipsForSpread);
 
         //initialize the strategy
-        AbstractStrategy thisStrategy = new JapaneseCandlesticksStrategy(cc);
+        AbstractStrategy thisStrategy = new JapaneseCandlesticksStrategy(cc,stoppLoss,takeProfit);
        // AbstractStrategy thisStrategy=new Testing(cc,"Testing");
         // start simulation
-        int leverage = 5;
         double balance = 50000;
         int timeframeInMinutes = 1;
         File f = new File(FOLDERNAME + thisStrategy.getName());
         f.mkdirs();
-        StrategySimulation simulation = new StrategySimulation(thisStrategy, cc, balance, leverage, writeToLogFile);
+        StrategySimulation simulation = new StrategySimulation(thisStrategy, cc, balance, timeframe,stoppLoss,takeProfit,leverage, writeToLogFile);
         return simulation.simulateStrategy(timeframeInMinutes);
     }
 

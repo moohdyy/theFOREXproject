@@ -41,19 +41,20 @@ public class StrategySimulation {
     private static boolean writeToLogFile;
     private BufferedWriter bwTW;
 
-    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, boolean writeToLogFile) {
+    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance,String timeframe,double stopLoss,double takeProfit,int leverage, boolean writeToLogFile) {
         this.cc = cc;
         this.strategy = strategy;
         this.tm = new TradeManager(balance);
+        this.tm.setLeverage(leverage);
         StrategySimulation.writeToLogFile = writeToLogFile;
         if (writeToLogFile) {
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(cc.getOHLCOfActualPosition().getTimestamp());
             String startOfCC = cal.get(Calendar.YEAR) + "_" + (cal.get(Calendar.MONTH) + 1);
-            String filename = Start.FOLDERNAME + strategy.getName() + "\\output" + cc.getCurrencyPair() + "_" + startOfCC + ".txt";
+            String filename = Start.FOLDERNAME + strategy.getName() + "\\output" + cc.getCurrencyPair() + "_" + startOfCC + "M"+timeframe+"_SL"+stopLoss+"_TP"+takeProfit+"_L"+leverage+".txt";
             StrategySimulation.logFile = new File(filename);
             
-            filename = Start.FOLDERNAME + strategy.getName() + "\\trades" + cc.getCurrencyPair() + "_" + startOfCC + ".txt";
+            filename = Start.FOLDERNAME + strategy.getName() + "\\trades" + cc.getCurrencyPair() + "_" + startOfCC + "M"+timeframe+"_SL"+stopLoss+"_TP"+takeProfit+"_L"+leverage+".txt";
 
             try {
                 File fTW =new File(filename);
@@ -67,11 +68,6 @@ public class StrategySimulation {
                 Logger.getLogger(StrategySimulation.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance, double leverage, boolean writeToLogFile) {
-        this(strategy, cc, balance, writeToLogFile);
-        this.tm.setLeverage(leverage);
     }
 
     /**
@@ -133,7 +129,7 @@ public class StrategySimulation {
     }
 
     public static void writeToLogFileAndOutput(String text) {
-        System.out.println(text);
+       // System.out.println(text);
         if (writeToLogFile) {
             try {
                 bw.write(text);
