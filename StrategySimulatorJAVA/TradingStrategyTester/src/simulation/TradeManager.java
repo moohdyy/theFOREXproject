@@ -12,8 +12,6 @@ import java.util.List;
 
 import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
-import strategies.AbstractStrategy;
-import strategies.JapaneseCandlestick.Patterns;
 
 /**
  *
@@ -137,7 +135,7 @@ public class TradeManager {
     public void closeAllOrders(long timeStamp, double actualPrice) {
         for (Trade trade : this.allTrades.values()) {
             if (trade.isOpen()) {
-                closeTrade(trade, timeStamp, actualPrice);
+                closeOrder(trade.getJavaID(), timeStamp, actualPrice);
             }
         }
     }
