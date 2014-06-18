@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- *
+ *  helper program to get monthly data out of a bigger file (like yearly)
  * @author Moohdyy
  */
 public class HistoricalDataFormatter {
