@@ -62,14 +62,14 @@ public class StrategyProcesser extends Thread {
                 } catch (IOException e) {
                     writeToUI("Error while parsing file: " + io.getOhlcFileName() + " : " + e.getMessage());
                 }
-                if (actualFileSize != fileSize) {
+                if (actualFileSize != fileSize) {   //if new candlestick has been added
                     try {
                         cc = ccc.getCurrencyCourseFromFile(io.getOhlcFileName(), "");
                         actualTrades = getTradesFromFile(io.getTradesFileName());
                     } catch (IOException | ParseException ex) {
                         writeToUI("Error while parsing files: " + ex.getMessage());
                     }
-                    cc.setActualPosition(cc.getNumberOfEntries() - 1);
+                    cc.setActualPosition(cc.getNumberOfEntries() - 1);  // debris from the simulation, has to been set to the last available entry
                     strategy.setCurrencyCourseOHLC(cc);
                     List<Trade> newTrades = strategy.processNewCourse(actualTrades, cc);
                     boolean success = false;
@@ -87,12 +87,6 @@ public class StrategyProcesser extends Thread {
                     }
                     actualFileSize = fileSize;
                 } else {
-
-
-//                    // UI updaten
-
-
-                    // Thread schlafen
                     sleepThread(5);
                 }
             }
@@ -187,7 +181,6 @@ public class StrategyProcesser extends Thread {
 
     private void sleepThread(int seconds) {
         try {
-            // fuer 3 Sekunden
             writeToUI("Sleeping for " + seconds + " seconds...");
             sleep(TimeUnit.SECONDS.toMillis(seconds));
         } catch (InterruptedException ex) {

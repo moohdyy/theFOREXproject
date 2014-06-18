@@ -61,6 +61,7 @@ public class JavaMT4Interface extends Application {
     private Label labelTRADES;
     File lastFile = new File(System.getProperty("user.dir"));
 
+	// set up buttons for file choosing
     public Node getTopContent() {
         Button ohlcBtn = new Button();
         ohlcBtn.setId("ohlcFileChooser");
@@ -121,6 +122,7 @@ public class JavaMT4Interface extends Application {
     static TextArea simOutput;
     StrategyProcesser sp;
 
+	// set up start button and ouput box
     private Node getLeftContent() {
         simOutput = new TextArea();
         simOutput.setPrefWidth(800);
@@ -172,6 +174,7 @@ public class JavaMT4Interface extends Application {
         simOutput.appendText("\n" + text);
     }
 
+	//helper method for popup message
     public void showDialog(String message) {
         Stage dialogStage = new Stage();
         dialogStage.initModality(Modality.WINDOW_MODAL);
