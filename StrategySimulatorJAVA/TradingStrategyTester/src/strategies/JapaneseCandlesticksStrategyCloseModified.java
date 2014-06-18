@@ -16,6 +16,9 @@ import strategies.JapaneseCandlesticksStrategy.Trend;
 import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
 
+
+// this strategy is nearly the same as the JapaneseCandlesticksStrategy. the only difference is that an order will not be closed until it has surpassed the spread
+// (changes in row number 118 and 135)
 public class JapaneseCandlesticksStrategyCloseModified extends AbstractStrategy {
 
     public ArrayList<JapaneseCandlestick> japanese = new ArrayList<JapaneseCandlestick>();
