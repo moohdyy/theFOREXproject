@@ -27,7 +27,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 	private double takeProfitPip = 0.0;
 	private double stoppLossPip = 0.0;
 
-	enum Trend {
+	public enum Trend {
 		flat, falling, rising
 	};
 

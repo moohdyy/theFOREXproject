@@ -1,8 +1,7 @@
-/Connection
-/datacollection
-/indicators
 /main
 /simulation
-/strategies
+/Connection
 /Drawing
+/datacollection
 /hneat
+/indicators

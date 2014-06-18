@@ -11,8 +11,8 @@ import org.encog.neural.neat.NEATNetwork;
 import Connection.Candlestick;
 import Connection.Time;
 import strategies.JapaneseCandlestick;
+import strategies.JapaneseCandlesticksStrategy.Trend;
 import strategies.JapaneseCandlestick.Patterns;
-import strategies.JapaneseCandlesticksStrategy;
 
 
 public class CandlestickEvaluation {
@@ -86,16 +86,16 @@ public class CandlestickEvaluation {
 			jsticks.add(jc);
 		}
 		
-		JapaneseCandlesticksStrategy.Trend t1 = JapaneseCandlesticksStrategy.Trend.flat;
+		Trend t1 = Trend.flat;
 		if(sma49>sma20 && sma20>sma7) {
-			t1 = JapaneseCandlesticksStrategy.Trend.falling;
+			t1 = Trend.falling;
 		} else if(sma49<sma20 && sma20<sma7) {
-			t1 = JapaneseCandlesticksStrategy.Trend.rising;
+			t1 = Trend.rising;
 		}
-		JapaneseCandlesticksStrategy.Trend t2 = JapaneseCandlesticksStrategy.Trend.flat;
-		JapaneseCandlestick.Patterns pattern = JapaneseCandlestick.determinePattern(jsticks,jsticks.size()-1,t1,t2);
+		Trend t2 = Trend.flat;
+		Patterns pattern = JapaneseCandlestick.determinePattern(jsticks,jsticks.size()-1,t1,t2);
 		int i=0;
-		while(i<4 && pattern == JapaneseCandlestick.Patterns.None){
+		while(i<4 && pattern == Patterns.None){
 			i++;
 			pattern = JapaneseCandlestick.determinePattern(jsticks,jsticks.size()-1-i,t1,t2);
 		}
@@ -115,9 +115,9 @@ public class CandlestickEvaluation {
 			input.setData(0,-1);
 		}
 		input.setData(1,0);
-		if(t1 == JapaneseCandlesticksStrategy.Trend.falling) {
+		if(t1 == Trend.falling) {
 			input.setData(1,-1);
-		} else if(t1 == JapaneseCandlesticksStrategy.Trend.rising) {
+		} else if(t1 == Trend.rising) {
 			input.setData(1,1);
 		}
 		int emaCrossover = determineEMACrossover(csvData,20,7);
