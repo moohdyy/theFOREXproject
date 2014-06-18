@@ -43,7 +43,7 @@ public class Start {
         //whole simulation
         String[] currencyPairs = {"EURUSD","GBPUSD", "USDJPY"};
         String[] years = {"2014"};
-        String[] timeframes = {"1","5","15","30","60"};
+        String[] timeframes = {"60","30","15","5","1"};
         int[]laverages={1,3,5,10,25,50,100};
         double [] pips={0.0,5.0,10.0,20.0,50.0};
         SimulationResults result;
@@ -98,7 +98,7 @@ public class Start {
         cc.setSpread(pipsForSpread);
 
         //initialize the strategy
-        AbstractStrategy thisStrategy = new JapaneseCandlesticksStrategy(cc,stoppLoss,takeProfit);
+        AbstractStrategy thisStrategy = new JapaneseCandlesticksStrategy(new CurrencyCourseOHLC(cc.getCurrencyPair()),stoppLoss,takeProfit);
        // AbstractStrategy thisStrategy=new Testing(cc,"Testing");
         // start simulation
         double balance = 50000;

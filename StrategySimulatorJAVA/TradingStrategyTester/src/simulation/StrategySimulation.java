@@ -43,6 +43,7 @@ public class StrategySimulation {
 
     public StrategySimulation(AbstractStrategy strategy, CurrencyCourseOHLC cc, double balance,String timeframe,double stopLoss,double takeProfit,int leverage, boolean writeToLogFile) {
         this.cc = cc;
+        
         this.strategy = strategy;
         this.tm = new TradeManager(balance);
         this.tm.setLeverage(leverage);
@@ -51,10 +52,10 @@ public class StrategySimulation {
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(cc.getOHLCOfActualPosition().getTimestamp());
             String startOfCC = cal.get(Calendar.YEAR) + "_" + (cal.get(Calendar.MONTH) + 1);
-            String filename = Start.FOLDERNAME + strategy.getName() + "\\output" + cc.getCurrencyPair() + "_" + startOfCC + "M"+timeframe+"_SL"+stopLoss+"_TP"+takeProfit+"_L"+leverage+".txt";
+            String filename = Start.FOLDERNAME + strategy.getName() + "\\output_" + cc.getCurrencyPair() + "_" + startOfCC + "_M"+timeframe+"_SL"+stopLoss+"_TP"+takeProfit+"_L"+leverage+".txt";
             StrategySimulation.logFile = new File(filename);
             
-            filename = Start.FOLDERNAME + strategy.getName() + "\\trades" + cc.getCurrencyPair() + "_" + startOfCC + "M"+timeframe+"_SL"+stopLoss+"_TP"+takeProfit+"_L"+leverage+".txt";
+            filename = Start.FOLDERNAME + strategy.getName() + "\\trades_" + cc.getCurrencyPair() + "_" + startOfCC + "_M"+timeframe+"_SL"+stopLoss+"_TP"+takeProfit+"_L"+leverage+".txt";
 
             try {
                 File fTW =new File(filename);
@@ -82,8 +83,11 @@ public class StrategySimulation {
     public SimulationResults simulateStrategy(int windowInMinutes) {
         long windowInMilliseconds = windowInMinutes * 60 * 1000;
         List<Trade> trades = new ArrayList<>();
+        CurrencyCourseOHLC ccH=new CurrencyCourseOHLC(getCc().getCurrencyPair());
         for (int index = 0; index < getCc().getNumberOfEntries(); index++) {
             double actualPrice = getCc().getClose(index);
+            ccH.addOHLC(getCc().getOHLC(index));
+            ccH.setActualPosition(index);
             if (checkNewPrice(getCc().getTimeStamp(index),actualPrice)) {
                 return new SimulationResults(this, tm, true);
             }
@@ -91,8 +95,9 @@ public class StrategySimulation {
             long windowTime = getCc().getTimeStamp(getCc().getActualPosition());
             if (this.actualTime >= windowTime + windowInMilliseconds) { //in our case we can access new course after window
                 getCc().setActualPosition(index);
+                ccH.setActualPosition(index);
                 writeToLogFileAndOutput("--- Strategy analyzing at actual price of: " + actualPrice + " ---");
-                trades = getStrategy().processNewCourse(trades, getCc());
+                trades = getStrategy().processNewCourse(trades, ccH);
             }
             tm.processTrades(trades, getCc().getBidPrice(index), getCc().getAskPrice(index), this.actualTime);
             printCurrentStats(index);

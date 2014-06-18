@@ -136,7 +136,7 @@ public class JavaMT4Interface extends Application {
                 if (io.isValid()) {
                     startSim.setDisable(true);
                     stopSim.setDisable(false);
-                    sp = new StrategyProcesser(io, new JapaneseCandlesticksStrategy());
+                    sp = new StrategyProcesser(io, new JapaneseCandlesticksStrategy(50.0,0.0));
                     sp.setDaemon(true);
                     System.out.println("Offical site");
                     sp.start();

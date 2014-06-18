@@ -1,37 +1,47 @@
 package forexstrategies;
 
+import indicators.CopyOfSMA;
+import indicators.SMA;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import Connection.Candlestick;
 import Connection.Time;
 import simulation.Trade;
+import forexstrategies.JapaneseCandlestick;
+import forexstrategies.JapaneseCandlestick.Patterns;
 import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
-import forexstrategies.JapaneseCandlestick.Patterns;
-import indicators.CopyOfSMA;
-
+/*
+ * This class is used to simulate the Japanese Candlesticks Strategy.
+ * To read more about this topic, please concern http://www.babypips.com/school/elementary/japanese-candle-sticks.
+ */
 public class JapaneseCandlesticksStrategy extends AbstractStrategy {
-
-	private static String myName = "JapaneseCandlesticksStrategy";
 	public ArrayList<JapaneseCandlestick> japanese = new ArrayList<JapaneseCandlestick>();
-	private CopyOfSMA sma7 = null;
-	private CopyOfSMA sma20 = null;
-	private CopyOfSMA sma65 = null;
+	private CopyOfSMA sma7;
+	private CopyOfSMA sma20;
+	private CopyOfSMA sma65;
+	private double takeProfitPip = 0.0;
+	private double stoppLossPip = 0.0;
 
 	enum Trend {
-
 		flat, falling, rising
 	};
 
 	CurrencyCourseOHLC actualCurrencyCourse = new CurrencyCourseOHLC();
-
-	public JapaneseCandlesticksStrategy() {
-		super(myName);
+	public JapaneseCandlesticksStrategy(double stoppLoss, double takeProfit) {
+		super("JapaneseCandlesticksStrategy");
+		this.takeProfitPip = takeProfit;
+		this.stoppLossPip = stoppLoss;
 	}
-
-	public JapaneseCandlesticksStrategy(CurrencyCourseOHLC currencyCourseOHLC) {
-		super(currencyCourseOHLC, myName);
+	public JapaneseCandlesticksStrategy(CurrencyCourseOHLC currencyCourseOHLC,
+			double stoppLoss, double takeProfit) {
+		super(currencyCourseOHLC, "JapaneseCandlesticksStrategy");
+		this.takeProfitPip = takeProfit;
+		this.stoppLossPip = stoppLoss;
 		int number = currencyCourseOHLC.getNumberOfEntries();
 		for (int i = 0; i < number; i++) {
 			OHLC ohlc = currencyCourseOHLC.getOHLC(i);
@@ -51,7 +61,7 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 
 	private double pipsRiskPerTrade = 1000;
 	private double balance = 50000;
-	private double laverage = 0.05;
+	private double laverage = 5;
 
 	public void setLaverage(double l) {
 		laverage = l;
@@ -60,13 +70,23 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 	public void setBalance(double b) {
 		balance = b;
 	}
-
+	/*
+	 * Determines if a Japanese Candlestick pattern exists at the given moment.
+	 * If it finds a new pattern, it opens a new Trade.
+	 * It also closes all other trades, which belonged to an opposite pattern.
+	 */
 	@Override
 	public List<Trade> processNewCourse(List<Trade> actualTrades,
 			CurrencyCourseOHLC currencyCourse) {
-		sma7 = new CopyOfSMA(currencyCourse, 7);
-		sma20 = new CopyOfSMA(currencyCourse, 20);
-		sma65 = new CopyOfSMA(currencyCourse, 65);
+		if (sma7 == null) {
+			sma7 = new CopyOfSMA(currencyCourse, 7);
+		}
+		if (sma20 == null) {
+			sma20 = new CopyOfSMA(currencyCourse, 20);
+		}
+		if (sma65 == null) {
+			sma65 = new CopyOfSMA(currencyCourse, 65);
+		}
 		int number = currencyCourse.getNumberOfEntries();
 		int start = actualCurrencyCourse.getNumberOfEntries();
 		for (int i = start; i < number; i++) {
@@ -82,33 +102,27 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			}
 
 		}
-		//actualCurrencyCourse = AbstractStrategy
-			//	.filterOutliers(actualCurrencyCourse);
-		int actualPos = cc.getActualPosition();
-		Trend t = determineTrend(cc);
+
+		int actualPos = currencyCourse.getActualPosition();
+		currencyCourse.setActualPosition(actualPos);
+		Trend t = determineTrend(currencyCourse);
 		Trend t2 = Trend.flat;
 		if (actualPos - 2 > 0) {
-			cc.setActualPosition(actualPos - 2);
-			t2 = determineTrend(cc);
+			currencyCourse.setActualPosition(actualPos - 2);
+			t2 = determineTrend(currencyCourse);
 		}
-		cc.setActualPosition(actualPos);
+		currencyCourse.setActualPosition(actualPos);
 		Patterns pattern = JapaneseCandlestick.determinePattern(japanese,
 				currencyCourse.getActualPosition(), t, t2);
-
 		boolean buying = JapaneseCandlestick.buyingSignal(pattern);
 		boolean selling = JapaneseCandlestick.sellingSignal(pattern);
 		double tradeV = balance * laverage;
 		tradeV = tradeV / pipsRiskPerTrade;
-		// double stopLoss = tradeV;
 		tradeV = 0.1;
-		if(selling)
-		{
-			System.out.println("SELL");
-		}
-		if(buying)
-		{
-			System.out.println("Buy");
-		}
+		OHLC c = currencyCourse.getOHLC(currencyCourse.getActualPosition());
+		double k = c.getHigh() - c.getLow();
+		k /= 2;
+		double pip = c.getHigh() / 10000;
 		if (selling) {
 			for (int i = 0; i < actualTrades.size(); i++) {
 				if (actualTrades.get(i).getTradeType() == Trade.BUY) {
@@ -117,8 +131,13 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			}
 
 			Trade trade = new Trade(Trade.SELL, tradeV);
-			trade.setStopLoss(10.0);
-			trade.setTakeProfit(20.0);
+			if (stoppLossPip != 0) {
+				trade.setStopLoss(c.getLow() + k + (pip * stoppLossPip));
+			}
+			if(takeProfitPip!=0)
+			{
+				trade.setTakeProfit(c.getLow() + k - (pip * takeProfitPip));
+			}
 			actualTrades.add(trade);
 		}
 		if (buying) {
@@ -127,40 +146,43 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 					actualTrades.get(i).close();
 				}
 			}
-			// double tradeV = (candle.getHighestValue() -
-			// candle.getLowestValue())
-			// / 60
-			// * currencyCourse.getBidPrice(actualCurrencyCourse
-			// .getNumberOfEntries() - 1) * 100000;
-			// System.out.println(tradeV);
-			// tradeV = 10000;
-			// Trade trade = new Trade(Trade.BUY, tradeV);
-			// actualTrades.add(trade);
 			Trade trade = new Trade(Trade.BUY, tradeV);
-	trade.setStopLoss(10.0);
-	trade.setTakeProfit(20.0);
+			if (stoppLossPip != 0) {
+				trade.setStopLoss(c.getLow() + k - (pip * stoppLossPip));
+			}
+			if(takeProfitPip!=0)
+			{
+				trade.setTakeProfit(c.getLow() + k + (pip * takeProfitPip));
+			}
 			actualTrades.add(trade);
 		}
 		return actualTrades;
 	}
-
-	public Trend determineTrend(CurrencyCourseOHLC cc) {
-		double sma65 = this.sma65.calculateSMA(cc);
-		double sma20 = this.sma20.calculateSMA(cc);
-		double sma7 = this.sma7.calculateSMA(cc);
-		if (sma65 > sma20) {
-			if (sma20 > sma7) {
-				System.out.println("Falling");
-				return Trend.falling;
+	
+	/*
+	 * This functions determines, if a trend is happening at the certain moment.
+	 * To do this, the simple moving average of 7, 20 and 65 were used.
+	 */
+	public Trend determineTrend(CurrencyCourseOHLC currencyCourse) {
+		double sma65 = this.sma65.calculateSMA(currencyCourse);
+		double sma20 = this.sma20.calculateSMA(currencyCourse);
+		double sma7 = this.sma7.calculateSMA(currencyCourse);
+		if ((sma65 != 0) && (sma20 != 0) && (sma7 != 0)) {
+			if (sma65 > sma20) {
+				if (sma20 > sma7) {
+					return Trend.falling;
+				}
 			}
-		}
-		if (sma7 > sma20) {
-			if (sma20 > sma65) {
-				System.out.println("Rising");
-				return Trend.rising;
-				
+			if (sma7 > sma20) {
+				if (sma20 > sma65) {
+					return Trend.rising;
+				}
 			}
 		}
 		return Trend.flat;
+	}
+
+	public static String patternToString(Patterns p) {
+		return p.toString();
 	}
 }

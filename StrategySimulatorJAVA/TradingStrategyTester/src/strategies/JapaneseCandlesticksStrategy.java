@@ -15,7 +15,10 @@ import strategies.JapaneseCandlestick;
 import strategies.JapaneseCandlestick.Patterns;
 import datacollection.CurrencyCourseOHLC;
 import datacollection.OHLC;
-
+/*
+ * This class is used to simulate the Japanese Candlesticks Strategy.
+ * To read more about this topic, please concern http://www.babypips.com/school/elementary/japanese-candle-sticks.
+ */
 public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 	public ArrayList<JapaneseCandlestick> japanese = new ArrayList<JapaneseCandlestick>();
 	private CopyOfSMA sma7;
@@ -63,7 +66,11 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 	public void setBalance(double b) {
 		balance = b;
 	}
-
+	/*
+	 * Determines if a Japanese Candlestick pattern exists at the given moment.
+	 * If it finds a new pattern, it opens a new Trade.
+	 * It also closes all other trades, which belonged to an opposite pattern.
+	 */
 	@Override
 	public List<Trade> processNewCourse(List<Trade> actualTrades,
 			CurrencyCourseOHLC currencyCourse) {
@@ -91,26 +98,24 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			}
 
 		}
-		// actualCurrencyCourse = AbstractStrategy
-		// .filterOutliers(actualCurrencyCourse);
-		int actualPos = cc.getActualPosition();
-		cc.setActualPosition(actualPos);
-		Trend t = determineTrend(cc);
+
+		int actualPos = currencyCourse.getActualPosition();
+		currencyCourse.setActualPosition(actualPos);
+		Trend t = determineTrend(currencyCourse);
 		Trend t2 = Trend.flat;
 		if (actualPos - 2 > 0) {
-			cc.setActualPosition(actualPos - 2);
-			t2 = determineTrend(cc);
+			currencyCourse.setActualPosition(actualPos - 2);
+			t2 = determineTrend(currencyCourse);
 		}
-		cc.setActualPosition(actualPos);
+		currencyCourse.setActualPosition(actualPos);
 		Patterns pattern = JapaneseCandlestick.determinePattern(japanese,
 				currencyCourse.getActualPosition(), t, t2);
 		boolean buying = JapaneseCandlestick.buyingSignal(pattern);
 		boolean selling = JapaneseCandlestick.sellingSignal(pattern);
 		double tradeV = balance * laverage;
 		tradeV = tradeV / pipsRiskPerTrade;
-		// double stopLoss = tradeV;
 		tradeV = 2000;
-		OHLC c = cc.getOHLC(cc.getActualPosition());
+		OHLC c = currencyCourse.getOHLC(currencyCourse.getActualPosition());
 		double k = c.getHigh() - c.getLow();
 		k /= 2;
 		double pip = c.getHigh() / 10000;
@@ -125,6 +130,9 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			trade.setPattern(pattern);
 			if (stoppLossPip != 0) {
 				trade.setStopLoss(c.getLow() + k + (pip * stoppLossPip));
+			}
+			if(takeProfitPip!=0)
+			{
 				trade.setTakeProfit(c.getLow() + k - (pip * takeProfitPip));
 			}
 			actualTrades.add(trade);
@@ -139,17 +147,24 @@ public class JapaneseCandlesticksStrategy extends AbstractStrategy {
 			trade.setPattern(pattern);
 			if (stoppLossPip != 0) {
 				trade.setStopLoss(c.getLow() + k - (pip * stoppLossPip));
+			}
+			if(takeProfitPip!=0)
+			{
 				trade.setTakeProfit(c.getLow() + k + (pip * takeProfitPip));
 			}
 			actualTrades.add(trade);
 		}
 		return actualTrades;
 	}
-
-	public Trend determineTrend(CurrencyCourseOHLC cc) {
-		double sma65 = this.sma65.calculateSMA(cc);
-		double sma20 = this.sma20.calculateSMA(cc);
-		double sma7 = this.sma7.calculateSMA(cc);
+	
+	/*
+	 * This functions determines, if a trend is happening at the certain moment.
+	 * To do this, the simple moving average of 7, 20 and 65 were used.
+	 */
+	public Trend determineTrend(CurrencyCourseOHLC currencyCourse) {
+		double sma65 = this.sma65.calculateSMA(currencyCourse);
+		double sma20 = this.sma20.calculateSMA(currencyCourse);
+		double sma7 = this.sma7.calculateSMA(currencyCourse);
 		if ((sma65 != 0) && (sma20 != 0) && (sma7 != 0)) {
 			if (sma65 > sma20) {
 				if (sma20 > sma7) {
